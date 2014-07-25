@@ -110,9 +110,14 @@
 }
 
 - (IBAction)popToScanView:(id)sender {
-    [[[self.navigationController viewControllers] objectAtIndex:2] viewDidLoad];
-    [[[self.navigationController viewControllers] objectAtIndex:2] viewWillAppear:YES];
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:2] animated:YES];
+    int indexOfScanPage = 2;
+    if(![[Config instance] showChildMode] && ![[Config instance] showGuideMode]) {
+        indexOfScanPage = 1;
+    }
+    
+    [[[self.navigationController viewControllers] objectAtIndex: indexOfScanPage] viewDidLoad];
+    [[[self.navigationController viewControllers] objectAtIndex: indexOfScanPage] viewWillAppear:YES];
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex: indexOfScanPage] animated:YES];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
