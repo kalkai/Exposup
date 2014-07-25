@@ -136,12 +136,16 @@
     tv.textColor = [[Config instance] color1];
     tv.frame = CGRectMake(0, 0, 550, 450);
     
+    CGSize textViewSize = [tv sizeThatFits:CGSizeMake(tv.frame.size.width, FLT_MAX)];
+    CGRect newFrame = tv.frame;
+    newFrame.size.height = textViewSize.height;
+    tv.frame = newFrame;
     
     [popup.view addSubview: tv];
     UITextView *tv2;
     
     if(![[[Labels instance] credits] isEqualToString: [[NSString alloc] init]]) {
-        UIView *lign = [[UIView alloc] initWithFrame:CGRectMake(0, tv.contentSize.height + 5, 550, 1)];
+        UIView *lign = [[UIView alloc] initWithFrame:CGRectMake(0, tv.frame.size.height + 5, 550, 1)];
         lign.backgroundColor = [[Config instance] color1];
         [tv addSubview: lign];
         
@@ -153,12 +157,21 @@
         tv2.font = [[Config instance] tinyFont];
         tv2.textColor = [[Config instance] color1];
         tv2.frame = CGRectMake(0, lign.frame.origin.y + 1, 550, 250);
-        NSLog(@"height %f", tv.contentSize.height);
-        CGRect newFrame2 = CGRectMake(tv2.frame.origin.x, tv2.frame.origin.y, tv2.frame.size.width, tv2.contentSize.height);
-        tv2.frame = newFrame2;
+        //NSLog(@"height %f", tv.contentSize.height);
+        //CGRect newFrame2 = CGRectMake(tv2.frame.origin.x, tv2.frame.origin.y, tv2.frame.size.width, tv2.contentSize.height);
+        //tv2.frame = newFrame2;
+        
+        CGSize textViewSize = [tv2 sizeThatFits:CGSizeMake(tv2.frame.size.width, FLT_MAX)];
+        CGRect newFrame = tv2.frame;
+        newFrame.size.height = textViewSize.height;
+        tv2.frame = newFrame;
+        
         [tv addSubview: tv2];
     }
-    tv.contentSize = CGSizeMake(tv.frame.size.width, tv.contentSize.height + tv2.frame.size.height + 2);//= CGRectMake(0, 0, tv.frame.size.width, tv.frame.size.height + tv2.frame.size.height + 2);
+    tv.frame = CGRectMake(tv.frame.origin.x, tv.frame.origin.y, tv.frame.size.width, tv.frame.size.height + tv2.frame.size.height + 2);
+    //= CGRectMake(0, 0, tv.frame.size.width, tv.frame.size.height + tv2.frame.size.height + 2);
+    
+    
     popover = [[UIPopoverController alloc] initWithContentViewController: popup];
     
     popover.popoverContentSize = CGSizeMake(tv.frame.size.width, tv.frame.size.height);
