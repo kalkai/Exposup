@@ -86,14 +86,14 @@
 - (void)createModsButtons {
     
     [ColorButton configButton: adultButton];
-    [adultButton addTarget:self action:@selector(selectAdultMod:) forControlEvents:UIControlEventTouchUpInside];
+    [adultButton addTarget:self action:@selector(selectAdult:) forControlEvents:UIControlEventTouchUpInside];
     [adultButton setTitle:[[Labels instance] adultButton] forState: UIControlStateNormal];
     [self.view addSubview: adultButton];
     
     if([[Config instance] showChildMode]) {
         
         [ColorButton configButton: childButton];
-        [childButton addTarget:self action:@selector(selectChildMod:) forControlEvents:UIControlEventTouchUpInside];
+        [childButton addTarget:self action:@selector(selectChild:) forControlEvents:UIControlEventTouchUpInside];
         [childButton setTitle:[[Labels instance] childButton] forState: UIControlStateNormal];
         [self.view addSubview: childButton];
     }
@@ -102,7 +102,7 @@
     if([[Config instance] showGuideMode]) {
         
         [ColorButton configButton: guideButton];
-        [guideButton addTarget:self action:@selector(selectGuideMod:) forControlEvents:UIControlEventTouchUpInside];
+        [guideButton addTarget:self action:@selector(selectGuide:) forControlEvents:UIControlEventTouchUpInside];
         [guideButton setTitle:[[Labels instance] guideButton] forState: UIControlStateNormal];
         [self.view addSubview: guideButton];
     }
@@ -162,37 +162,42 @@
     
 }
 
-
-
-- (IBAction)selectChildMod:(id)sender {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    appDelegate.mod = @"Child";
-}
-
-- (IBAction)selectAdultMod:(id)sender {
+-(void)selectAdult:(id)sender {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     appDelegate.mod = @"Adult";
+    
+    if(![[Config instance] showChildMode] && ![[Config instance] showGuideMode]) {
+        [self performSegueWithIdentifier:@"fromStartToScan" sender: self];
+    }
+    else {
+        [self performSegueWithIdentifier:@"toMods" sender: self];
+    }
 }
 
-- (IBAction)selectGuideMod:(id)sender {
+-(void)selectChild:(id)sender {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    appDelegate.mod = @"Child";
+    
+    if(![[Config instance] showChildMode] && ![[Config instance] showGuideMode]) {
+        [self performSegueWithIdentifier:@"fromStartToScan" sender: self];
+    }
+    else {
+        [self performSegueWithIdentifier:@"toMods" sender: self];
+    }
+}
+
+-(void)selectGuide:(id)sender {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     appDelegate.mod = @"Guide";
-}
-
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    NSLog(@"prepareForSegue: %@", segue.identifier);
-
-    if([segue.identifier isEqualToString:@"child"]){
-        [self selectChildMod:sender];
+    
+    if(![[Config instance] showChildMode] && ![[Config instance] showGuideMode]) {
+        [self performSegueWithIdentifier:@"fromStartToScan" sender: self];
     }
-    else if([segue.identifier isEqualToString:@"adult"]){
-        [self selectAdultMod:sender];
-    }
-    else if([segue.identifier isEqualToString:@"guide"]){
-        [self selectGuideMod:sender];
+    else {
+        [self performSegueWithIdentifier:@"toMods" sender: self];
     }
 }
+
 
 -(void)updateLanguage {
     welcomeLabel.text = [[Labels instance] welcomeTitle];

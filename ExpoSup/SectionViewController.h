@@ -35,10 +35,13 @@
 @property (strong, nonatomic) MPVolumeView *volumeViewSlider;
 
 - (id)initWithFileToParse:(NSString *)fileName;
+- (id)initWithParser:(XMLSectionParser*)parser;
 
 -(IBAction)toSlideshow:(id)sender;
 -(IBAction)toText:(id)sender;
 -(IBAction)toMovie:(id)sender;
+-(IBAction)toQuiz:(id)sender;
+-(IBAction)toZoom:(id)sender;
 -(IBAction)toAnimateImage:(id)sender;
 -(IBAction)playButtonClicked:(id)sender;
 -(IBAction)pauseButtonClicked:(id)sender;

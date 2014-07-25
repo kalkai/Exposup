@@ -28,6 +28,11 @@
     return self;
 }
 
+- (id)initWithParser:(XMLSectionParser*)parserArg {
+    self.parser = parserArg;
+    return self;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
   

@@ -48,9 +48,6 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="Ny6-4b-RBC" kind="push" identifier="child" id="Ux2-zV-bWG"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94T-wo-tqG">
                                 <rect key="frame" x="306" y="614" width="156" height="100"/>
@@ -66,9 +63,6 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="Ny6-4b-RBC" kind="push" identifier="adult" id="PaZ-iA-jF8"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T8P-JX-TrD">
                                 <rect key="frame" x="582" y="658" width="118" height="56"/>
@@ -83,9 +77,6 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="Ny6-4b-RBC" kind="push" identifier="guide" id="A4J-Ia-j6K"/>
-                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORo-k4-sOL">
                                 <rect key="frame" x="363" y="106" width="42" height="21"/>
@@ -151,6 +142,8 @@
                         <outlet property="sound" destination="rra-QK-BFL" id="6v0-Mf-7x3"/>
                         <outlet property="soundSwitch" destination="aPS-ZF-pVd" id="x4F-d9-fHI"/>
                         <outlet property="welcomeLabel" destination="ORo-k4-sOL" id="2af-qH-OOh"/>
+                        <segue destination="yYV-1e-8uk" kind="push" identifier="fromStartToScan" id="rMF-Za-LdW"/>
+                        <segue destination="Ny6-4b-RBC" kind="push" identifier="toMods" id="bHE-dI-t1R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
@@ -194,7 +187,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="yYV-1e-8uk" kind="push" identifier="confirm" id="f5e-Sf-TL9"/>
+                                    <segue destination="yYV-1e-8uk" kind="push" identifier="toScan" id="f5e-Sf-TL9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9z-tH-FXF">
@@ -235,7 +228,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a69-Lp-2bO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1614" y="-144"/>
+            <point key="canvasLocation" x="-1550" y="-1048"/>
         </scene>
         <!--Choice View Controller-->
         <scene sceneID="hVa-ec-yaD">
@@ -255,12 +248,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="KTa-IY-DVr"/>
                     <connections>
-                        <segue destination="A4j-mn-uX5" kind="push" identifier="toSectionVCFromID" id="V29-Mu-2aD"/>
+                        <segue destination="A4j-mn-uX5" kind="push" identifier="fromIDToSection" id="V29-Mu-2aD"/>
+                        <segue destination="ZTN-cs-ig9" kind="push" identifier="fromIDToText" id="HOL-nf-PgD"/>
+                        <segue destination="AR5-fN-x76" kind="push" identifier="fromIDToSlideshow" id="e2N-Rj-4wa"/>
+                        <segue destination="JbO-JC-7Ov" kind="push" identifier="fromIDToMovie" id="cfu-wm-07O"/>
+                        <segue destination="OB8-E7-QDq" kind="push" identifier="fromIDToZoom" id="Hic-bB-BiV"/>
+                        <segue destination="dSG-4O-gOa" kind="push" identifier="fromIDToQuiz" id="cdr-jW-sBC"/>
+                        <segue destination="Llb-0U-cHc" kind="push" identifier="fromIDToAnimate" id="z2y-ru-M7A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rfg-Ew-auc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="434" y="-1330"/>
+            <point key="canvasLocation" x="438" y="-1914"/>
         </scene>
         <!--Scan View Controller-->
         <scene sceneID="rGH-kw-uMq">
@@ -279,6 +278,12 @@
                     <connections>
                         <segue destination="A4j-mn-uX5" kind="push" identifier="toSectionVC" id="P43-hf-Bn3"/>
                         <segue destination="9vo-RT-dow" kind="push" identifier="toID" id="Jxn-Go-T59"/>
+                        <segue destination="ZTN-cs-ig9" kind="push" identifier="fromScanToText" id="BL4-JM-DBn"/>
+                        <segue destination="AR5-fN-x76" kind="push" identifier="fromScanToSlideshow" id="ftK-mM-x7m"/>
+                        <segue destination="JbO-JC-7Ov" kind="push" identifier="fromScanToMovie" id="nmO-Sc-cPv"/>
+                        <segue destination="OB8-E7-QDq" kind="push" identifier="fromScanToZoom" id="5nn-if-pnK"/>
+                        <segue destination="dSG-4O-gOa" kind="push" identifier="fromScanToQuiz" id="J5g-HR-FLs"/>
+                        <segue destination="Llb-0U-cHc" kind="push" identifier="fromScanToAnimate" id="6E2-h1-dnZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="53P-BU-blw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -320,7 +325,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rK7-WG-baZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2885" y="-1338"/>
+            <point key="canvasLocation" x="5229" y="-1066"/>
         </scene>
         <!--Quiz View Controller-->
         <scene sceneID="UgA-Lz-mAR">
@@ -339,7 +344,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOj-Kd-2im" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2901" y="1523"/>
+            <point key="canvasLocation" x="6399" y="2403"/>
         </scene>
         <!--Animate Image View Controller-->
         <scene sceneID="RpC-LZ-6H3">
@@ -358,7 +363,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="see-tM-psK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2917" y="2711"/>
+            <point key="canvasLocation" x="6415" y="3591"/>
         </scene>
         <!--Image Zoom View Controller-->
         <scene sceneID="MsY-L1-cxk">
@@ -400,7 +405,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDU-QY-Epk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4581" y="1501"/>
+            <point key="canvasLocation" x="6399" y="1109"/>
         </scene>
         <!--Movie View Controller-->
         <scene sceneID="zLx-ua-zb3">
@@ -419,7 +424,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAz-xz-naN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4575" y="295"/>
+            <point key="canvasLocation" x="6415" y="-361"/>
         </scene>
         <!--Section View Controller-->
         <scene sceneID="xVC-ql-xEi">
@@ -446,7 +451,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BhU-yq-Tbq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1425" y="-112"/>
+            <point key="canvasLocation" x="3201" y="-2314"/>
         </scene>
         <!--Slideshow View Controller-->
         <scene sceneID="Bg6-Wy-d8B">
@@ -485,7 +490,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4575" y="-893"/>
+            <point key="canvasLocation" x="6415" y="-1725"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -494,10 +499,13 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="PaZ-iA-jF8"/>
-        <segue reference="P43-hf-Bn3"/>
-        <segue reference="3Mf-Cg-9Fj"/>
-        <segue reference="kB0-rJ-Igw"/>
-        <segue reference="ahW-49-zde"/>
+        <segue reference="rMF-Za-LdW"/>
+        <segue reference="cdr-jW-sBC"/>
+        <segue reference="Hic-bB-BiV"/>
+        <segue reference="cfu-wm-07O"/>
+        <segue reference="HOL-nf-PgD"/>
+        <segue reference="e2N-Rj-4wa"/>
+        <segue reference="z2y-ru-M7A"/>
+        <segue reference="V29-Mu-2aD"/>
     </inferredMetricsTieBreakers>
 </document>

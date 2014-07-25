@@ -26,6 +26,8 @@
 @property (strong, nonatomic) UIButton *infoButton;
 @property (strong, nonatomic) UIButton *languagesButton;
 
+@property (strong, nonatomic) NSString* argument;
+
 @property (strong, nonatomic) NSString *file;
 
 - (IBAction)parseFileAndProceed:(id)sender;
