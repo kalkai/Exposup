@@ -248,8 +248,12 @@
     tv.font = [[Config instance] smallFont];
     tv.textColor = [[Config instance] color1];
     tv.frame = CGRectMake(0, 0, 350, 250);
-    NSLog(@"height %f", tv.contentSize.height);
-    CGRect newFrame = CGRectMake(tv.frame.origin.x, tv.frame.origin.y, tv.frame.size.width, tv.contentSize.height);
+    //NSLog(@"height %f", tv.contentSize.height);
+    //CGRect newFrame = CGRectMake(tv.frame.origin.x, tv.frame.origin.y, tv.frame.size.width, tv.contentSize.height);
+    //tv.frame = newFrame;
+    CGSize textViewSize = [tv sizeThatFits:CGSizeMake(tv.frame.size.width, FLT_MAX)];
+    CGRect newFrame = tv.frame;
+    newFrame.size.height = textViewSize.height;
     tv.frame = newFrame;
     
     
