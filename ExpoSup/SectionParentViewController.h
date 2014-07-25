@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ColorButton.h"
+#import "Config.h"
 #import "RotateViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 
