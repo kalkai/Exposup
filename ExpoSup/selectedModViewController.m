@@ -45,7 +45,7 @@
     [super viewDidLoad];
     
     /*if(![[Config instance] showChildMode] && ![[Config instance] showGuideMode]) {
-        [self performSegueWithIdentifier:@"confirm" sender: self];
+        [self performSegueWithIdentifier:@"toScan" sender: self];
     }
     else {*/
     

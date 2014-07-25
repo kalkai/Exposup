@@ -20,6 +20,7 @@
 @interface ScanViewController : RotateViewController <ZBarReaderViewDelegate>
 
 @property (strong,nonatomic) NSString *result;
+@property (strong,nonatomic) NSString *argument;
 
 @property (strong, nonatomic) UIView *scannerContainer;
 @property (strong,nonatomic) ZBarReaderView *reader;

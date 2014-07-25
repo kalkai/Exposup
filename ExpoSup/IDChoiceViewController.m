@@ -9,7 +9,7 @@
 #import "IDChoiceViewController.h"
 
 @implementation IDChoiceViewController
-@synthesize idTextfield, file, expoTitle, goButton, banner, popover, infoButton, idInfo, languagesButton;
+@synthesize idTextfield, file, expoTitle, goButton, banner, popover, infoButton, idInfo, languagesButton, argument;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -241,11 +241,39 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if( [segue.identifier isEqualToString:@"toSectionVCFromID"] ) {
+    if( [segue.identifier isEqualToString:@"fromIDToSection"] ) {
         SectionViewController *vc = [segue destinationViewController];
         [vc initWithFileToParse: file];
     }
+    
+    
+    
+    if( [segue.identifier isEqualToString:@"fromIDToText"] ) {
+        TextViewController *textVC = [segue destinationViewController];
+        textVC.standID = argument;
+    }
+    else if( [segue.identifier isEqualToString:@"fromIDToSlideshow"] ) {
+        SlideshowViewController *slideshowVC = [segue destinationViewController];
+        slideshowVC.standID = argument;
+    }
+    else if( [segue.identifier isEqualToString:@"fromIDToMovie"] ) {
+        MovieViewController *movieVC = [segue destinationViewController];
+        movieVC.standID = argument;
+    }
+    else if( [segue.identifier isEqualToString:@"fromIDToQuiz"] ) {
+        QuizViewController *quizVC = [segue destinationViewController];
+        quizVC.fileName = argument;
+    }
+    else if( [segue.identifier isEqualToString:@"fromIDToAnimate"] ) {
+        AnimateImageViewController *animateVC = [segue destinationViewController];
+        animateVC.standID = argument;
+    }
+    else if( [segue.identifier isEqualToString:@"fromIDToZoom"] ) {
+        ImageZoomViewController *zoomVC = [segue destinationViewController];
+        zoomVC.fileName = argument;
+    }
 }
+
 
 
 - (IBAction)parseFileAndProceed:(id)sender {
@@ -285,8 +313,46 @@
             Alerts *alert = [[Alerts alloc] init];
             [alert showIDNotFoundAlert:self];
         }
-        else [self performSegueWithIdentifier: @"toSectionVCFromID" sender: self];
-        
+        else {
+            XMLSectionParser* sectionParser = [[XMLSectionParser alloc] init];
+            sectionParser = [[XMLSectionParser alloc] init];
+            [sectionParser parseXMLFileAtPath: file];
+            
+            if(sectionParser.error == FALSE) {
+                // si on a une seule sous-section, on passe directement dessus
+                NSString *type = [sectionParser.types objectAtIndex: 0];
+                if(sectionParser.names.count == 1 && ![type isEqualToString:@"audio"] && ![type isEqualToString:@"movie"]) {
+                    NSLog(@"Only one subsection");
+                    //[self setNumberOfPagesToPop: [NSNumber numberWithInt: 2]]; // utile pour faire un retour "direct" à la page de scan
+                    
+                    argument = [sectionParser.files objectAtIndex: 0];
+                    
+                    if([type isEqualToString: @"slideshow"]) {
+                        [self performSegueWithIdentifier: @"fromIDToSlideshow" sender: self];
+                    }
+                    else if([type isEqualToString: @"text"]) {
+                        [self performSegueWithIdentifier: @"fromIDToText" sender: self];
+                    }
+                    else if([type isEqualToString: @"quiz"] || [type isEqualToString: @"quizz"]) {
+                        [self performSegueWithIdentifier: @"fromIDToQuiz" sender: self];
+                    }
+                    else if([type isEqualToString: @"zoom"]) {
+                        [self performSegueWithIdentifier: @"fromIDToZoom" sender: self];
+                    }
+                    else if([type isEqualToString: @"animate"]) {
+                        [self performSegueWithIdentifier: @"fromIDToAnimate" sender: self];
+                    }
+                }
+                else {
+                    [self performSegueWithIdentifier: @"fromIDToSection" sender: self];
+                }
+            }
+            else {
+                Alerts *alert = [[Alerts alloc] init];
+                [alert errorParsingAlert:self file: sectionParser.path error: @"File is probably not a section file."];
+            }
+
+        }
     }
 }
 
