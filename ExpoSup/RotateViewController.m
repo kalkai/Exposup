@@ -83,10 +83,10 @@
     NSLog(@"tointerfaceorientation %d", toInterfaceOrientation);
     previousOrientation = toInterfaceOrientation;
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-        [self setBackgroundImage: [[Config instance] backgroundLandscape]];
+        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage: [UIImage imageWithContentsOfFile: [[Config instance] backgroundLandscape]]];
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        [self setBackgroundImage: [[Config instance] backgroundPortrait]];
+        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage: [UIImage imageWithContentsOfFile: [[Config instance] backgroundPortrait]]];
     }
 }
 

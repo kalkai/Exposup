@@ -33,9 +33,11 @@
     
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         languagesButton.frame = CGRectMake(1024 - languagesButton.frame.size.width - 10 , 5, languagesButton.frame.size.width, languagesButton.frame.size.height);
+        foot.frame = CGRectMake(15, 610, 1024-15, 160);
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
         languagesButton.frame = CGRectMake(768 - languagesButton.frame.size.width - 10 , 5, languagesButton.frame.size.width, languagesButton.frame.size.height);
+        foot.frame = CGRectMake(15, 890, 768-15, 130);
     }
 
 }
@@ -73,8 +75,15 @@
         modChoiceLabel.numberOfLines = 2;
         [self.view addSubview: modChoiceLabel];
         
+        
+        foot = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 768, 10)];
         foot.text = [[Labels instance] credits];
         foot.textColor = [[Config instance] color1];
+        foot.backgroundColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.0 ];
+        foot.font = [[Config instance] smallFont];
+        foot.numberOfLines = 0;
+        [foot sizeToFit];
+        [self.view addSubview: foot];
        
         
         [self createModsButtons];
@@ -154,10 +163,12 @@
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         if(languagesButton != NULL)
             languagesButton.frame = CGRectMake(1024 - languagesButton.frame.size.width - 10 , 5, languagesButton.frame.size.width, languagesButton.frame.size.height);
+        foot.frame = CGRectMake(15, 610, 1024-15, 160);
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
         if(languagesButton != NULL)
             languagesButton.frame = CGRectMake(768 - languagesButton.frame.size.width - 10 , 5, languagesButton.frame.size.width, languagesButton.frame.size.height);
+        foot.frame = CGRectMake(15, 890, 768-15, 130);
     }
     
 }

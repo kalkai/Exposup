@@ -24,7 +24,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *modChoiceLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *soundSwitch;
 @property (strong, nonatomic) IBOutlet UILabel *sound;
-@property (strong, nonatomic) IBOutlet UITextView *foot;
+@property (strong, nonatomic) IBOutlet UILabel *foot;
 
 @property (strong, nonatomic) UIPopoverController *popover;
 @property (strong, nonatomic) IBOutlet UIButton *languagesButton;
