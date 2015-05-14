@@ -553,6 +553,10 @@
             [self addLine: button.frame index: imageIdx];
             [button addTarget: self action:@selector(handleAudio:) forControlEvents: UIControlEventTouchUpInside];
         }
+        else if([type isEqualToString: @"section"]) {
+            [self addLine: button.frame index: imageIdx];
+            [button addTarget: self action:@selector(toSection:) forControlEvents: UIControlEventTouchUpInside];
+        }
         [scrollView addSubview: button];
         [views addObject: button];
         
@@ -795,6 +799,14 @@
     [self performSegueWithIdentifier: @"toZoom" sender: self];
 }
 
+-(IBAction)toSection:(id)sender {
+    int idx = ((UIButton*)sender).tag;
+    argument = [parser.links objectAtIndex: idx];
+    NSLog(@"cliqué zoom %@", argument);
+    [self performSegueWithIdentifier: @"toSection" sender: self];
+}
+
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
     if( [segue.identifier isEqualToString:@"toSlideshow"] ) {
@@ -808,6 +820,11 @@
     else if( [segue.identifier isEqualToString:@"toZoom"] ) {
         ImageZoomViewController *zoomVC = [segue destinationViewController];
         zoomVC.fileName = argument;
+        //NSLog(@"segue with filename : %@", argument);
+    }
+    else if( [segue.identifier isEqualToString:@"toSection"] ) {
+        SectionViewController *sectionVC = [segue destinationViewController];
+        sectionVC.fileName = argument;
         //NSLog(@"segue with filename : %@", argument);
     }
 }

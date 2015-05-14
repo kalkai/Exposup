@@ -272,6 +272,7 @@
     [self performSegueWithIdentifier: @"toAnimate" sender: self];
 }
 
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSLog(@"prepare for segue");
     if( [segue.identifier isEqualToString:@"toTextSection"] ) {

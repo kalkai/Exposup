@@ -49,10 +49,14 @@
     }
     else {*/
     
+        [change setTitle: [[Labels instance] modifyMod] forState: UIControlStateNormal];
+        [confirm setTitle:[[Labels instance] confirmMod] forState: UIControlStateNormal];
+    
         [ColorButton configButton: confirm];
         [ColorButton configButton: change];
-        
-        
+    
+    
+    
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         if([appDelegate.mod isEqualToString: @"Adult"]) {
             modChosen.text = [[Labels instance] adultButton];

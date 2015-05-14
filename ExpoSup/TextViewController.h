@@ -15,6 +15,7 @@
 #import "XMLTextParser.h"
 #import "XMLDictionaryParser.h"
 #import "AudioViewController.h"
+#import "SectionViewController.h"
 
 
 @interface TextViewController : SectionParentViewController <UIScrollViewDelegate>
