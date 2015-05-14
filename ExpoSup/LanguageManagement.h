@@ -27,13 +27,14 @@
 
 @property (strong, nonatomic) UIPopoverController *popover;
 @property (strong, nonatomic) UIView* currentView;
+@property (strong, nonatomic) UIViewController* currentViewController;
 
 
 @property (strong, nonatomic) LanguageButton *languageButton;
 
 
 - (Boolean)initialize;
-- (UIButton *)addLanguageSelectionButton:(UIView*) view;
+- (UIButton *)addLanguageSelectionButton:(UIView*) view viewController:(UIViewController*)vc;
 - (NSString*)pathForFile:(NSString*)str contentFile:(Boolean)isContentFile;
 
 - (NSString*)defautLanguagePrefix;

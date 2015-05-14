@@ -29,7 +29,7 @@
 @property (strong, nonatomic) NSMutableDictionary *isParagraphOpen;
 @property (strong, nonatomic) NSMutableDictionary *superiorLines;
 @property (strong, nonatomic) NSMutableDictionary *inferiorLines;
-@property (strong, nonatomic) IBOutlet UILabel *title;
+@property (strong, nonatomic) UILabel *titleScreen;
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UIPopoverController *popover;

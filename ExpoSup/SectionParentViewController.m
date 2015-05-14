@@ -99,6 +99,7 @@
         SectionViewController *tmpSection = (SectionViewController*)[[self.navigationController viewControllers] objectAtIndex:previousIndex];
         if([tmpSection.numberOfPagesToPop intValue] == 2) {
             [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:previousIndex - 1] animated:YES];
+        
             return;
         }
     }

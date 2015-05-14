@@ -27,7 +27,7 @@
 
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     
-    languagesButton = [[LanguageManagement instance] addLanguageSelectionButton: self.view];
+    languagesButton = [[LanguageManagement instance] addLanguageSelectionButton: self.view viewController: self];
     
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         reader.previewTransform = CGAffineTransformMakeRotation (M_PI * 270 / 180.0);
@@ -40,14 +40,17 @@
 
 }
 
+
 - (void)viewDidDisappear:(BOOL)animated {
     [reader stop];
+    
 }
 
 - (void)viewDidLoad
 {
+    [self deleteSubviewsFromView: self.view];
     [super viewDidLoad];
-	[[self.view subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
     
     result = nil;
     
@@ -108,8 +111,6 @@
     scanInstruction.numberOfLines = 2;
     [self.view addSubview: scanInstruction];
     
-    
-
     
     
 }
@@ -368,9 +369,10 @@
 - (void)deleteSubviewsFromView:(UIView*)view {
     UIView *child;
     for(child in [view subviews]) {
-        [self deleteSubviewsFromView: child];
-        [child removeFromSuperview];
-            
+        if(child.tag != 888) {
+            [self deleteSubviewsFromView: child];
+            [child removeFromSuperview];
+        }
     }
 }
 

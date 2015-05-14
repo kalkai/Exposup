@@ -10,7 +10,7 @@
 
 @implementation TextViewController
 
-@synthesize standID, title, argument, buttonsList, parser,audioController, coordY, currentWidth, scrollView, tapGr, clickingFrames, commentToPopup, popover, views, buttonToParagraphIdx, isParagraphOpen, buttonToParagraphView, expandedParagraph, superiorLines, inferiorLines;
+@synthesize standID, titleScreen, argument, buttonsList, parser,audioController, coordY, currentWidth, scrollView, tapGr, clickingFrames, commentToPopup, popover, views, buttonToParagraphIdx, isParagraphOpen, buttonToParagraphView, expandedParagraph, superiorLines, inferiorLines;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -30,11 +30,11 @@
     
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         currentWidth = 1024;
-        [self createBodyWithWidth];
+        [self createBody];
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
         currentWidth = 768;
-        [self createBodyWithWidth];
+        [self createBody];
     }
     [super viewWillAppear:YES];
     NSLog(@"end of view will appear");
@@ -59,14 +59,18 @@
 
 
 
-- (void)addTitle:(NSString*)text {
-    title.font = [[Config instance] normalFont];
-    title.backgroundColor = [UIColor clearColor];
-    title.textColor = [[Config instance] color1];
-    title.text = text;
-    [title sizeToFit];
-    title.frame = CGRectMake(currentWidth/2 - title.frame.size.width/2, 30, title.frame.size.width, title.frame.size.height);
-    [self.view addSubview: title];
+- (void)addTitleScreen:(NSString*)text {
+    titleScreen = [[UILabel alloc] init];
+    titleScreen.font = [[Config instance] normalFont];
+    titleScreen.backgroundColor = [UIColor clearColor];
+    titleScreen.textColor = [[Config instance] color1];
+    titleScreen.text = text;
+    [titleScreen sizeToFit];
+    NSLog(@"titleScreen frame before. Width = %f, Height = %f, OriginX = %f, OriginY = %f", titleScreen.frame.size.width, titleScreen.frame.size.height, titleScreen.frame.origin.x, titleScreen.frame.origin.y);
+    NSLog(@"margin = %f", currentWidth/2-titleScreen.frame.size.width/2);
+    titleScreen.frame = CGRectMake(currentWidth/2 - titleScreen.frame.size.width/2, 30, titleScreen.frame.size.width, titleScreen.frame.size.height);
+    NSLog(@"titleScreen frame after. Width = %f, Height = %f, OriginX = %f, OriginY = %f", titleScreen.frame.size.width, titleScreen.frame.size.height, titleScreen.frame.origin.x, titleScreen.frame.origin.y);
+    [self.view addSubview: titleScreen];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -97,7 +101,7 @@
     [super viewDidLoad];
 }
 
--(void)createBodyWithWidth {
+-(void)createBody {
     Boolean audio = NO;
     int startY=100;
     if(parser.audio) {
@@ -121,7 +125,7 @@
     
     scrollView.contentSize = scrollView.frame.size;
     
-    [self addTitle: parser.title];
+    [self addTitleScreen: parser.title];
     
     clickingFrames = [[NSMutableArray alloc] init];
     commentToPopup = [[NSMutableArray alloc] init];
@@ -667,7 +671,7 @@
 {
     
     [self setScrollView:nil];
-    [self setTitle:nil];
+    [self setTitleScreen:nil];
     [super viewDidUnload];
 }
 
@@ -829,11 +833,11 @@
 
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         currentWidth = 1024;
-        [self createBodyWithWidth];
+        [self createBody];
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
         currentWidth = 768;
-        [self createBodyWithWidth];
+        [self createBody];
     }
     
 }

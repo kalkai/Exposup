@@ -7,32 +7,32 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>112228B6-606B-4A40-ACD7-8CFBD093C0F2</string>
 	<key>IDESourceControlProjectName</key>
-	<string>exposup</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>7694172C-4A5D-4E5A-B2A2-D0FA818AF3C5</key>
-		<string>https://github.com/CCS-ULB/ExpoSup.git</string>
+		<key>88C6C1C2E8DCDA781E49B35B7AF31C84994DBC01</key>
+		<string>https://github.com/CCS-ULB/ExpoSup</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>exposup.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7694172C-4A5D-4E5A-B2A2-D0FA818AF3C5</key>
+		<key>88C6C1C2E8DCDA781E49B35B7AF31C84994DBC01</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/CCS-ULB/ExpoSup.git</string>
+	<string>https://github.com/CCS-ULB/ExpoSup</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7694172C-4A5D-4E5A-B2A2-D0FA818AF3C5</string>
+	<string>88C6C1C2E8DCDA781E49B35B7AF31C84994DBC01</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7694172C-4A5D-4E5A-B2A2-D0FA818AF3C5</string>
+			<string>88C6C1C2E8DCDA781E49B35B7AF31C84994DBC01</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ExpoSup</string>
 		</dict>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="Obe-qt-oJi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C2055" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="Obe-qt-oJi">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -301,23 +301,10 @@
                     <view key="view" contentMode="scaleToFill" id="Dj4-YJ-TLZ">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9tG-yx-RZj">
-                                <rect key="frame" x="363" y="29" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="9tG-yx-RZj" firstAttribute="top" secondItem="Dj4-YJ-TLZ" secondAttribute="top" constant="29" id="d6q-tD-RlH"/>
-                            <constraint firstItem="9tG-yx-RZj" firstAttribute="centerX" secondItem="Dj4-YJ-TLZ" secondAttribute="centerX" id="mr6-9u-fY2"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HzG-fg-Q14"/>
                     <connections>
-                        <outlet property="title" destination="9tG-yx-RZj" id="g8j-VW-ZlV"/>
                         <segue destination="AR5-fN-x76" kind="push" identifier="toSlideshow" id="gQ4-SZ-6Tc"/>
                         <segue destination="JbO-JC-7Ov" kind="push" identifier="toMovie" id="eEy-d7-DIy"/>
                         <segue destination="OB8-E7-QDq" kind="push" identifier="toZoom" id="yVM-1I-Ve1"/>
@@ -400,7 +387,7 @@
                     <navigationItem key="navigationItem" id="0z7-oO-2MP"/>
                     <connections>
                         <outlet property="scrollView" destination="Nmt-hP-dAm" id="f3x-DT-NUU"/>
-                        <outlet property="title" destination="REd-h6-b6e" id="MLe-C8-o2O"/>
+                        <outlet property="titleScreen" destination="REd-h6-b6e" id="w63-p3-LaU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDU-QY-Epk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -499,13 +486,13 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="rMF-Za-LdW"/>
-        <segue reference="cdr-jW-sBC"/>
-        <segue reference="Hic-bB-BiV"/>
-        <segue reference="cfu-wm-07O"/>
-        <segue reference="HOL-nf-PgD"/>
-        <segue reference="e2N-Rj-4wa"/>
-        <segue reference="z2y-ru-M7A"/>
+        <segue reference="VRr-iM-R79"/>
         <segue reference="V29-Mu-2aD"/>
+        <segue reference="rMF-Za-LdW"/>
+        <segue reference="PFI-Aq-Ozb"/>
+        <segue reference="1pz-Lb-vWu"/>
+        <segue reference="eEy-d7-DIy"/>
+        <segue reference="gQ4-SZ-6Tc"/>
+        <segue reference="yVM-1I-Ve1"/>
     </inferredMetricsTieBreakers>
 </document>

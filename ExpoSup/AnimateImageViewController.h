@@ -18,7 +18,7 @@
 
 @property (strong, nonatomic) UIImageView* animationView;
 @property (strong, nonatomic) UIButton *startButton;
-@property (strong, nonatomic) UILabel *title;
+@property (strong, nonatomic) UILabel *titleScreen;
 @property (strong, nonatomic) UITextView *comment;
 @property (assign, nonatomic) int currentWidth;
 @property (assign, nonatomic) int tempHeight;

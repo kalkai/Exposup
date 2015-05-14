@@ -12,7 +12,7 @@
 
 @implementation ImageZoomViewController
 
-@synthesize parser, imageView, scrollView, clickingFrames, tapGr, popover, currentScale, title, opacity;
+@synthesize parser, imageView, scrollView, clickingFrames, tapGr, popover, currentScale, titleScreen, opacity;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -71,14 +71,14 @@
 
 
 - (void)addTitle {
-    title.font = [[Config instance] normalFont];
-    title.backgroundColor = [UIColor clearColor];
-    title.textColor = [[Config instance] color1];
-    title.text = parser.title;
+    titleScreen.font = [[Config instance] normalFont];
+    titleScreen.backgroundColor = [UIColor clearColor];
+    titleScreen.textColor = [[Config instance] color1];
+    titleScreen.text = parser.title;
     NSLog(@"title %@", parser.title);
-    [title sizeToFit];
-    title.frame = CGRectMake(title.frame.origin.x, title.frame.origin.y, title.frame.size.width, title.frame.size.height);
-    [self.view addSubview: title];
+    [titleScreen sizeToFit];
+    titleScreen.frame = CGRectMake(titleScreen.frame.origin.x, titleScreen.frame.origin.y, titleScreen.frame.size.width, titleScreen.frame.size.height);
+    [self.view addSubview: titleScreen];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

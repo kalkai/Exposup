@@ -18,7 +18,7 @@
 
 @property (assign, nonatomic) NSString *fileName;
 @property (assign, nonatomic) float currentScale;
-@property (strong, nonatomic) IBOutlet UILabel *title;
+@property (strong, nonatomic) IBOutlet UILabel *titleScreen;
 
 @property (strong, nonatomic) XMLZoomParser *parser;
 @property (strong, nonatomic) UIView *opacity;

@@ -10,7 +10,7 @@
 
 @implementation LanguageManagement
 
-@synthesize languagesPrefixes, languagesNames, languagesIcons, defautLanguagePrefix, popover, currentView, currentLanguagePrefix, languageButton, isLanguageActivated;
+@synthesize languagesPrefixes, languagesNames, languagesIcons, defautLanguagePrefix, popover, currentView, currentLanguagePrefix, languageButton, isLanguageActivated, currentViewController;
 
 -(Boolean)initialize {
     XMLConfigParser *configParser = [[Config instance] parser];
@@ -51,9 +51,10 @@
     return [currentLanguagePrefix stringByAppendingString: @"_"];
 }
 
-- (UIButton *)addLanguageSelectionButton:(UIView*) view {
+- (UIButton *)addLanguageSelectionButton:(UIView*)view viewController:(UIViewController*)vc {
     if(isLanguageActivated) {
         currentView = view;
+        currentViewController = vc;
         [view addSubview: languageButton];
         return languageButton;
     }
@@ -144,6 +145,7 @@
 }
 
 - (void)changeLanguage:(id)sender {
+    NSLog(@"start");
     UIButton *buttonTriggered = (UIButton*)sender;
     int index = buttonTriggered.tag;
     currentLanguagePrefix = [languagesPrefixes objectAtIndex: index];
@@ -156,15 +158,22 @@
     // update labels and current view
     [[Labels instance] updateLabels];
 
-    //NSLog(@"Current view update %@", [LanguageManagement getTopController]);
-    [[LanguageManagement getTopController] viewDidLoad];
-    [[LanguageManagement getTopController] viewWillAppear: YES];
+    [currentViewController.view setNeedsDisplay];
+    [currentViewController viewWillDisappear:YES];
+    [currentViewController viewDidDisappear:YES];
+    [currentViewController viewDidLoad];
+    [currentViewController viewWillAppear:YES];
+    
+    
+    NSLog(@"end");
 }
 
+
+/*
 +(UIViewController*)getTopController {
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     return ((UINavigationController*)appDelegate.window.rootViewController).visibleViewController;
-}
+}*/
 
 - (NSString*)pathForFile:(NSString*)str contentFile:(Boolean)isContentFile {
     NSString *currentPrefix = [self currentLanguagePrefix];

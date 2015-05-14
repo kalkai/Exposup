@@ -11,7 +11,7 @@
 
 @implementation AnimateImageViewController
 
-@synthesize parser, standID, animationView,  startButton, currentWidth, title, comment, tempHeight;
+@synthesize parser, standID, animationView,  startButton, currentWidth, titleScreen, comment, tempHeight;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -122,18 +122,18 @@
 - (int)addTitle  {
     int originY = 50;
     CGSize available = CGSizeMake(currentWidth - 150, 9999);
-    title = [[UILabel alloc] init];
-    title.font = [[Config instance] bigFont];
-    title.frame = CGRectMake(0, 0, currentWidth - 150, 100);;
-    title.backgroundColor = [UIColor clearColor];
-    title.textColor = [[Config instance] color1];
-    title.text = [parser title];
-    title.numberOfLines = 0;
-    CGSize sizedToFit = [title sizeThatFits: available];
+    titleScreen = [[UILabel alloc] init];
+    titleScreen.font = [[Config instance] bigFont];
+    titleScreen.frame = CGRectMake(0, 0, currentWidth - 150, 100);;
+    titleScreen.backgroundColor = [UIColor clearColor];
+    titleScreen.textColor = [[Config instance] color1];
+    titleScreen.text = [parser title];
+    titleScreen.numberOfLines = 0;
+    CGSize sizedToFit = [titleScreen sizeThatFits: available];
     
     
-    title.frame = CGRectMake(currentWidth / 2 - sizedToFit.width/2, originY, sizedToFit.width, sizedToFit.height);
-    [self.view addSubview: title];
+    titleScreen.frame = CGRectMake(currentWidth / 2 - sizedToFit.width/2, originY, sizedToFit.width, sizedToFit.height);
+    [self.view addSubview: titleScreen];
     return originY + sizedToFit.height;
 }
 

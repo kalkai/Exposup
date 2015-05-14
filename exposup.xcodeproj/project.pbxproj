@@ -15,13 +15,6 @@
 		0F99ACC9186DB4410060E213 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F99ACC7186DB4410060E213 /* plus.png */; };
 		0F99ACCB186F26570060E213 /* sound.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F99ACCA186F26570060E213 /* sound.png */; };
 		0F9C345617F6F33800C5BE75 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C345517F6F33800C5BE75 /* AudioViewController.m */; };
-		0F9C872C18B4C53A00B00968 /* Labels.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C872918B4C53A00B00968 /* Labels.m */; };
-		0F9C872D18B4C53A00B00968 /* LanguageManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C872B18B4C53A00B00968 /* LanguageManagement.m */; };
-		0F9C873018B4C55C00B00968 /* leftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C872E18B4C55C00B00968 /* leftArrow.png */; };
-		0F9C873118B4C55C00B00968 /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C872F18B4C55C00B00968 /* rightArrow.png */; };
-		0F9C873818B4C58600B00968 /* XMLAnimateImageParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C873318B4C58600B00968 /* XMLAnimateImageParser.m */; };
-		0F9C873918B4C58600B00968 /* XMLIndexParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C873518B4C58600B00968 /* XMLIndexParser.m */; };
-		0F9C873A18B4C58600B00968 /* XMLLabelsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C873718B4C58600B00968 /* XMLLabelsParser.m */; };
 		0F9C873B18B4C6E100B00968 /* XMLAnimateImageParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C873318B4C58600B00968 /* XMLAnimateImageParser.m */; };
 		0F9C873C18B4C6E100B00968 /* XMLIndexParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C873518B4C58600B00968 /* XMLIndexParser.m */; };
 		0F9C873D18B4C6E100B00968 /* XMLLabelsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C873718B4C58600B00968 /* XMLLabelsParser.m */; };
@@ -36,9 +29,6 @@
 		A880A29216BD550C00A8BC18 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A880A29116BD550C00A8BC18 /* UIKit.framework */; };
 		A880A29416BD550C00A8BC18 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A880A29316BD550C00A8BC18 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A880A29616BD550C00A8BC18 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A880A29516BD550C00A8BC18 /* CoreGraphics.framework */; };
-		A880A2B016BD550C00A8BC18 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A880A2AF16BD550C00A8BC18 /* SenTestingKit.framework */; };
-		A880A2B116BD550C00A8BC18 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A880A29116BD550C00A8BC18 /* UIKit.framework */; };
-		A880A2B216BD550C00A8BC18 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A880A29316BD550C00A8BC18 /* Foundation.framework */; };
 		A88E50D516C29DBC00A76E8F /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88E50D416C29DBC00A76E8F /* MediaPlayer.framework */; };
 		A893DB5716FB4B7500EF2E77 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A893DB5116FB4B7500EF2E77 /* libzbar.a */; };
 		A893DB5816FB4B7500EF2E77 /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = A893DB5316FB4B7500EF2E77 /* zbar-back.png */; };
@@ -79,16 +69,6 @@
 		A8C08C75175361B400230680 /* XMLZoomParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C08C5B175361B400230680 /* XMLZoomParser.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		A880A2B316BD550C00A8BC18 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A880A28416BD550C00A8BC18 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A880A28C16BD550C00A8BC18;
-			remoteInfo = ExpostitionSupport;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		0F9768EE184F7326004EB9F0 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		0F9768EF184F7326004EB9F0 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
@@ -119,7 +99,6 @@
 		A880A29116BD550C00A8BC18 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A880A29316BD550C00A8BC18 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A880A29516BD550C00A8BC18 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		A880A2AE16BD550C00A8BC18 /* ExpoSupTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpoSupTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A880A2AF16BD550C00A8BC18 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		A88E50D416C29DBC00A76E8F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		A893DB3D16FB4B7500EF2E77 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
@@ -225,16 +204,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A880A2AA16BD550C00A8BC18 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A880A2B016BD550C00A8BC18 /* SenTestingKit.framework in Frameworks */,
-				A880A2B116BD550C00A8BC18 /* UIKit.framework in Frameworks */,
-				A880A2B216BD550C00A8BC18 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -276,7 +245,6 @@
 			isa = PBXGroup;
 			children = (
 				A880A28D16BD550C00A8BC18 /* ExpoSup.app */,
-				A880A2AE16BD550C00A8BC18 /* ExpoSupTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -459,25 +427,6 @@
 			productReference = A880A28D16BD550C00A8BC18 /* ExpoSup.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A880A2AD16BD550C00A8BC18 /* ExpoSupTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A880A2C316BD550D00A8BC18 /* Build configuration list for PBXNativeTarget "ExpoSupTests" */;
-			buildPhases = (
-				A880A2A916BD550C00A8BC18 /* Sources */,
-				A880A2AA16BD550C00A8BC18 /* Frameworks */,
-				A880A2AB16BD550C00A8BC18 /* Resources */,
-				A880A2AC16BD550C00A8BC18 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A880A2B416BD550C00A8BC18 /* PBXTargetDependency */,
-			);
-			name = ExpoSupTests;
-			productName = ExpostitionSupportTests;
-			productReference = A880A2AE16BD550C00A8BC18 /* ExpoSupTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -485,7 +434,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0630;
 				TargetAttributes = {
 					A880A28C16BD550C00A8BC18 = {
 						DevelopmentTeam = T83AE8A2UD;
@@ -505,7 +454,6 @@
 			projectRoot = "";
 			targets = (
 				A880A28C16BD550C00A8BC18 /* ExpoSup */,
-				A880A2AD16BD550C00A8BC18 /* ExpoSupTests */,
 			);
 		};
 /* End PBXProject section */
@@ -537,32 +485,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A880A2AB16BD550C00A8BC18 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0F9C873018B4C55C00B00968 /* leftArrow.png in Resources */,
-				0F9C873118B4C55C00B00968 /* rightArrow.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		A880A2AC16BD550C00A8BC18 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A880A28916BD550C00A8BC18 /* Sources */ = {
@@ -603,27 +526,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A880A2A916BD550C00A8BC18 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0F9C872C18B4C53A00B00968 /* Labels.m in Sources */,
-				0F9C872D18B4C53A00B00968 /* LanguageManagement.m in Sources */,
-				0F9C873818B4C58600B00968 /* XMLAnimateImageParser.m in Sources */,
-				0F9C873918B4C58600B00968 /* XMLIndexParser.m in Sources */,
-				0F9C873A18B4C58600B00968 /* XMLLabelsParser.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		A880A2B416BD550C00A8BC18 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A880A28C16BD550C00A8BC18 /* ExpoSup */;
-			targetProxy = A880A2B316BD550C00A8BC18 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A8AFB6941754911B004D3F92 /* MainStoryboard.storyboard */ = {
@@ -655,13 +558,16 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jean Richelle (9W2QWE2VH8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jean Richelle (9W2QWE2VH8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -678,8 +584,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "532E8187-1357-4824-B09B-91358A0BE0D0";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "532E8187-1357-4824-B09B-91358A0BE0D0";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -695,12 +601,15 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Musée des Sciences et Techniques ASBL (T83AE8A2UD)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Musée des Sciences et Techniques ASBL (T83AE8A2UD)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -711,8 +620,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "EF6033FF-130D-4CA8-89A1-FE44C8BB6302";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EF6033FF-130D-4CA8-89A1-FE44C8BB6302";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -723,8 +632,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jean Richelle (9W2QWE2VH8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jean Richelle (9W2QWE2VH8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ExpoSup/ExpoSup-Prefix.pch";
 				INFOPLIST_FILE = "ExpoSup/ExpoSup-Info.plist";
@@ -734,8 +643,8 @@
 					"\"$(SRCROOT)/ZBarSDK\"",
 				);
 				PRODUCT_NAME = ExpoSup;
-				PROVISIONING_PROFILE = "532E8187-1357-4824-B09B-91358A0BE0D0";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "532E8187-1357-4824-B09B-91358A0BE0D0";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
@@ -745,8 +654,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Musée des Sciences et Techniques ASBL (T83AE8A2UD)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Musée des Sciences et Techniques ASBL (T83AE8A2UD)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ExpoSup/ExpoSup-Prefix.pch";
 				INFOPLIST_FILE = "ExpoSup/ExpoSup-Info.plist";
@@ -756,44 +665,10 @@
 					"\"$(SRCROOT)/ZBarSDK\"",
 				);
 				PRODUCT_NAME = ExpoSup;
-				PROVISIONING_PROFILE = "EF6033FF-130D-4CA8-89A1-FE44C8BB6302";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EF6033FF-130D-4CA8-89A1-FE44C8BB6302";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		A880A2C416BD550D00A8BC18 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ExpostitionSupport.app/ExpostitionSupport";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ExpostitionSupport/ExpostitionSupport-Prefix.pch";
-				INFOPLIST_FILE = "ExpostitionSupportTests/ExpoSupTests-Info.plist";
-				PRODUCT_NAME = ExpoSupTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		A880A2C516BD550D00A8BC18 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ExpostitionSupport.app/ExpostitionSupport";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ExpostitionSupport/ExpostitionSupport-Prefix.pch";
-				INFOPLIST_FILE = "ExpostitionSupportTests/ExpoSupTests-Info.plist";
-				PRODUCT_NAME = ExpoSupTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -814,15 +689,6 @@
 			buildConfigurations = (
 				A880A2C116BD550D00A8BC18 /* Debug */,
 				A880A2C216BD550D00A8BC18 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A880A2C316BD550D00A8BC18 /* Build configuration list for PBXNativeTarget "ExpoSupTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A880A2C416BD550D00A8BC18 /* Debug */,
-				A880A2C516BD550D00A8BC18 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

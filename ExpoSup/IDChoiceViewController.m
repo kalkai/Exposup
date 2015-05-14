@@ -24,7 +24,7 @@
     
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     
-    languagesButton = [[LanguageManagement instance] addLanguageSelectionButton: self.view];
+    languagesButton = [[LanguageManagement instance] addLanguageSelectionButton: self.view viewController: self];
     
     [super viewWillAppear: animated];
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
