@@ -190,9 +190,10 @@
             
         }
         
-        /*
+        
         // si on a une seule sous-section, on passe directement dessus
         NSString *type = [parser.types objectAtIndex: 0];
+        NSLog(@"section count =%d", parser.names.count);
         if(parser.names.count == 1 && ![type isEqualToString:@"audio"] && ![type isEqualToString:@"movie"]) {
             NSLog(@"Only one subsection");
             [self setNumberOfPagesToPop: [NSNumber numberWithInt: 2]]; // utile pour faire un retour "direct" à la page de scan
@@ -219,7 +220,7 @@
                 [self toAnimateImage: buttonClicked];
             }
         }
-        */
+        
         
     }
     else {
