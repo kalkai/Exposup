@@ -17,12 +17,24 @@
 
 @property (strong,nonatomic) XMLConfigParser *parser;
 
+typedef enum {
+    FONT_BIG = 0,
+    FONT_NORMAL = 1,
+    FONT_SMALL = 2,
+    FONT_TINY = 3,
+    FONT_QUOTE = 4
+} ConfigErrorType;
+
 @property (strong,nonatomic) NSString *mode;
 @property (assign,nonatomic) Boolean audioOn;
+@property (strong,nonatomic) NSMutableArray* errors;
+@property (strong,nonatomic) NSMutableArray* errorsFont;
 
 - (Boolean)initialize;
 - (Boolean)parseConfigFile;
 - (Boolean)audioOn;
+- (NSMutableArray*)getErrors;
+- (NSMutableArray*)getErrorsFont;
 
 - (Boolean)showChildMode;
 - (Boolean)showGuideMode;

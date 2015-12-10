@@ -17,6 +17,12 @@
 
 @synthesize scanButton,returnButton, showReturn, swipeArea, gesture, volumeLabel, animationView, volumeViewSlider, isPageWithAudio, numberOfPagesToPop, navController;
 
+
+
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -121,9 +127,22 @@
     [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex: indexOfScanPage] animated:YES];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+
+    //The device has already rotated, that's why this method is being called.
+    UIDeviceOrientation toOrientation   = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation toInterfaceOrientation;
+    //fixes orientation mismatch (between UIDeviceOrientation and UIInterfaceOrientation)
+    if (toOrientation == UIDeviceOrientationLandscapeRight)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeLeft;
+    else if (toOrientation == UIDeviceOrientationLandscapeLeft)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeRight;
+    else if (toOrientation == UIDeviceOrientationPortraitUpsideDown)
+        toInterfaceOrientation = UIInterfaceOrientationPortraitUpsideDown;
+    else toInterfaceOrientation = UIInterfaceOrientationPortrait;
+    
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         returnButton.frame = CGRectMake(1024-90, 15, 80 , 50);
         //swipeArea.frame = CGRectMake(1024/2 - swipeArea.frame.size.width/2, 0, swipeArea.frame.size.width, swipeArea.frame.size.height);
@@ -135,6 +154,10 @@
     //[self addArrowToView: swipeArea];
     //volumeViewSlider.frame = CGRectMake(swipeArea.frame.origin.x, -swipeArea.frame.size.height , swipeArea.frame.size.width, swipeArea.frame.size.height);
 }
+
+
+
+
 /*
 -(void)swipe:(UISwipeGestureRecognizer*)gesture {
     [self showVolumeView: self];

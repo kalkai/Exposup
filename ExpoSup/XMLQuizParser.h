@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "Config.h"
 #import "Alerts.h"
+#import "XMLParser.h"
 
-@interface XMLQuizParser : NSObject <NSXMLParserDelegate>
+@interface XMLQuizParser : XMLParser
 
 @property (strong, nonatomic) NSMutableString *currentProperty;
 @property (strong, nonatomic) NSMutableString *currentQuestion;
@@ -21,6 +22,6 @@
 @property (strong, nonatomic) NSMutableArray *falseAnswers; //array of array
 @property (strong, nonatomic) NSMutableArray *correctAnswers;
 
--(void)parseXMLFileAtPath:(NSString*)path;
+-(Boolean)parseXMLFileAtPath:(NSString*)path;
 
 @end

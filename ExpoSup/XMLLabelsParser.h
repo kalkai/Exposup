@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "Alerts.h"
-
+#import "XMLParser.h"
 
 @class Config;
 
-@interface XMLLabelsParser : NSObject <NSXMLParserDelegate>
+@interface XMLLabelsParser :  XMLParser
 
 @property (strong, nonatomic) NSMutableString *currentProperty;
 
@@ -43,6 +43,6 @@
 
 @property (strong, nonatomic) NSString *animateButton;
 
-- (void)parseXMLLabels;
+- (Boolean)parseXMLLabels;
 
 @end

@@ -10,8 +10,9 @@
 #import "Config.h"
 #import "Alerts.h"
 #import "AudioViewController.h"
+#import "XMLParser.h"
 
-@interface XMLTextParser : NSObject <NSXMLParserDelegate> 
+@interface XMLTextParser : XMLParser
 
 @property (strong,nonatomic) NSString *currentText;
 @property (strong,nonatomic) NSString *title;
@@ -61,7 +62,7 @@
 @property(strong,nonatomic) NSString *audioAutostart;
 @property(strong,nonatomic) NSString *audioRepetition;
 
-- (void)parseXMLFileAtPath:(NSString *)path;
+- (Boolean)parseXMLFileAtPath:(NSString *)path;
 
 
 

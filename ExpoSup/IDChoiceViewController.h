@@ -15,14 +15,15 @@
 #import "Alerts.h"
 #import "Labels.h"
 
-@interface IDChoiceViewController : SectionParentViewController
+@interface IDChoiceViewController : SectionParentViewController<UIPopoverPresentationControllerDelegate>
 
 @property (strong, nonatomic) UILabel *expoTitle;
 @property (strong, nonatomic) UILabel *idInfo;
 @property (strong, nonatomic) UITextField *idTextfield;
 @property (strong, nonatomic) UIButton *goButton;
 @property (strong, nonatomic) UIImageView *banner;
-@property (strong, nonatomic) UIPopoverController *popover;
+@property (strong, nonatomic) UIViewController *popover;
+@property (strong, nonatomic) UIPopoverPresentationController *popController;
 @property (strong, nonatomic) UIButton *infoButton;
 @property (strong, nonatomic) UIButton *languagesButton;
 

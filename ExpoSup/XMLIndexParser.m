@@ -15,12 +15,15 @@
 
 
 
-- (void)parseIndex{
+- (Boolean)parseIndex{
     error = false;
     errors = [[NSString alloc] init];
     NSData *data = [NSData  dataWithContentsOfFile: [[LanguageManagement instance] pathForFile: @"index.xml" contentFile: NO] ];
-    if(data == nil)
+    if(data == nil) {
         NSLog(@"Error during creation of data from file. Path = %@", @"index.xml");
+        [XMLParser setState: FILE_EMPTY];
+        return false;
+    }
     else NSLog(@"Data created from file content.");
     
     NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData: data];
@@ -36,8 +39,13 @@
     if(parseError) {
         error = true;
         NSLog(@"XmlParser - error parsing data : %@", [parseError localizedDescription]);
-        errors = [parseError localizedDescription];        
+        errors = [parseError localizedDescription];
+        [XMLParser setLastErrorFilePath:@"index.html"];
+        [XMLParser setLastErrorDescription:[parseError localizedDescription]];
+        [XMLParser setState: PARSING_ERROR];
+        return false;
     }
+    return true;
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {

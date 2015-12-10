@@ -14,7 +14,7 @@
 
 
 
-@interface ImageZoomViewController : SectionParentViewController <UIScrollViewDelegate>
+@interface ImageZoomViewController : SectionParentViewController <UIScrollViewDelegate, UIPopoverPresentationControllerDelegate>
 
 @property (assign, nonatomic) NSString *fileName;
 @property (assign, nonatomic) float currentScale;
@@ -26,6 +26,8 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) NSMutableArray *clickingFrames;
 @property (strong,nonatomic) UITapGestureRecognizer *tapGr;
-@property (strong, nonatomic) UIPopoverController *popover;
+//@property (strong, nonatomic) UIPopoverController *popover;
+@property (strong, nonatomic) UIViewController *popover;
+@property (strong, nonatomic) UIPopoverPresentationController *popController;
 
 @end

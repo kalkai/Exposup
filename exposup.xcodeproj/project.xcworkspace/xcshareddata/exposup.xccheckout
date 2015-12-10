@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>112228B6-606B-4A40-ACD7-8CFBD093C0F2</string>
 	<key>IDESourceControlProjectName</key>
-	<string>exposup</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>88C6C1C2E8DCDA781E49B35B7AF31C84994DBC01</key>
 		<string>https://github.com/CCS-ULB/ExpoSup</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>exposup.xcodeproj</string>
+	<string>exposup.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>88C6C1C2E8DCDA781E49B35B7AF31C84994DBC01</key>

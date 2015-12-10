@@ -12,7 +12,7 @@
 
 @implementation ImageZoomViewController
 
-@synthesize parser, imageView, scrollView, clickingFrames, tapGr, popover, currentScale, titleScreen, opacity;
+@synthesize parser, imageView, scrollView, clickingFrames, tapGr, popover, currentScale, titleScreen, opacity, popController;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -38,9 +38,11 @@
     [parser.audio deleteFromView];
     
     scrollView.zoomScale = 1.0;
-    if( [popover isPopoverVisible]) {
-        [popover dismissPopoverAnimated: YES];
-    }
+    //if( [popover isPopoverVisible]) {
+    //    [popover dismissPopoverAnimated: YES];
+    //}
+    // added after iOS 9
+    [popover dismissViewControllerAnimated:NO completion:nil];
     
     CGRect frame;
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
@@ -224,21 +226,21 @@
             NSLog(@"touche tap x: %f", [tapGr locationInView: scrollView].x);
             NSLog(@"touche tap y: %f", [tapGr locationInView: scrollView].y);
             
-            if( [popover isPopoverVisible]) {
-                [popover dismissPopoverAnimated: YES];
-            }
-            else {
+            //if( [popover isPopoverVisible]) {
+            //    [popover dismissPopoverAnimated: YES];
+            //}
+            //else {
                 [self showPopup:scaleRect atIndex: i];
                 
-            }
+            //}
         }
     }
     
 }
 
 - (void)showPopup:(CGRect)rect atIndex:(int)idx{
-    UIViewController *popup = [[UIViewController alloc] init];
-    popup.view.backgroundColor = [UIColor clearColor];
+    popover = [[UIViewController alloc] init];
+    popover.view.backgroundColor = [UIColor clearColor];
     
     UITextView *tv = [[UITextView alloc] init];
     tv.editable = NO;
@@ -256,8 +258,8 @@
     newFrame.size.height = textViewSize.height;
     tv.frame = newFrame;
     
-    
-    
+    // Before iOS 9
+    /*
     [popup.view addSubview: tv];
     popover = [[UIPopoverController alloc] initWithContentViewController: popup];
     
@@ -265,7 +267,19 @@
     [popover presentPopoverFromRect: rect
                              inView: scrollView
            permittedArrowDirections: UIPopoverArrowDirectionAny
-                           animated: YES];
+                           animated: YES];*/
+    
+    // After iOS 9
+    popover.modalPresentationStyle = UIModalPresentationPopover;
+    popover.preferredContentSize = tv.frame.size;
+    [self presentViewController: popover animated:YES completion:nil];
+    
+    // configure the Popover presentation controller
+    popController = [popover popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    popController.sourceView = scrollView;
+    popController.sourceRect = rect;
+    popController.delegate = self;
 }
 
 
@@ -278,18 +292,31 @@
 
 
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    //The device has already rotated, that's why this method is being called.
+    UIDeviceOrientation toOrientation   = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation toInterfaceOrientation;
+    //fixes orientation mismatch (between UIDeviceOrientation and UIInterfaceOrientation)
+    if (toOrientation == UIDeviceOrientationLandscapeRight)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeLeft;
+    else if (toOrientation == UIDeviceOrientationLandscapeLeft)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeRight;
+    else if (toOrientation == UIDeviceOrientationPortraitUpsideDown)
+        toInterfaceOrientation = UIInterfaceOrientationPortraitUpsideDown;
+    else toInterfaceOrientation = UIInterfaceOrientationPortrait;
+    
     [self deletePopups];
     [parser.audio deleteFromView];
     
     scrollView.zoomScale = 1.0;
     currentScale = 1.0;
-    if( [popover isPopoverVisible]) {
-        [popover dismissPopoverAnimated: YES];
-    }
+    //if( [popover isPopoverVisible]) {
+    //    [popover dismissPopoverAnimated: YES];
+    //}
+    [popover dismissViewControllerAnimated:NO completion:nil];
     
     CGRect frame;
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {

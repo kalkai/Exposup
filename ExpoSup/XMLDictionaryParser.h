@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "Config.h"
 #import "Alerts.h"
+#import "XMLParser.h"
 
-@interface XMLDictionaryParser : NSObject <NSXMLParserDelegate>
+@interface XMLDictionaryParser : XMLParser
 
 @property (strong,nonatomic) NSMutableArray *words;
 @property (strong,nonatomic) NSMutableArray *definitions;
@@ -19,7 +20,7 @@
 @property (strong,nonatomic) NSMutableString *currentWord;
 @property (strong,nonatomic) NSMutableString *currentProperty;
 
-- (void)parseXMLDictionary;
+- (Boolean)parseXMLDictionary;
 
 +(XMLDictionaryParser*)instance;
 

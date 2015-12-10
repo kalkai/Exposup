@@ -18,7 +18,7 @@
 #import "SectionViewController.h"
 
 
-@interface TextViewController : SectionParentViewController <UIScrollViewDelegate>
+@interface TextViewController : SectionParentViewController <UIScrollViewDelegate, UIPopoverPresentationControllerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *views;
 
@@ -33,7 +33,8 @@
 @property (strong, nonatomic) UILabel *titleScreen;
 
 @property (strong, nonatomic) UIScrollView *scrollView;
-@property (strong, nonatomic) UIPopoverController *popover;
+@property (strong, nonatomic) UIViewController *popover;
+@property (strong, nonatomic) UIPopoverPresentationController *popController;
 
 @property (assign,nonatomic) NSString *standID;
 @property (strong,nonatomic) AudioViewController *audioController;

@@ -38,6 +38,7 @@
 
 
 +(Labels*)instance;
+
 -(Boolean)initialize;
 -(void)updateLabels;
 @end

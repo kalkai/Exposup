@@ -10,8 +10,9 @@
 #import "Config.h"
 #import "Alerts.h"
 #import "AudioViewController.h"
+#import "XMLParser.h"
 
-@interface XMLAnimateImageParser : NSObject <NSXMLParserDelegate>
+@interface XMLAnimateImageParser : XMLParser
 
 @property(strong,nonatomic) AudioViewController* audioFile;
 @property(strong,nonatomic) NSString *audioFileName;
@@ -32,7 +33,7 @@
 
 
 
-- (void)parseXMLFileAtPath:(NSString *)path;
+- (Boolean)parseXMLFileAtPath:(NSString *)path;
 
 
 @end

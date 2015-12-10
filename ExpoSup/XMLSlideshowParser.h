@@ -10,8 +10,9 @@
 #import "Config.h"
 #import "Alerts.h"
 #import "AudioViewController.h"
+#import "XMLParser.h"
 
-@interface XMLSlideshowParser : NSObject <NSXMLParserDelegate> 
+@interface XMLSlideshowParser : XMLParser
 
 @property (assign,nonatomic) int nSlides;
 
@@ -30,7 +31,7 @@
 @property (strong,nonatomic) NSMutableString *currentComment;
 @property (strong,nonatomic) NSMutableString *currentProperty;
 
-- (void)parseXMLFileAtPath:(NSString *)path;
+- (Boolean)parseXMLFileAtPath:(NSString *)path;
 
 
 

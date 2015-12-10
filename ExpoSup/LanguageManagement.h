@@ -14,7 +14,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @class LanguageButton;
-@interface LanguageManagement : NSObject
+@interface LanguageManagement : NSObject<UIPopoverPresentationControllerDelegate>
 
 @property (strong,nonatomic) NSString *currentLanguagePrefix;
 
@@ -25,7 +25,8 @@
 @property (strong,nonatomic) NSMutableArray *languagesIcons;
 @property (strong,nonatomic) NSString *defautLanguagePrefix;
 
-@property (strong, nonatomic) UIPopoverController *popover;
+@property (strong, nonatomic) UIViewController *popover;
+@property (strong, nonatomic) UIPopoverPresentationController *popController;
 @property (strong, nonatomic) UIView* currentView;
 @property (strong, nonatomic) UIViewController* currentViewController;
 
@@ -41,7 +42,7 @@
 - (NSString*)currentLanguagePrefix;
 
 +(LanguageManagement*)instance;
-+(UIViewController*)getTopController;
+//+(UIViewController*)getTopController;
 
 @end
 

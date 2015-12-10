@@ -10,8 +10,9 @@
 #import "Config.h"
 #import "Alerts.h"
 #import "AudioViewController.h"
+#import "XMLParser.h"
 
-@interface XMLZoomParser : NSObject <NSXMLParserDelegate>
+@interface XMLZoomParser : XMLParser
 
 @property (strong,nonatomic) NSString *imagePath;
 @property (strong,nonatomic) NSString *title;
@@ -33,7 +34,7 @@
 @property(strong,nonatomic) NSString *audioRepetition;
 
 
-- (void)parseXMLFileAtPath:(NSString *)path;
+- (Boolean)parseXMLFileAtPath:(NSString *)path;
 
 
 @end

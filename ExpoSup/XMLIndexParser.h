@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "Config.h"
 #import "Alerts.h"
+#import "XMLParser.h"
 
-@interface XMLIndexParser : NSObject <NSXMLParserDelegate>
+@interface XMLIndexParser : XMLParser
 
 @property (assign,nonatomic) Boolean error;
 @property (strong,nonatomic) NSString *errors;
@@ -23,7 +24,7 @@
 @property (strong,nonatomic) NSMutableArray *ids;
 
 
-- (void)parseIndex;
+- (Boolean)parseIndex;
 +(XMLIndexParser*)instance;
 
 @end

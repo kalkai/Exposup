@@ -10,7 +10,7 @@
 
 @implementation LanguageManagement
 
-@synthesize languagesPrefixes, languagesNames, languagesIcons, defautLanguagePrefix, popover, currentView, currentLanguagePrefix, languageButton, isLanguageActivated, currentViewController;
+@synthesize languagesPrefixes, languagesNames, languagesIcons, defautLanguagePrefix, popover, currentView, currentLanguagePrefix, languageButton, isLanguageActivated, currentViewController, popController;
 
 -(Boolean)initialize {
     XMLConfigParser *configParser = [[Config instance] parser];
@@ -65,25 +65,41 @@
 
 - (IBAction)languageButtonClicked:(id)sender {
     UIButton *button = (UIButton*)sender;
-    if( [popover isPopoverVisible]) {
-        [popover dismissPopoverAnimated: YES];
-    }
-    else {
+    //if( [popover isPopoverVisible]) {
+    //    [popover dismissPopoverAnimated: YES];
+    //}
+    //else {
         [self showPopup: button.frame];
         
-    }
+    //}
 }
 
 - (void)showPopup:(CGRect)rect {
     
-    UIViewController *viewControllerToShow = [self createLanguagesPopup];
+    popover = [self createLanguagesPopup];
     
+    // Before iOS 9
+    /*
     popover = [[UIPopoverController alloc] initWithContentViewController: viewControllerToShow];
     popover.popoverContentSize = viewControllerToShow.contentSizeForViewInPopover;
     [popover presentPopoverFromRect: rect
                              inView: currentView
            permittedArrowDirections: UIPopoverArrowDirectionAny
                            animated: YES];
+    */
+    
+    
+    // After iOS 9
+    popover.modalPresentationStyle = UIModalPresentationPopover;
+    popover.preferredContentSize = popover.preferredContentSize; //useless
+    [currentViewController presentViewController: popover animated:YES completion:nil];
+    
+    // configure the Popover presentation controller
+    popController = [popover popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    popController.sourceView = currentView;
+    popController.sourceRect = languageButton.frame;
+    popController.delegate = self;
 }
 
 
@@ -138,7 +154,7 @@
         [view addSubview: tmpButton];
     }
     view.frame = CGRectMake(0, 0, width + 5,  y);
-    [popup setContentSizeForViewInPopover: view.frame.size];
+    [popup setPreferredContentSize: view.frame.size];
     [popup.view addSubview: view];
     
     return popup;
@@ -149,8 +165,8 @@
     UIButton *buttonTriggered = (UIButton*)sender;
     int index = buttonTriggered.tag;
     currentLanguagePrefix = [languagesPrefixes objectAtIndex: index];
-    [popover dismissPopoverAnimated: YES];
-    
+    //[popover dismissPopoverAnimated: YES];
+    [popover dismissViewControllerAnimated:YES completion:nil];
 
     
     [languageButton fillWithLabel: [languagesNames objectAtIndex:[languagesPrefixes indexOfObject: currentLanguagePrefix]] andIcon: [languagesIcons objectAtIndex:[languagesPrefixes indexOfObject: currentLanguagePrefix]]];

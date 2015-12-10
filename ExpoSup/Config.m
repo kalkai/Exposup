@@ -11,7 +11,7 @@
 
 @implementation Config
 
-@synthesize parser,mode, audioOn;
+@synthesize parser,mode, audioOn, errors, errorsFont;
 
 - (Boolean)initialize {
 
@@ -24,14 +24,19 @@
 
 - (Boolean)parseConfigFile {
     parser = [[XMLConfigParser alloc] init];
+    errors = [[NSMutableArray alloc] init];
+    errorsFont = [[NSMutableArray alloc] init];
+    
     if(![parser parseXMLFile])
         return false;
     return true;
 }
 
-- (Boolean)showChildMode {return parser.showChildMode;};
-- (Boolean)showGuideMode {return parser.showGuideMode;};
-- (Boolean)audioOn {return audioOn;};
+- (Boolean)showChildMode {return parser.showChildMode;}
+- (Boolean)showGuideMode {return parser.showGuideMode;}
+- (Boolean)audioOn {return audioOn;}
+- (NSMutableArray*)getErrors {return errors;}
+- (NSMutableArray*)getErrorsFont {return errorsFont;}
 
 - (NSString*) backgroundPortrait { return [[LanguageManagement instance] pathForFile: parser.backgroundPortrait contentFile: NO]; };
 - (NSString*) backgroundLandscape { return [[LanguageManagement instance] pathForFile: parser.backgroundLandscape contentFile: NO]; };
@@ -50,8 +55,12 @@
         return [UIFont fontWithName: parser.bigFont size: [parser.bigFontSize intValue]];
     }
     
-    Alerts *alert = [[Alerts alloc] init];
-    [alert showPoliceNotFoundAlert:self name: parser.bigFont num: 1];
+    [errors addObject: [NSNumber numberWithInteger: FONT_BIG]];
+    [errorsFont addObject: parser.bigFont];
+    
+    //UIAlertController* alert = [Alerts getFontNotFoundAlert:parser.bigFont value:@"<bigFont>"];
+    //[self presentViewController:alert animated:YES completion:nil];
+    
     
     return [UIFont systemFontOfSize:3];
 }
@@ -65,8 +74,12 @@
     else if ([UIFont fontWithName: parser.normalFont size: [parser.normalFontSize intValue]] != nil)
         return [UIFont fontWithName: parser.normalFont size: [parser.normalFontSize intValue]];
     
-    Alerts *alert = [[Alerts alloc] init];
-    [alert showPoliceNotFoundAlert:self name: parser.normalFont num: 2];
+    //Alerts *alert = [[Alerts alloc] init];
+    //[alert showPoliceNotFoundAlert:self name: parser.normalFont num: 2];
+    
+    [errors addObject: [NSNumber numberWithInteger: FONT_NORMAL]];
+    [errorsFont addObject: parser.normalFont];
+    
     return [UIFont systemFontOfSize:3];
 }
 
@@ -78,8 +91,12 @@
     else if([UIFont fontWithName: parser.smallFont size: [parser.smallFontSize intValue]] != nil)
         return [UIFont fontWithName: parser.smallFont size: [parser.smallFontSize intValue]];
     
-    Alerts *alert = [[Alerts alloc] init];
-    [alert showPoliceNotFoundAlert:self name: parser.smallFont num: 3];
+    //Alerts *alert = [[Alerts alloc] init];
+    //[alert showPoliceNotFoundAlert:self name: parser.smallFont num: 3];
+    
+    [errors addObject: [NSNumber numberWithInteger: FONT_SMALL]];
+    [errorsFont addObject: parser.smallFont];
+    
     return [UIFont systemFontOfSize:3];
 }
 
@@ -91,8 +108,13 @@
     else if([UIFont fontWithName: parser.tinyFont size: [parser.tinyFontSize intValue]] != nil)
         return [UIFont fontWithName: parser.tinyFont size: [parser.tinyFontSize intValue]];
     
-    Alerts *alert = [[Alerts alloc] init];
-    [alert showPoliceNotFoundAlert:self name: parser.tinyFont num: 4];
+    //Alerts *alert = [[Alerts alloc] init];
+    //[alert showPoliceNotFoundAlert:self name: parser.tinyFont num: 4];
+    
+    
+    [errors addObject: [NSNumber numberWithInteger: FONT_TINY]];
+    [errorsFont addObject: parser.tinyFont];
+    
     return [UIFont systemFontOfSize:3];
 }
 
@@ -104,8 +126,12 @@
         return [UIFont fontWithName: parser.quoteFont size: [parser.quoteFontSize intValue]];
     }
     
-    Alerts *alert = [[Alerts alloc] init];
-    [alert showPoliceNotFoundAlert:self name: parser.quoteFont num: 5];
+    //Alerts *alert = [[Alerts alloc] init];
+    //[alert showPoliceNotFoundAlert:self name: parser.quoteFont num: 5];
+    
+    [errors addObject: [NSNumber numberWithInteger: FONT_QUOTE]];
+    [errorsFont addObject: parser.quoteFont];
+    
     return [UIFont systemFontOfSize:33];
 }
 

@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "Alerts.h"
+#import "XMLParser.h"
 
-@interface XMLConfigParser : NSObject <NSXMLParserDelegate> 
+@interface XMLConfigParser : XMLParser
 
 @property (strong,nonatomic) NSMutableString *currentProperty;
 @property (strong,nonatomic) NSString *currentR;

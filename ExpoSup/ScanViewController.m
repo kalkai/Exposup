@@ -11,7 +11,7 @@
 
 @implementation ScanViewController
 
-@synthesize reader, result, file, expoTitle, scannerContainer, toID, banner, popover, infoButton, scanInstruction, languagesButton, argument;
+@synthesize result, file, expoTitle, scannerContainer, toID, banner, popover, infoButton, scanInstruction, languagesButton, argument, popController, device, input, session, preview, output;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,18 +23,19 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [reader start];
 
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     
     languagesButton = [[LanguageManagement instance] addLanguageSelectionButton: self.view viewController: self];
     
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-        reader.previewTransform = CGAffineTransformMakeRotation (M_PI * 270 / 180.0);
+        AVCaptureConnection *con = self.preview.connection;
+        con.videoOrientation = AVCaptureVideoOrientationLandscapeRight;
         [self createSubviewsForLandscape];
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        reader.previewTransform = CGAffineTransformMakeRotation (M_PI * 0 / 180.0);
+        AVCaptureConnection *con = self.preview.connection;
+        con.videoOrientation = AVCaptureVideoOrientationPortrait;
         [self createSubviewsForPortrait];
     }
 
@@ -42,8 +43,7 @@
 
 
 - (void)viewDidDisappear:(BOOL)animated {
-    [reader stop];
-    
+    [self stopScanning];
 }
 
 - (void)viewDidLoad
@@ -53,10 +53,6 @@
     
     
     result = nil;
-    
-    //Cam view
-    scannerContainer = [[UIView alloc] init];
-    [self StartScan: self];
     
     
 
@@ -111,15 +107,75 @@
     scanInstruction.numberOfLines = 2;
     [self.view addSubview: scanInstruction];
     
+    scannerContainer = [[UIView alloc] init];
+    scannerContainer.backgroundColor = [UIColor yellowColor];
     
+    [self setupScanner];
+    [self startScanning];
+}
+
+- (void) setupScanner;
+{
+    self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    self.input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
+    
+    self.session = [[AVCaptureSession alloc] init];
+    
+    self.output = [[AVCaptureMetadataOutput alloc] init];
+    [self.session addOutput:self.output];
+    [self.session addInput:self.input];
+    
+    [self.output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    self.output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+    
+    
+    
+    self.preview = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
+    self.preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.preview.frame = CGRectMake(0, 0, scannerContainer.frame.size.width, scannerContainer.frame.size.height);
+    
+    AVCaptureConnection *con = self.preview.connection;
+    
+    con.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+    
+    
+    [self.scannerContainer.layer insertSublayer:self.preview atIndex:0];
+    [self.view addSubview: scannerContainer];
+}
+
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects
+       fromConnection:(AVCaptureConnection *)connection
+{
+    for(AVMetadataObject *current in metadataObjects) {
+        //if([current isKindOfClass:[AVMetadataMachineReadableCodeObject class]]) {
+            //if([self.delegate respondsToSelector:@selector(scanViewController:didSuccessfullyScan:)]) {
+                [self stopScanning];
+                NSString *scannedValue = [((AVMetadataMachineReadableCodeObject *) current) stringValue];
+                result = scannedValue;
+                [self.delegate scanViewController:self didSuccessfullyScan:scannedValue];
+                [self parseFileAndProceed:self];
+        
+            //}
+        //}
+    }
+}
+
+- (void)startScanning;
+{
+    [self.session startRunning];
     
 }
 
+- (void) stopScanning;
+{
+    [self.session stopRunning];
+}
 
 
 - (void)showPopup {
-    UIViewController *popup = [[UIViewController alloc] init];
-    popup.view.backgroundColor = [UIColor clearColor];
+    popover = [[UIViewController alloc] init];
+    popover.view.backgroundColor = [UIColor clearColor];
     
     UITextView *tv = [[UITextView alloc] init];
     tv.editable = NO;
@@ -135,7 +191,7 @@
     
     //CGSize textViewSizeTV1 = [tv sizeThatFits:CGSizeMake(tv.frame.size.width, FLT_MAX)];
     
-    [popup.view addSubview: tv];
+    [popover.view addSubview: tv];
     /*UITextView *tv2;
      
      if(![[[Labels instance] credits] isEqualToString: [[NSString alloc] init]]) {
@@ -169,28 +225,41 @@
      //= CGRectMake(0, 0, tv.frame.size.width, tv.frame.size.height + tv2.frame.size.height + 2);
      
      */
+    
+    // Before iOS 9
+    /*
     popover = [[UIPopoverController alloc] initWithContentViewController: popup];
     
     popover.popoverContentSize = CGSizeMake(tv.frame.size.width, tv.frame.size.height );
     [popover presentPopoverFromRect: infoButton.frame
                              inView: self.view
            permittedArrowDirections: UIPopoverArrowDirectionAny
-                           animated: YES];
+                           animated: YES];*/
+    // After iOS 9
+    popover.modalPresentationStyle = UIModalPresentationPopover;
+    popover.preferredContentSize = CGSizeMake(tv.frame.size.width, tv.frame.size.height );
+    [self presentViewController: popover animated:YES completion:nil];
+    
+    // configure the Popover presentation controller
+    popController = [popover popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    popController.sourceView = self.view;
+    popController.sourceRect = infoButton.frame;
+    popController.delegate = self;
 }
 
 -(IBAction)printInfoPopup:(id)sender {
-    if( [popover isPopoverVisible]) {
-        
-        [popover dismissPopoverAnimated: YES];
-    }
-    else {
+    //if( [popover isPopoverVisible]) {
+    //    [popover dismissPopoverAnimated: YES];
+    //}
+    //else {
         [self showPopup];
-        
-    }
+    //}
 }
 
 -(IBAction)hideInfoPopup:(id)sender {
-    [popover dismissPopoverAnimated: YES];
+    //[popover dismissPopoverAnimated: YES];
+    [popover dismissViewControllerAnimated:NO completion:nil];
 }
 
 
@@ -200,6 +269,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
 - (IBAction)StartScan:(id) sender {
     reader = [ZBarReaderView new];
     reader.readerDelegate = self;
@@ -214,9 +284,9 @@
     
     [scannerContainer addSubview: reader];
     [self.view addSubview: scannerContainer];
-}
+}*/
 
-
+/*
 -(void)readerView:(ZBarReaderView*)reader didReadSymbols: (ZBarSymbolSet*) symbols fromImage:(UIImage *) image{
     ZBarSymbol *symbol = nil;
     for(symbol in symbols) {
@@ -224,7 +294,7 @@
         [self parseFileAndProceed: self];
 
     }
-}
+}*/
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -279,8 +349,16 @@
 
     if(![self isIDFileFound: file]) {
         NSLog(@"Fichier non trouvé : %@.", file);
-        Alerts *alert = [[Alerts alloc] init];
-        [alert showQRCodeNotFoundAlert:self];
+        //Alerts *alert = [[Alerts alloc] init];
+        //[alert showQRCodeNotFoundAlert:self];
+        UIAlertController* alert = [Alerts getQRCodeNotFoundAlert];
+        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertAction* restartScanningAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                    style:UIAlertActionStyleDefault
+                                                                    handler:^(UIAlertAction * action) {
+                                                                        [self startScanning];
+                                                                    }];
+        [alert addAction: restartScanningAction];
     }
     else {
         
@@ -319,8 +397,10 @@
              }
         }
         else {
-            Alerts *alert = [[Alerts alloc] init];
-            [alert errorParsingAlert:self file: sectionParser.path error: @"File is probably not a section file."];
+            //Alerts *alert = [[Alerts alloc] init];
+            //[alert errorParsingAlert:self file: sectionParser.path error: @"File is probably not a section file."];
+            UIAlertController* alert = [Alerts getParsingErrorAlert:sectionParser.path error:@"File is probably not a section file."];
+            [self presentViewController:alert animated:YES completion:nil];
         }
     }
 }
@@ -342,6 +422,7 @@
     scanInstruction.frame = CGRectMake(768 / 2 - scanInstruction.frame.size.width/2, 200, scanInstruction.frame.size.width, scanInstruction.frame.size.height);
     
     scannerContainer.frame = CGRectMake(768/2-600/2, 250, 600, 500);
+    self.preview.frame = CGRectMake(0, 0, scannerContainer.frame.size.width, scannerContainer.frame.size.height);
     toID.frame = CGRectMake(768/2 - toID.frame.size.width/2, 845, toID.frame.size.width, toID.frame.size.height);
 
     expoTitle.frame = CGRectMake(768 / 2 - expoTitle.frame.size.width/2, 100, expoTitle.frame.size.width, expoTitle.frame.size.height);
@@ -357,6 +438,7 @@
     scanInstruction.frame = CGRectMake(1024 / 2 - scanInstruction.frame.size.width/2, 100, scanInstruction.frame.size.width, scanInstruction.frame.size.height);
     
     scannerContainer.frame = CGRectMake(1024/2-550/2, 140, 550, 400);
+    self.preview.frame = CGRectMake(0, 0, scannerContainer.frame.size.width, scannerContainer.frame.size.height);
     toID.frame = CGRectMake(1024/2 - toID.frame.size.width/2, 595, toID.frame.size.width, toID.frame.size.height);
 
     expoTitle.frame = CGRectMake(1024 / 2 - expoTitle.frame.size.width/2, 30, expoTitle.frame.size.width, expoTitle.frame.size.height);
@@ -376,23 +458,40 @@
     }
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    //The device has already rotated, that's why this method is being called.
+    UIDeviceOrientation toOrientation   = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation toInterfaceOrientation;
+    //fixes orientation mismatch (between UIDeviceOrientation and UIInterfaceOrientation)
+    if (toOrientation == UIDeviceOrientationLandscapeRight)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeLeft;
+    else if (toOrientation == UIDeviceOrientationLandscapeLeft)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeRight;
+    else if (toOrientation == UIDeviceOrientationPortraitUpsideDown)
+        toInterfaceOrientation = UIInterfaceOrientationPortraitUpsideDown;
+    else toInterfaceOrientation = UIInterfaceOrientationPortrait;
+    
     //[reader willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     //[self deleteSubviewsFromView: self.view];
-    
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-        reader.previewTransform = CGAffineTransformMakeRotation (M_PI * 270 / 180.0); // rotation a 270degrés
+        //reader.previewTransform = CGAffineTransformMakeRotation (M_PI * 270 / 180.0); // rotation a 270degrés
+        AVCaptureConnection *con = self.preview.connection;
+        con.videoOrientation = AVCaptureVideoOrientationLandscapeRight;
         [self createSubviewsForLandscape];
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        reader.previewTransform = CGAffineTransformMakeRotation (M_PI * 0 / 180.0);
+        //reader.previewTransform = CGAffineTransformMakeRotation (M_PI * 0 / 180.0);
+        AVCaptureConnection *con = self.preview.connection;
+        con.videoOrientation = AVCaptureVideoOrientationPortrait;
         [self createSubviewsForPortrait];
     }
-    
 }
+
 
 - (void)updateLanguage {
     expoTitle.text = [[Labels instance] expoTitle];

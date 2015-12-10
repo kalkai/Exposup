@@ -20,7 +20,8 @@
 #import "AudioViewController.h"
 
 
-@interface SectionViewController : SectionParentViewController
+
+@interface SectionViewController : SectionParentViewController <UIPopoverPresentationControllerDelegate>
 
 
 @property (strong, nonatomic) AudioViewController *audioController;
@@ -31,7 +32,9 @@
 @property (assign, nonatomic) int lastAudioPlayed;
 @property (strong, nonatomic) NSMutableArray *buttonsList;
 
-@property (strong, nonatomic) UIPopoverController *popover;
+//@property (strong, nonatomic) UIPopoverController *popover;
+@property (strong, nonatomic) UIViewController *popover;
+@property (strong, nonatomic) UIPopoverPresentationController *popController;
 @property (strong, nonatomic) MPVolumeView *volumeViewSlider;
 
 - (id)initWithFileToParse:(NSString *)fileName;
@@ -56,7 +59,5 @@
 @property (assign, nonatomic) int audioPlayerNr;
 @property (strong, nonatomic) NSMutableArray *audioPlayers;
 @property (strong, nonatomic) NSMutableArray *audioPlayersAssociatedIndex; //index of parser result
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 
 @end

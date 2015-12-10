@@ -15,15 +15,17 @@
 
 
 
-- (void)parseXMLFileAtPath:(NSString *)path {
+- (Boolean)parseXMLFileAtPath:(NSString *)path {
     NSLog(@"path %@", path);
      NSString *filePath = [[LanguageManagement instance] pathForFile: path contentFile: NO];
     
      NSData *data = [NSData  dataWithContentsOfFile: filePath];
     if(data == nil) {
         NSLog(@"Error during creation of data from file. Path = %@", filePath);
-        Alerts *alert = [[Alerts alloc] init];
-        [alert showTextNotFoundAlert:self file:path];
+        //Alerts *alert = [[Alerts alloc] init];
+        //[alert showTextNotFoundAlert:self file:path];
+        [XMLParser setState: FILE_EMPTY];
+        return false;
     }
     else {
         NSLog(@"Data created from file content.");
@@ -40,13 +42,18 @@
         NSError *parseError = [xmlParser parserError];
         if(parseError) {
             NSLog(@"XmlParser - error parsing data : %@", [parseError localizedDescription]);
-            Alerts *alert = [[Alerts alloc] init];
-            [alert errorParsingAlert:self file:path error:[parseError localizedDescription]];
+            //Alerts *alert = [[Alerts alloc] init];
+            //[alert errorParsingAlert:self file:path error:[parseError localizedDescription]];
+            [XMLParser setLastErrorFilePath:path];
+            [XMLParser setLastErrorDescription:[parseError localizedDescription]];
+            [XMLParser setState: PARSING_ERROR];
+            return false;
         }
         else {
             NSLog(@"Parsing Done...");
         }
     }
+    return true;
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {

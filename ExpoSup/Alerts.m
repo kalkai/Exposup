@@ -11,138 +11,291 @@
 
 @implementation Alerts
 
-- (IBAction)showEmptyFieldAlert:(id)sender{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Champs vide"
++ (UIAlertController*)getEmptyFieldAlert{
+    // Before iOS 9
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Champs vide"
                                                     message: @"Veuillez indiquer un identifiant avant de continuer"
                                                    delegate: nil
                                           cancelButtonTitle: @"OK"
                                           otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    
+    
+    // After iOS 9
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Champs vide"
+                                                                   message:@"Veuillez indiquer un identifiant avant de continuer"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
-- (IBAction)showIDNotFoundAlert:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Identifiant non valide"
++ (UIAlertController*)getIDNotFoundAlert {
+    // Before iOS 9
+   /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Identifiant non valide"
                                                     message: @"L'identifiant que vous avez indiqué n'existe pas."
                                                    delegate: nil
                                           cancelButtonTitle: @"OK"
                                           otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Identifiant non valide"
+                                                                   message:@"L'identifiant que vous avez indiqué n'existe pas."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
-- (IBAction)showQRCodeNotFoundAlert:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Identifiant non valide"
++ (UIAlertController*)getQRCodeNotFoundAlert {
+    // Before iOS 9
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Identifiant non valide"
                                                     message: @"La section liée à ce QR code n'existe pas."
                                                    delegate: nil
                                           cancelButtonTitle: @"OK"
                                           otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Identifiant non valide"
+                                                                   message:@"La section liée à ce QR code n'existe pas."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    return alert;
 }
 
 
-- (IBAction)showSlideshowNotFoundAlert:(id)sender file:(NSString*)file {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
++ (UIAlertController*)getSlideshowNotFoundAlert:(NSString*)file {
+    // Before iOS 9
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
                                                 message: [@"Le fichier contenant le slideshow demandé n'existe pas. Fichier : " stringByAppendingString: file]
                                                delegate: nil
                                       cancelButtonTitle: @"OK"
                                       otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Fichier manquant"
+                                                                   message:[@"Le fichier contenant le slideshow demandé n'existe pas. Fichier : " stringByAppendingString: file]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
-- (IBAction)showZoomNotFoundAlert:(id)sender file:(NSString*)file {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
++ (UIAlertController*)getZoomNotFoundAlert:(NSString*)file {
+    // Before iOS 9
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
                                                     message: [@"Le fichier contenant le zoom demandé n'existe pas. Fichier : " stringByAppendingString: file]
                                                    delegate: nil
                                           cancelButtonTitle: @"OK"
                                           otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Fichier manquant"
+                                                                   message:[@"Le fichier contenant le zoom demandé n'existe pas. Fichier : " stringByAppendingString: file]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
-- (IBAction)showVideoNotFoundAlert:(id)sender file:(NSString*)file {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
++ (UIAlertController*)getVideoNotFoundAlert:(NSString*)file {
+    // Before iOS 9
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
                                                     message: [@"Le fichier vidéo demandé n'existe pas. Fichier : " stringByAppendingString: file]
                                                    delegate: nil
                                           cancelButtonTitle: @"OK"
                                           otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Fichier manquant"
+                                                                   message:[@"Le fichier vidéo demandé n'existe pas. Fichier : " stringByAppendingString: file]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
-- (IBAction)showTextNotFoundAlert:(id)sender file:(NSString*)file {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
++ (UIAlertController*)getTextNotFoundAlert:(NSString*)file {
+    // Before iOS 9
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
                                                 message: [@"Le fichier contenant la section texte demandée n'existe pas. Fichier : " stringByAppendingString: file]
                                                delegate: nil
                                       cancelButtonTitle: @"OK"
                                       otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Fichier manquant"
+                                                                   message:[@"Le fichier contenant la section texte demandée n'existe pas. Fichier : " stringByAppendingString: file]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
-- (IBAction)showConfigNotFoundAlert:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
++ (UIAlertController*)getConfigNotFoundAlert {
+    // Before iOS 9
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
                                                 message: @"Le fichier de configuration n'existe pas. Fichier : config.xml"
                                                delegate: nil
                                       cancelButtonTitle: @"OK"
                                       otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    
+    
+    // After iOS 9
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Fichier manquant"
+                                                                   message:@"Le fichier de configuration n'existe pas. Fichier : config.xml"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
-- (IBAction)showDictionaryNotFoundAlert:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
++ (UIAlertController*)getDictionaryNotFoundAlert {
+    // Before iOS 9
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
                                                 message: [@"Le fichier contenant le dictionnaire n'existe pas. Fichier : "stringByAppendingString: [[[LanguageManagement instance] currentLanguagePrefix] stringByAppendingString: @"dictionary.xml"]]
                                                delegate: nil
                                       cancelButtonTitle: @"OK"
                                       otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Fichier manquant"
+                                                                   message:[@"Le fichier contenant le dictionnaire n'existe pas. Fichier : "stringByAppendingString: [[[LanguageManagement instance] currentLanguagePrefix] stringByAppendingString: @"dictionary.xml"]]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
-- (IBAction)showLabelsNotFoundAlert:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
++ (UIAlertController*)getLabelsNotFoundAlert {
+    // Before iOS 9
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
                                                     message: [@"Le fichier contenant les labels n'existe pas. Fichier : "stringByAppendingString: [[[LanguageManagement instance] currentLanguagePrefix] stringByAppendingString: @"labels.xml"]]
                                                    delegate: nil
                                           cancelButtonTitle: @"OK"
                                           otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Fichier manquant"
+                                                                   message:[@"Le fichier contenant les labels n'existe pas. Fichier : "stringByAppendingString: [[[LanguageManagement instance] currentLanguagePrefix] stringByAppendingString: @"labels.xml"]]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
-- (IBAction)showQuizNotFoundAlert:(id)sender file:(NSString*)file {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
++ (UIAlertController*)getQuizNotFoundAlert:(NSString*)file {
+    // Before iOS 9
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier manquant"
                                                 message: [@"Le fichier contenant le quiz demandé n'existe pas. Fichier : " stringByAppendingString: file]
                                                delegate: nil
                                       cancelButtonTitle: @"OK"
                                       otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Fichier manquant"
+                                                                   message:[@"Le fichier contenant le quiz demandé n'existe pas. Fichier : " stringByAppendingString: file]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
-- (IBAction)errorParsingAlert:(id)sender file:(NSString*)file error:(NSString *)error {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Parsing error"
++ (UIAlertController*)getParsingErrorAlert:(NSString*)file error:(NSString *)error {
+    // Before iOS 9
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Parsing error"
                                                     message: [[@"Le fichier xml correspondant contient des erreurs. Fichier : " stringByAppendingString: file] stringByAppendingString: [@" Erreur : " stringByAppendingString: error]]
                                                    delegate: nil
                                           cancelButtonTitle: @"OK"
                                           otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Fichier manquant"
+                                                                   message:[[@"Le fichier xml correspondant contient des erreurs. Fichier : " stringByAppendingString: file] stringByAppendingString: [@" Erreur : " stringByAppendingString: error]]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
 
-- (IBAction)showAudioNotFoundAlert:(id)sender file:(NSString*)file {
++ (UIAlertController*)getAudioNotFoundAlert:(NSString*)file {
 
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier audio manquant"
+    // Before iOS 9
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier audio manquant"
                                                 message: [@"Le fichier audio demandé n'existe pas. Fichier : " stringByAppendingString: file]
                                                delegate: nil
                                       cancelButtonTitle: @"OK"
                                       otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Fichier manquant"
+                                                                   message:[@"Le fichier audio demandé n'existe pas. Fichier : " stringByAppendingString: file]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
-- (IBAction)showImageNotFoundAlert:(id)sender file:(NSString*)file {
++ (UIAlertController*)getImageNotFoundAlert:(NSString*)file {
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier image manquant"
+    // Before iOS 9
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Fichier image manquant"
                                                     message: [@"Le fichier image demandé n'existe pas. Fichier : " stringByAppendingString: file]
                                                    delegate: nil
                                           cancelButtonTitle: @"OK"
                                           otherButtonTitles: nil];
-    [alert show];
+    [alert show]; */
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Fichier manquant"
+                                                                   message:[@"Le fichier image demandé n'existe pas. Fichier : " stringByAppendingString: file]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
-- (IBAction)showPoliceNotFoundAlert:(id)sender name:(NSString*)name num:(int) num  {
-    NSString *police = [[NSString alloc] init];
++ (UIAlertController*)getFontNotFoundAlert:(NSString*)name value:(NSString*)font  {
+    /*NSString *police = [[NSString alloc] init];
     if(num == 1)
         police = @"<bigFont>";
     else if(num == 2)
@@ -158,7 +311,17 @@
                                                    delegate: nil
                                           cancelButtonTitle: @"OK"
                                           otherButtonTitles: nil];
-    [alert show];
+    [alert show];*/
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Police inexisante"
+                                                                   message:[[@"La police n'existe pas : "             stringByAppendingString: name] stringByAppendingString: font]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    
+    return alert;
 }
 
 @end

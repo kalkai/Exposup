@@ -10,7 +10,7 @@
 
 @implementation MainViewController
 
-@synthesize welcomeLabel, modChoiceLabel, childButton, adultButton, guideButton, checkbox,soundSwitch, checkboxSelected, sound, foot, popover, languagesButton;
+@synthesize welcomeLabel, modChoiceLabel, childButton, adultButton, guideButton, checkbox,soundSwitch, checkboxSelected, sound, foot, languagesButton;
 
 - (void)didReceiveMemoryWarning
 {
@@ -42,53 +42,113 @@
 
 }
 
+- (Boolean)checkConfigAndLabelsFile {
+    Boolean result = true;
+    if([Config instance] == nil) {
+        UIAlertController* alert = [Alerts getConfigNotFoundAlert];
+        [self presentViewController:alert animated:YES completion:nil];
+        result = false;
+        return false;
+    }
+    
+    if([Labels instance] == nil) {
+        UIAlertController* alert = [[UIAlertController alloc] init];
+        if([XMLParser getState] == FILE_EMPTY) {
+            alert = [Alerts getLabelsNotFoundAlert];
+        }
+        else if([XMLParser getState] == PARSING_ERROR) {
+            alert = [Alerts getParsingErrorAlert:[XMLLabelsParser getLastErrorFilePath] error:[XMLLabelsParser getLastErrorDescription]];
+        }
+        [self presentViewController:alert animated:YES completion:nil];
+        result = false;
+    }
+    
+    int max = [[Config instance] getErrors].count;
+    
+    for(int cnt=0; cnt<max; ++cnt) {
+        
+        NSInteger temp = (NSInteger)[[[Config instance] getErrors] objectAtIndex:cnt];
+        NSString* font = [[[Config instance] getErrorsFont] objectAtIndex:cnt];
+        
+        NSString* tag;
+        switch(temp) {
+            case FONT_BIG:
+                tag = @"<bigFont>";
+                break;
+            case FONT_NORMAL:
+                tag = @"<normalFont>";
+                break;
+            case FONT_SMALL:
+                tag = @"<smallFont>";
+                break;
+            case FONT_TINY:
+                tag = @"<tinyFont>";
+                break;
+            case FONT_QUOTE:
+                tag = @"<quoteFont>";
+                break;
+            default:
+                NSLog(@"Not found");
+                break;
+        }
+        UIAlertController* alert = [Alerts getFontNotFoundAlert:font value:tag];
+        [self presentViewController:alert animated:YES completion:nil];
+        result = false;
+    }
+    return result;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    // Deprecated in iOS 9
+    //[[UIApplication sharedApplication] setStatusBarHidden:YES];
     
-    if ([Config instance] != nil) {
-        NSLog(@"Config instance not nil... = %@",[Config instance]);
-        [self setBackgroundImage: [[Config instance] backgroundPortrait]];
-        
-        //titre
-        
-        welcomeLabel.text = [[Labels instance] welcomeTitle];
-        welcomeLabel.font = [[Config instance] bigFont];
-        welcomeLabel.textColor = [[Config instance] color1];
-        welcomeLabel.backgroundColor = [UIColor clearColor];
-        [welcomeLabel sizeToFit];
-        // on va placer le label au centre. On prend la moitié de l'écran et on décale à gauche de la moitié du label.
-        //welcomeLabel.frame = CGRectMake(self.view.frame.size.width/2 - welcomeLabel.frame.size.width/2, 100, welcomeLabel.frame.size.width, welcomeLabel.frame.size.height);
-        welcomeLabel.numberOfLines = 2;
-        [self.view addSubview: welcomeLabel];
-        
-        //choix du mode
-        modChoiceLabel.text = [[Labels instance] chooseModLabel];
-        modChoiceLabel.font = [[Config instance] bigFont];
-        modChoiceLabel.textColor = [[Config instance] color1];
-        modChoiceLabel.backgroundColor = [UIColor clearColor];
-        [modChoiceLabel sizeToFit];
-        // on va placer le label au centre. On prend la moitié de l'écran et on décale à gauche de la moitié du label.
-        modChoiceLabel.frame = CGRectMake(self.view.frame.size.width/2 - modChoiceLabel.frame.size.width/2, 650, modChoiceLabel.frame.size.width, modChoiceLabel.frame.size.height);
-        modChoiceLabel.numberOfLines = 2;
-        [self.view addSubview: modChoiceLabel];
-        
-        
-        foot = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 768, 10)];
-        foot.text = [[Labels instance] credits];
-        foot.textColor = [[Config instance] color1];
-        foot.backgroundColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.0 ];
-        foot.font = [[Config instance] smallFont];
-        foot.numberOfLines = 0;
-        [foot sizeToFit];
-        [self.view addSubview: foot];
-       
-        
-        [self createModsButtons];
-        [self createCheckboxSound];
     
+    if([self checkConfigAndLabelsFile]) {
+        if ([Config instance] != nil) {
+            NSLog(@"Config instance not nil... = %@",[Config instance]);
+            if ([Labels instance] != nil) {
+                [self setBackgroundImage: [[Config instance] backgroundPortrait]];
+                
+                //titre
+                
+                welcomeLabel.text = [[Labels instance] welcomeTitle];
+                welcomeLabel.font = [[Config instance] bigFont];
+                welcomeLabel.textColor = [[Config instance] color1];
+                welcomeLabel.backgroundColor = [UIColor clearColor];
+                [welcomeLabel sizeToFit];
+                // on va placer le label au centre. On prend la moitié de l'écran et on décale à gauche de la moitié du label.
+                //welcomeLabel.frame = CGRectMake(self.view.frame.size.width/2 - welcomeLabel.frame.size.width/2, 100, welcomeLabel.frame.size.width, welcomeLabel.frame.size.height);
+                welcomeLabel.numberOfLines = 2;
+                [self.view addSubview: welcomeLabel];
+                
+                //choix du mode
+                modChoiceLabel.text = [[Labels instance] chooseModLabel];
+                modChoiceLabel.font = [[Config instance] bigFont];
+                modChoiceLabel.textColor = [[Config instance] color1];
+                modChoiceLabel.backgroundColor = [UIColor clearColor];
+                [modChoiceLabel sizeToFit];
+                // on va placer le label au centre. On prend la moitié de l'écran et on décale à gauche de la moitié du label.
+                modChoiceLabel.frame = CGRectMake(self.view.frame.size.width/2 - modChoiceLabel.frame.size.width/2, 650, modChoiceLabel.frame.size.width, modChoiceLabel.frame.size.height);
+                modChoiceLabel.numberOfLines = 2;
+                [self.view addSubview: modChoiceLabel];
+                
+                
+                foot = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 768, 10)];
+                foot.text = [[Labels instance] credits];
+                foot.textColor = [[Config instance] color1];
+                foot.backgroundColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:0.0 ];
+                foot.font = [[Config instance] smallFont];
+                foot.numberOfLines = 0;
+                [foot sizeToFit];
+                [self.view addSubview: foot];
+               
+                
+                [self createModsButtons];
+                [self createCheckboxSound];
+            }
+        }
     }
 }
 
@@ -155,10 +215,22 @@
 	[super viewDidDisappear:animated];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    //The device has already rotated, that's why this method is being called.
+    UIDeviceOrientation toOrientation   = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation toInterfaceOrientation;
+    //fixes orientation mismatch (between UIDeviceOrientation and UIInterfaceOrientation)
+    if (toOrientation == UIDeviceOrientationLandscapeRight)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeLeft;
+    else if (toOrientation == UIDeviceOrientationLandscapeLeft)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeRight;
+    else if (toOrientation == UIDeviceOrientationPortraitUpsideDown)
+        toInterfaceOrientation = UIInterfaceOrientationPortraitUpsideDown;
+    else toInterfaceOrientation = UIInterfaceOrientationPortrait;
+    
     
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         if(languagesButton != NULL)

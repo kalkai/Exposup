@@ -14,7 +14,7 @@
 
 @implementation AudioViewController
 
-@synthesize file,autostart,repetition, audioPlayer, pauseButton , playButton, stopButton, name, audioComment, volumeButton, popover, currentView, volumeViewSlider;
+@synthesize file,autostart,repetition, audioPlayer, pauseButton , playButton, stopButton, name, audioComment, volumeButton, popover, currentView, volumeViewSlider, popController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,8 +47,10 @@
             [parent setIsPageWithAudio:YES];
             NSData *data = [NSData  dataWithContentsOfFile: [[LanguageManagement instance] pathForFile: file contentFile: NO]];
             if(data == nil) {
-                Alerts *alert = [[Alerts alloc] init];
-                [alert showAudioNotFoundAlert: self file: file];
+                //Alerts *alert = [[Alerts alloc] init];
+                //[alert showAudioNotFoundAlert: self file: file];
+                UIAlertController* alert = [Alerts getAudioNotFoundAlert:file];
+                [self presentViewController:alert animated:YES completion:nil];
             }
             else {
                 audioPlayer = [[AVAudioPlayer alloc] initWithData: data error: &error];
@@ -80,8 +82,10 @@
             [parent setIsPageWithAudio:YES];
             NSData *data = [NSData  dataWithContentsOfFile: [[LanguageManagement instance] pathForFile: file contentFile: NO]];
             if(data == nil) {
-                Alerts *alert = [[Alerts alloc] init];
-                [alert showAudioNotFoundAlert: self file: file];
+                //Alerts *alert = [[Alerts alloc] init];
+                //[alert showAudioNotFoundAlert: self file: file];
+                UIAlertController *alert = [Alerts getAudioNotFoundAlert:file];
+                [self presentViewController:alert animated:YES completion:nil];
             }
             else {
                 audioPlayer = [[AVAudioPlayer alloc] initWithData: data error: &error];
@@ -231,18 +235,17 @@
 
 - (IBAction)volumeButtonClicked:(id)sender {
     UIButton *button = (UIButton*)sender;
-    if( [popover isPopoverVisible]) {
-        [popover dismissPopoverAnimated: YES];
-    }
-    else {
+    //if( [popover isPopoverVisible]) {
+    //    [popover dismissPopoverAnimated: YES];
+    //}
+    //else {
         [self showPopup: button.frame];
-        
-    }
+    //}
 }
 
 - (void)showPopup:(CGRect)rect {
-    UIViewController *popup = [[UIViewController alloc] init];
-    popup.view.backgroundColor = [UIColor clearColor];
+    popover = [[UIViewController alloc] init];
+    popover.view.backgroundColor = [UIColor clearColor];
     
     
     volumeViewSlider = [[MPVolumeView alloc] init];
@@ -256,16 +259,29 @@
     
     volumeViewSlider.frame = CGRectMake(0, 0, 300, 50);
     [volumeViewSlider sizeToFit];
-    [popup.view addSubview: volumeViewSlider];
+    [popover.view addSubview: volumeViewSlider];
     
-    
+    // Before iOS 9
+    /*
     popover = [[UIPopoverController alloc] initWithContentViewController: popup];
     
     popover.popoverContentSize = volumeViewSlider.frame.size;
     [popover presentPopoverFromRect: rect
                              inView: currentView
            permittedArrowDirections: UIPopoverArrowDirectionAny
-                           animated: YES];
+                           animated: YES];*/
+    
+    // After iOS 9
+    popover.modalPresentationStyle = UIModalPresentationPopover;
+    popover.preferredContentSize = volumeViewSlider.frame.size;
+    [self presentViewController: popover animated:YES completion:nil];
+    
+    // configure the Popover presentation controller
+    popController = [popover popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    popController.sourceView = currentView;
+    popController.sourceRect = rect;
+    popController.delegate = self;
 }
 
 

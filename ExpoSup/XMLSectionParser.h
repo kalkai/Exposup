@@ -1,9 +1,10 @@
 #import <Foundation/Foundation.h>
 #import "Config.h"
+#import "XMLParser.h"
 
 
 
-@interface XMLSectionParser : NSObject <NSXMLParserDelegate>
+@interface XMLSectionParser : XMLParser
 
 @property (assign,nonatomic) Boolean error;
 @property (strong,nonatomic) NSString *path;
@@ -21,7 +22,7 @@
 @property (strong,nonatomic) NSMutableArray *subtitles;
 @property (strong,nonatomic) NSMutableArray *locations;
 
-- (void)parseXMLFileAtPath:(NSString *)path;
+- (Boolean)parseXMLFileAtPath:(NSString *)path;
 
 
 

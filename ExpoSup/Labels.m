@@ -35,8 +35,6 @@
 -(NSString*)credits { return @"ExpoSup, v3.05, © 2015 (Belgique) \nRéalisation et conception : Aurélien Lebeau et Jean Richelle - Département d'Informatique de la Faculté des Sciences de l'ULB et Centre de Culture Scientifique de l'ULB \nPour le projet \"Vers le Lune avec Tania\" - Maison de la Science de l'ULg, Centre de Culture Scientifique de l'ULB et Euro Space Center à Transinne - financé par la DG06 du SPW"; }
 
 
-
-
 +(Labels*)instance {
     static Labels *instance = nil;
     static dispatch_once_t onceToken;
@@ -49,11 +47,8 @@
 }
 
 - (Boolean)initialize {
-
     labelsParser = [[XMLLabelsParser alloc] init];
-    [labelsParser parseXMLLabels];
-
-    return true;
+    return [labelsParser parseXMLLabels];
 }
 
 - (void)updateLabels {

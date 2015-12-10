@@ -9,7 +9,7 @@
 #import "IDChoiceViewController.h"
 
 @implementation IDChoiceViewController
-@synthesize idTextfield, file, expoTitle, goButton, banner, popover, infoButton, idInfo, languagesButton, argument;
+@synthesize idTextfield, file, expoTitle, goButton, banner, popover, infoButton, idInfo, languagesButton, argument, popController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -123,8 +123,8 @@
 }
 
 - (void)showPopup {
-    UIViewController *popup = [[UIViewController alloc] init];
-    popup.view.backgroundColor = [UIColor clearColor];
+    popover = [[UIViewController alloc] init];
+    popover.view.backgroundColor = [UIColor clearColor];
     
     UITextView *tv = [[UITextView alloc] init];
     tv.editable = NO;
@@ -140,7 +140,7 @@
     
     //CGSize textViewSizeTV1 = [tv sizeThatFits:CGSizeMake(tv.frame.size.width, FLT_MAX)];
     
-    [popup.view addSubview: tv];
+    [popover.view addSubview: tv];
     /*UITextView *tv2;
     
     if(![[[Labels instance] credits] isEqualToString: [[NSString alloc] init]]) {
@@ -174,27 +174,42 @@
     //= CGRectMake(0, 0, tv.frame.size.width, tv.frame.size.height + tv2.frame.size.height + 2);
     
     */
+    
+    //Before iOS 9
+    /*
     popover = [[UIPopoverController alloc] initWithContentViewController: popup];
     
     popover.popoverContentSize = CGSizeMake(tv.frame.size.width, tv.frame.size.height );
     [popover presentPopoverFromRect: infoButton.frame
                              inView: self.view
            permittedArrowDirections: UIPopoverArrowDirectionAny
-                           animated: YES];
+                           animated: YES];*/
+    
+    // After iOS 9
+    popover.modalPresentationStyle = UIModalPresentationPopover;
+    popover.preferredContentSize = CGSizeMake(tv.frame.size.width, tv.frame.size.height);
+    [self presentViewController: popover animated:YES completion:nil];
+    
+    // configure the Popover presentation controller
+    popController = [popover popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    popController.sourceView = self.view;
+    popController.sourceRect = infoButton.frame;
+    popController.delegate = self;
 }
 
 -(IBAction)printInfoPopup:(id)sender {
-    if( [popover isPopoverVisible]) {
-        [popover dismissPopoverAnimated: YES];
-    }
-    else {
+    //if( [popover isPopoverVisible]) {
+    //    [popover dismissPopoverAnimated: YES];
+    //}
+    //else {
         [self showPopup];
-        
-    }
+    //}
 }
 
 -(IBAction)hideInfoPopup:(id)sender {
-    [popover dismissPopoverAnimated: YES];
+    //[popover dismissPopoverAnimated: YES];
+    [popover dismissViewControllerAnimated:NO completion:nil];
 }
 
 
@@ -295,15 +310,19 @@
     NSString *res = idTextfield.text;
     NSString *fileToLoad = @"default";
     if([res length] == 0) {
-        Alerts *alert = [[Alerts alloc] init];
-        [alert showEmptyFieldAlert:self];
+        //Alerts *alert = [[Alerts alloc] init];
+        //[alert showEmptyFieldAlert:self];
+        UIAlertController *alert = [Alerts getEmptyFieldAlert];
+        [self presentViewController:alert animated:YES completion:nil];
     }
     else {
         if([self isFileFound: @"index.xml"]) {
             XMLIndexParser *index = [XMLIndexParser instance];
             if(index.error == true) {
-                Alerts *alert = [[Alerts alloc] init];
-                [alert errorParsingAlert:self file:@"index.xml" error: index.errors];
+                //Alerts *alert = [[Alerts alloc] init];
+                //[alert errorParsingAlert:self file:@"index.xml" error: index.errors];
+                UIAlertController* alert = [Alerts getParsingErrorAlert:@"index.html" error: index.errors];
+                [self presentViewController:alert animated:YES completion:nil];
             }
             else fileToLoad = [index.map objectForKey:res];
         }
@@ -325,8 +344,10 @@
         
         if(![self isFileFound: file]) {
             NSLog(@"Fichier non trouvé : %@.", file);
-            Alerts *alert = [[Alerts alloc] init];
-            [alert showIDNotFoundAlert:self];
+            //Alerts *alert = [[Alerts alloc] init];
+            //[alert showIDNotFoundAlert:self];
+            UIAlertController* alert = [Alerts getIDNotFoundAlert];
+            [self presentViewController:alert animated:YES completion:nil];
         }
         else {
             XMLSectionParser* sectionParser = [[XMLSectionParser alloc] init];
@@ -363,8 +384,10 @@
                 }
             }
             else {
-                Alerts *alert = [[Alerts alloc] init];
-                [alert errorParsingAlert:self file: sectionParser.path error: @"File is probably not a section file."];
+                //Alerts *alert = [[Alerts alloc] init];
+                //[alert errorParsingAlert:self file: sectionParser.path error: @"File is probably not a section file."];
+                UIAlertController* alert = [Alerts getParsingErrorAlert:sectionParser.path error:@"File is probably not a section file."];
+                [self presentViewController:alert animated:YES completion:nil];
             }
 
         }
@@ -375,10 +398,21 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    //The device has already rotated, that's why this method is being called.
+    UIDeviceOrientation toOrientation   = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation toInterfaceOrientation;
+    //fixes orientation mismatch (between UIDeviceOrientation and UIInterfaceOrientation)
+    if (toOrientation == UIDeviceOrientationLandscapeRight)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeLeft;
+    else if (toOrientation == UIDeviceOrientationLandscapeLeft)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeRight;
+    else if (toOrientation == UIDeviceOrientationPortraitUpsideDown)
+        toInterfaceOrientation = UIInterfaceOrientationPortraitUpsideDown;
+    else toInterfaceOrientation = UIInterfaceOrientationPortrait;
     
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         [self createSubviewsForLandscape];

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 #import "SectionParentViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "Alerts.h"
@@ -14,9 +15,12 @@
 
 @interface MovieViewController : SectionParentViewController
 
-@property (assign, nonatomic) NSString *standID;
-@property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
+//@property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
 
+@property (assign, nonatomic) NSString *standID;
 @property (strong, nonatomic) AudioViewController *audioController;
+
+@property (strong, nonatomic) AVPlayer* player;
+@property (strong, nonatomic) AVPlayerLayer* playerLayer;
 
 @end

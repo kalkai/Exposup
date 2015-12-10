@@ -14,6 +14,7 @@
 #import "ColorButton.h"
 #import "SelectedModViewController.h"
 #import "Labels.h"
+#import "Alerts.h"
 
 @interface MainViewController : RotateViewController {
     SelectedModViewController *selectedModView;
@@ -26,7 +27,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *sound;
 @property (strong, nonatomic) IBOutlet UILabel *foot;
 
-@property (strong, nonatomic) UIPopoverController *popover;
 @property (strong, nonatomic) IBOutlet UIButton *languagesButton;
 
 @property (strong, nonatomic) UIButton *checkbox;
@@ -37,5 +37,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *guideButton;
 
 -(void)updateLanguage;
+-(Boolean)checkConfigAndLabelsFile;
 
 @end

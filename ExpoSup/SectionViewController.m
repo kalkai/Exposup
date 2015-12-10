@@ -11,7 +11,7 @@
 
 @implementation SectionViewController
 
-@synthesize  parser, pauseButton, playButton, stopButton, lastAudioPlayed, audioPlayers, audioPlayerNr, fileName, argument, buttonsList, sectionTitle, volumeButton, popover, volumeViewSlider;
+@synthesize  parser, pauseButton, playButton, stopButton, lastAudioPlayed, audioPlayers, audioPlayerNr, fileName, argument, buttonsList, sectionTitle, volumeButton, popover, volumeViewSlider, popController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -224,8 +224,10 @@
         
     }
     else {
-        Alerts *alert = [[Alerts alloc] init];
-        [alert errorParsingAlert:self file:parser.path error: @"File is probably not a section file."];
+        //Alerts *alert = [[Alerts alloc] init];
+        //[alert errorParsingAlert:self file:parser.path error: @"File is probably not a section file."];
+        UIAlertController* alert = [Alerts getParsingErrorAlert:parser.path error:@"File is probably not a section file."];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -316,8 +318,10 @@
         //NSLog(@"audio file : %@", [[LanguageManagement instance] pathForFile: audio]);
         NSData *data = [NSData  dataWithContentsOfFile: [[LanguageManagement instance] pathForFile: [parser.files objectAtIndex: index] contentFile: NO]];
         if(data == nil) {
-            Alerts *alert = [[Alerts alloc] init];
-            [alert showAudioNotFoundAlert: self file: [parser.files objectAtIndex: index]];
+            //Alerts *alert = [[Alerts alloc] init];
+            //[alert showAudioNotFoundAlert: self file: [parser.files objectAtIndex: index]];
+            UIAlertController* alert = [Alerts getAudioNotFoundAlert: [parser.files objectAtIndex: index]];
+            [self presentViewController:alert animated:YES completion:nil];
         }
         else {
             AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithData: data error: &error];
@@ -442,18 +446,18 @@
 
 - (IBAction)volumeButtonClicked:(id)sender {
     UIButton *button = (UIButton*)sender;
-    if( [popover isPopoverVisible]) {
-        [popover dismissPopoverAnimated: YES];
-    }
-    else {
+    //if( [popover isPopoverVisible]) {
+    //    [popover dismissPopoverAnimated: YES];
+    //}
+    //else {
         [self showPopup: button.frame];
         
-    }
+    //}
 }
 
 - (void)showPopup:(CGRect)rect {
-    UIViewController *popup = [[UIViewController alloc] init];
-    popup.view.backgroundColor = [UIColor clearColor];
+    popover = [[UIViewController alloc] init];
+    popover.view.backgroundColor = [UIColor clearColor];
     
     
     volumeViewSlider = [[MPVolumeView alloc] init];
@@ -467,22 +471,48 @@
     
     volumeViewSlider.frame = CGRectMake(0, 0, 300, 100);
     [volumeViewSlider sizeToFit];
-    [popup.view addSubview: volumeViewSlider];
+    [popover.view addSubview: volumeViewSlider];
     
-    
+    // Before iOS 9
+    /*
     popover = [[UIPopoverController alloc] initWithContentViewController: popup];
     
     popover.popoverContentSize = volumeViewSlider.frame.size;
     [popover presentPopoverFromRect: rect
                              inView: self.view
            permittedArrowDirections: UIPopoverArrowDirectionAny
-                           animated: YES];
+                           animated: YES];*/
+    
+    // After iOS 9
+    popover.modalPresentationStyle = UIModalPresentationPopover;
+    popover.preferredContentSize = volumeViewSlider.frame.size;
+    [self presentViewController: popover animated:YES completion:nil];
+    
+    // configure the Popover presentation controller
+    popController = [popover popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    popController.sourceView = self.view;
+    popController.sourceRect = rect;
+    popController.delegate = self;
 }
 
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    //The device has already rotated, that's why this method is being called.
+    UIDeviceOrientation toOrientation   = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation toInterfaceOrientation;
+    //fixes orientation mismatch (between UIDeviceOrientation and UIInterfaceOrientation)
+    if (toOrientation == UIDeviceOrientationLandscapeRight)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeLeft;
+    else if (toOrientation == UIDeviceOrientationLandscapeLeft)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeRight;
+    else if (toOrientation == UIDeviceOrientationPortraitUpsideDown)
+        toInterfaceOrientation = UIInterfaceOrientationPortraitUpsideDown;
+    else toInterfaceOrientation = UIInterfaceOrientationPortrait;
     
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         UIView *view;
@@ -504,6 +534,7 @@
             }
         }
     }
+    
 }
 
 

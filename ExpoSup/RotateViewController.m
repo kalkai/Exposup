@@ -16,6 +16,12 @@
 
 @synthesize previousOrientation;
 
+
+- (BOOL)prefersStatusBarHidden {
+    
+    return NO;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -78,8 +84,24 @@
     return YES;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    //The device has already rotated, that's why this method is being called.
+    UIDeviceOrientation toOrientation   = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation toInterfaceOrientation;
+    //fixes orientation mismatch (between UIDeviceOrientation and UIInterfaceOrientation)
+    if (toOrientation == UIDeviceOrientationLandscapeRight)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeLeft;
+    else if (toOrientation == UIDeviceOrientationLandscapeLeft)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeRight;
+    else if (toOrientation == UIDeviceOrientationPortraitUpsideDown)
+        toInterfaceOrientation = UIInterfaceOrientationPortraitUpsideDown;
+    else toInterfaceOrientation = UIInterfaceOrientationPortrait;
+    
+    //UIInterfaceOrientation fromOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     NSLog(@"tointerfaceorientation %d", toInterfaceOrientation);
     previousOrientation = toInterfaceOrientation;
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
@@ -89,6 +111,8 @@
         self.view.backgroundColor = [[UIColor alloc] initWithPatternImage: [UIImage imageWithContentsOfFile: [[Config instance] backgroundPortrait]]];
     }
 }
+
+
 
 
 @end

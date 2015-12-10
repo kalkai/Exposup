@@ -10,14 +10,11 @@
 
 @implementation MovieViewController
 
-@synthesize standID,moviePlayer, audioController;
+@synthesize standID, audioController, player, playerLayer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
@@ -26,34 +23,24 @@
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     [audioController removeVolumeIcon];
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-        moviePlayer.view.frame = CGRectMake(0, 0, 1024, 768);
-        [audioController addVolumeButton: moviePlayer.view Yoffset:690 Xoffset:950 ];
+        playerLayer.frame = CGRectMake(0, 0, 1024, 768);
+        //[audioController addVolumeButton: moviePlayer.view Yoffset:690 Xoffset:950 ];
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        moviePlayer.view.frame = CGRectMake(0, 0, 768, 1024);
-        [audioController addVolumeButton: moviePlayer.view Yoffset:940 Xoffset:700 ];
+        playerLayer.frame = CGRectMake(0, 0, 768, 1024);
+        //[audioController addVolumeButton: moviePlayer.view Yoffset:940 Xoffset:700 ];
     }
     [super viewWillAppear:YES];
-    [moviePlayer play];
+    //[moviePlayer play];
+    [player play];
 }
 
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - View lifecycle
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -65,53 +52,69 @@
     NSString *filePath = [[LanguageManagement instance] pathForFile: standID contentFile: NO];
     NSLog(@"movie file path: %@", filePath);
     
-    moviePlayer = [[MPMoviePlayerController alloc] init];
-    [moviePlayer setContentURL: [NSURL fileURLWithPath: filePath]];
+    //moviePlayer = [[MPMoviePlayerController alloc] init];
+    //[moviePlayer setContentURL: [NSURL fileURLWithPath: filePath]];
 
     if(![self isFileFound: filePath]) {
         NSLog(@"error movie player");
-        Alerts *alert = [[Alerts alloc] init];
-        [alert showVideoNotFoundAlert:self file: standID];
+        //Alerts *alert = [[Alerts alloc] init];
+        //[alert showVideoNotFoundAlert:self file: standID];
+        UIAlertController* alert = [Alerts getVideoNotFoundAlert:filePath];
+        [self presentViewController:alert animated:YES completion:nil];
     }
     else {
-        moviePlayer.shouldAutoplay = YES;
-        moviePlayer.movieSourceType = MPMovieSourceTypeFile;
-        moviePlayer.controlStyle = MPMovieControlStyleDefault;
-    
-        moviePlayer.fullscreen = NO;
-        [self.view addSubview: moviePlayer.view];
-    
-        audioController = [[AudioViewController alloc] init];
+        //moviePlayer.shouldAutoplay = YES;
+        //moviePlayer.movieSourceType = MPMovieSourceTypeFile;
+        //moviePlayer.controlStyle = MPMovieControlStyleDefault;
+        //moviePlayer.fullscreen = NO;
+        //[self.view addSubview: moviePlayer.view];
+        //NSLog(@"load state %i", moviePlayer.loadState);
         
-        NSLog(@"load state %i", moviePlayer.loadState);
+        //audioController = [[AudioViewController alloc] init];
         
+        player = [AVPlayer playerWithURL:[NSURL fileURLWithPath: filePath]];
+        playerLayer = [AVPlayerLayer playerLayerWithPlayer: player];
+        
+        playerLayer.frame = self.view.frame;
+        [self.view.layer addSublayer: playerLayer];
     }
     [super viewDidLoad];
-    [self setIsPageWithAudio:YES];
+    //[self setIsPageWithAudio:YES];
 }
 
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    moviePlayer = nil;
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    //moviePlayer = nil;
 }
 
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    //The device has already rotated, that's why this method is being called.
+    UIDeviceOrientation toOrientation   = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation toInterfaceOrientation;
+    //fixes orientation mismatch (between UIDeviceOrientation and UIInterfaceOrientation)
+    if (toOrientation == UIDeviceOrientationLandscapeRight)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeLeft;
+    else if (toOrientation == UIDeviceOrientationLandscapeLeft)
+        toInterfaceOrientation = UIInterfaceOrientationLandscapeRight;
+    else if (toOrientation == UIDeviceOrientationPortraitUpsideDown)
+        toInterfaceOrientation = UIInterfaceOrientationPortraitUpsideDown;
+    else toInterfaceOrientation = UIInterfaceOrientationPortrait;
+    
     [audioController removeVolumeIcon];
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-        moviePlayer.view.frame = CGRectMake(0, 0, 1024, 768);
-        [audioController addVolumeButton: moviePlayer.view Yoffset:690 Xoffset:950 ];
+        playerLayer.frame = CGRectMake(0, 0, 1024, 768);
+        //[audioController addVolumeButton: moviePlayer.view Yoffset:690 Xoffset:950 ];
 
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        moviePlayer.view.frame = CGRectMake(0, 0, 768, 1024);
-        [audioController addVolumeButton: moviePlayer.view Yoffset:940 Xoffset:700 ];
+        playerLayer.frame = CGRectMake(0, 0, 768, 1024);
+        //[audioController addVolumeButton: moviePlayer.view Yoffset:940 Xoffset:700 ];
 
     }
 }

@@ -23,9 +23,7 @@
     NSData *data = [NSData  dataWithContentsOfFile: filePath];
     if(data == nil) {
         NSLog(@"Error during creation of data from file. Path = config.xml");
-        
-        Alerts *alert = [[Alerts alloc] init];
-        [alert showConfigNotFoundAlert:self];
+        [XMLParser setState: FILE_EMPTY];
         return false;
     }
     else {
@@ -43,8 +41,12 @@
         NSError *parseError = [xmlParser parserError];
         if(parseError) {
             NSLog(@"XmlParser - error parsing data : %@", [parseError localizedDescription]);
-            Alerts *alert = [[Alerts alloc] init];
-            [alert errorParsingAlert:self file:filePath error: [parseError localizedDescription]];
+            //Alerts *alert = [[Alerts alloc] init];
+            //[alert errorParsingAlert:self file:filePath error: [parseError localizedDescription]];
+            //return false;
+            [XMLParser setLastErrorFilePath:filePath];
+            [XMLParser setLastErrorDescription:[parseError localizedDescription]];
+            [XMLParser setState: PARSING_ERROR];
             return false;
         }
         else return true;

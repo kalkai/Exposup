@@ -13,7 +13,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SectionParentViewController.h"
 
-@interface AudioViewController : UIViewController
+@interface AudioViewController : UIViewController<UIPopoverPresentationControllerDelegate>
 
 @property(strong,nonatomic) NSString *file;
 @property(strong,nonatomic) NSString *name;
@@ -27,7 +27,9 @@
 @property (strong, nonatomic) UIButton *volumeButton;
 @property (strong, nonatomic) UILabel *audioComment;
 
-@property (strong, nonatomic) UIPopoverController *popover;
+//@property (strong, nonatomic) UIPopoverController *popover;
+@property (strong, nonatomic) UIViewController *popover;
+@property (strong, nonatomic) UIPopoverPresentationController *popController;
 @property (strong, nonatomic) MPVolumeView *volumeViewSlider;
 @property (strong, nonatomic) UIView *currentView;
 

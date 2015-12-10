@@ -29,10 +29,11 @@
 
 @property (strong, nonatomic) NSNumber *numberOfPagesToPop;
 
+
+- (BOOL)prefersStatusBarHidden;
 - (IBAction)popView:(id)sender;
 - (IBAction)popToScanView:(id)sender;
 - (void)createBackButtons;
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 
 @end

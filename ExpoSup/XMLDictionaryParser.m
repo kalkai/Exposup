@@ -14,15 +14,17 @@
 
 
 
-- (void)parseXMLDictionary {
+- (Boolean)parseXMLDictionary {
 
     NSString *filePath = [[LanguageManagement instance] pathForFile: @"dictionary.xml" contentFile: NO];
     
     NSData *data = [NSData  dataWithContentsOfFile: filePath];
     if(data == nil) {
         NSLog(@"Error during creation of data from dictionary. Path = %@", filePath);
-        Alerts *alert = [[Alerts alloc] init];
-        [alert showDictionaryNotFoundAlert:self];
+        //Alerts *alert = [[Alerts alloc] init];
+        //[alert showDictionaryNotFoundAlert:self];
+        [XMLParser setState: FILE_EMPTY];
+        return false;
     }
     else {
         NSLog(@"Data created from file content. Dictionary.");
@@ -39,10 +41,15 @@
         NSError *parseError = [xmlParser parserError];
         if(parseError) {
             NSLog(@"XmlParser - error parsing data : %@", [parseError localizedDescription]);
-            Alerts *alert = [[Alerts alloc] init];
-            [alert errorParsingAlert:self file: filePath error:[parseError localizedDescription]];
+            //Alerts *alert = [[Alerts alloc] init];
+            //[alert errorParsingAlert:self file: filePath error:[parseError localizedDescription]];
+            [XMLParser setLastErrorFilePath:filePath];
+            [XMLParser setLastErrorDescription:[parseError localizedDescription]];
+            [XMLParser setState: PARSING_ERROR];
+            return false;
         }
     }
+    return true;
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
