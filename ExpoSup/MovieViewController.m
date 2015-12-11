@@ -10,7 +10,7 @@
 
 @implementation MovieViewController
 
-@synthesize standID, audioController, player, playerLayer;
+@synthesize standID, audioController, player, playerController, playerFrame;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,18 +23,25 @@
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     [audioController removeVolumeIcon];
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-        playerLayer.frame = CGRectMake(0, 0, 1024, 768);
-        //[audioController addVolumeButton: moviePlayer.view Yoffset:690 Xoffset:950 ];
+        playerFrame = CGRectMake(0, 50, 1024, 718);
+        playerController.view.frame = playerFrame;
+        [audioController addVolumeButton: playerController.view viewController: self Yoffset:680 Xoffset:955 ];
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        playerLayer.frame = CGRectMake(0, 0, 768, 1024);
-        //[audioController addVolumeButton: moviePlayer.view Yoffset:940 Xoffset:700 ];
+        playerFrame = CGRectMake(0, 50, 768, 974);
+        playerController.view.frame = playerFrame;
+        [audioController addVolumeButton: playerController.view viewController: self Yoffset:930 Xoffset:705 ];
     }
     [super viewWillAppear:YES];
     //[moviePlayer play];
     [player play];
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+    [player pause];
+    [playerController.view removeFromSuperview];
+    player = nil;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -70,13 +77,20 @@
         //[self.view addSubview: moviePlayer.view];
         //NSLog(@"load state %i", moviePlayer.loadState);
         
-        //audioController = [[AudioViewController alloc] init];
+        audioController = [[AudioViewController alloc] init];
         
         player = [AVPlayer playerWithURL:[NSURL fileURLWithPath: filePath]];
-        playerLayer = [AVPlayerLayer playerLayerWithPlayer: player];
+        //playerLayer = [AVPlayerLayer playerLayerWithPlayer: player];
+        playerController = [[AVPlayerViewController alloc] init];
+        playerController.player = player;
+        playerController.view.frame = playerFrame;
+        [self.view addSubview: playerController.view];
         
-        playerLayer.frame = self.view.frame;
-        [self.view.layer addSublayer: playerLayer];
+        
+        
+        //[self presentViewController:playerController animated:NO completion:nil];
+        //playerController.view.frame = self.view.frame;
+        //[self.view.layer addSublayer: playerLayer];
     }
     [super viewDidLoad];
     //[self setIsPageWithAudio:YES];
@@ -108,12 +122,12 @@
     
     [audioController removeVolumeIcon];
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-        playerLayer.frame = CGRectMake(0, 0, 1024, 768);
+       // playerLayer.frame = CGRectMake(0, 0, 1024, 768);
         //[audioController addVolumeButton: moviePlayer.view Yoffset:690 Xoffset:950 ];
 
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        playerLayer.frame = CGRectMake(0, 0, 768, 1024);
+        //playerLayer.frame = CGRectMake(0, 0, 768, 1024);
         //[audioController addVolumeButton: moviePlayer.view Yoffset:940 Xoffset:700 ];
 
     }

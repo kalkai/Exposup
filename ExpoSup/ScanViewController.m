@@ -108,7 +108,6 @@
     [self.view addSubview: scanInstruction];
     
     scannerContainer = [[UIView alloc] init];
-    scannerContainer.backgroundColor = [UIColor yellowColor];
     
     [self setupScanner];
     [self startScanning];

@@ -48,13 +48,13 @@
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         frame = CGRectMake(0, 0, 1024, 570);
         scrollView.frame = frame;
-        [parser.audio addAudioToView: self.view atY: 700 width: 1024 startDelayed: NO parent:self];
+        [parser.audio addAudioToView: self.view viewController: self atY: 700 width: 1024 startDelayed: NO parent:self];
         imageView.frame = frame;
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
         frame = CGRectMake(0, 0, 768, 900);
         scrollView.frame = frame;
-        [parser.audio addAudioToView: self.view atY: 960 width: 768 startDelayed: NO parent:self];
+        [parser.audio addAudioToView: self.view viewController: self atY: 960 width: 768 startDelayed: NO parent:self];
         imageView.frame = frame;
     }
     scrollView.contentSize = frame.size;
@@ -323,14 +323,14 @@
         frame = CGRectMake(0, 0, 1024, 570);
         opacity.frame = CGRectMake(0, 0, 1024, 768);
         scrollView.frame = frame;
-        [parser.audio addAudioToView: self.view atY: 700 width: 1024 startDelayed: NO parent:self];
+        [parser.audio addAudioToView: self.view viewController: self atY: 700 width: 1024 startDelayed: NO parent:self];
         imageView.frame = frame;
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
         frame = CGRectMake(0, 0, 768, 829);
         opacity.frame = CGRectMake(0, 0, 768, 1024);
         scrollView.frame = frame;
-        [parser.audio addAudioToView: self.view atY: 960 width: 768 startDelayed: NO parent:self];
+        [parser.audio addAudioToView: self.view viewController: self atY: 960 width: 768 startDelayed: NO parent:self];
         imageView.frame = frame;
     }
     scrollView.contentSize = frame.size;

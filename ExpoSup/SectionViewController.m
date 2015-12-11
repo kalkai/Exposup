@@ -469,7 +469,8 @@
         }
     }
     
-    volumeViewSlider.frame = CGRectMake(0, 0, 300, 100);
+    volumeViewSlider.frame = CGRectMake(10, 10, 250, 40);
+    popover.view.frame = volumeViewSlider.frame;
     [volumeViewSlider sizeToFit];
     [popover.view addSubview: volumeViewSlider];
     
@@ -485,7 +486,7 @@
     
     // After iOS 9
     popover.modalPresentationStyle = UIModalPresentationPopover;
-    popover.preferredContentSize = volumeViewSlider.frame.size;
+    popover.preferredContentSize = CGSizeMake(270, 50);
     [self presentViewController: popover animated:YES completion:nil];
     
     // configure the Popover presentation controller
