@@ -124,7 +124,7 @@
     parser = [[XMLSectionParser alloc] init];
     [parser parseXMLFileAtPath: fileName];
     if(parser.error == FALSE) {
-        self.previousOrientation = UIInterfaceOrientationPortrait;
+        self.previousOrientation = [[UIApplication sharedApplication] statusBarOrientation];
         
         buttonsList = [[NSMutableArray alloc] init];
         audioPlayers = [[NSMutableArray alloc] init];
