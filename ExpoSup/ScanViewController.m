@@ -28,6 +28,7 @@
     
     languagesButton = [[LanguageManagement instance] addLanguageSelectionButton: self.view viewController: self];
     
+    [self startScanning];
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         AVCaptureConnection *con = self.preview.connection;
         con.videoOrientation = AVCaptureVideoOrientationLandscapeRight;
@@ -110,7 +111,6 @@
     scannerContainer = [[UIView alloc] init];
     
     [self setupScanner];
-    [self startScanning];
 }
 
 - (void) setupScanner;

@@ -25,7 +25,7 @@
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         playerFrame = CGRectMake(0, 50, 1024, 718);
         playerController.view.frame = playerFrame;
-        [audioController addVolumeButton: playerController.view viewController: self Yoffset:680 Xoffset:955 ];
+        [audioController addVolumeButton: playerController.view viewController: self Yoffset:675 Xoffset:955 ];
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
         playerFrame = CGRectMake(0, 50, 768, 974);
@@ -124,11 +124,16 @@
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
        // playerLayer.frame = CGRectMake(0, 0, 1024, 768);
         //[audioController addVolumeButton: moviePlayer.view Yoffset:690 Xoffset:950 ];
-
+        //playerFrame = CGRectMake(0, 50, 1024, 718);
+        //playerController.view.frame = playerFrame;
+        [audioController addVolumeButton: playerController.view viewController: self Yoffset:675 Xoffset:955 ];
     }
     else if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
         //playerLayer.frame = CGRectMake(0, 0, 768, 1024);
         //[audioController addVolumeButton: moviePlayer.view Yoffset:940 Xoffset:700 ];
+        //playerFrame = CGRectMake(0, 50, 768, 974);
+        //playerController.view.frame = playerFrame;
+        [audioController addVolumeButton: playerController.view viewController: self Yoffset:930 Xoffset:705 ];
 
     }
 }
