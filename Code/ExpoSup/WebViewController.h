@@ -16,5 +16,6 @@
 @interface WebViewController : SectionParentViewController
 
 @property (assign, nonatomic) NSString *fileName;
+@property (strong, nonatomic) UIWebView *webview;
 
 @end
