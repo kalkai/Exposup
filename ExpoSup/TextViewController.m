@@ -106,12 +106,12 @@
     int startY=100;
     if(parser.audio) {
         if(currentWidth == 768) {
-            if([parser.currentAudio addAudioToView:self.view atY:1024-60 width:currentWidth startDelayed:NO parent:self]) {
+            if([parser.currentAudio addAudioToView:self.view viewController: self atY:1024-60 width:currentWidth startDelayed:NO parent:self]) {
                 scrollView.frame = CGRectMake(0, startY, currentWidth, 1024-startY-70);
                 audio = YES;
             }
         }
-        else if([parser.currentAudio addAudioToView:self.view atY:768-60 width:currentWidth startDelayed:NO parent:self]) {
+        else if([parser.currentAudio addAudioToView:self.view viewController: self atY:768-60 width:currentWidth startDelayed:NO parent:self]) {
             scrollView.frame = CGRectMake(0, startY, currentWidth, 768-startY-70);
             audio = YES;
         }
@@ -673,6 +673,10 @@
     
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [self stopAudio: self];
+}
+
 - (void)viewDidUnload
 {
     
@@ -897,9 +901,9 @@
     argument = [parser.links objectAtIndex: idx];
     audioController = [[AudioViewController alloc] init];
     audioController.file = argument;
-    [audioController addAudioAndPlayOnceToView: self.view parent:self];
+    [audioController addAudioAndPlayOnceToView: self.view viewController: self parent:self];
     
-    [audioController addVolumeButton: scrollView Yoffset: button.frame.origin.y  Xoffset:button.frame.origin.x + button.frame.size.width + 10 ];
+    [audioController addVolumeButton: scrollView viewController: self Yoffset: button.frame.origin.y  Xoffset:button.frame.origin.x + button.frame.size.width + 10 ];
     return true;
 }
 

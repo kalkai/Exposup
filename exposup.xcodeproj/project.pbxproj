@@ -63,6 +63,7 @@
 		A8C08C73175361B400230680 /* XMLSlideshowParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C08C57175361B400230680 /* XMLSlideshowParser.m */; };
 		A8C08C74175361B400230680 /* XMLTextParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C08C59175361B400230680 /* XMLTextParser.m */; };
 		A8C08C75175361B400230680 /* XMLZoomParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C08C5B175361B400230680 /* XMLZoomParser.m */; };
+		A8E464DA1C1ABFBC00C0B161 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8E464D91C1ABFBC00C0B161 /* AVKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -157,6 +158,7 @@
 		A8C08C59175361B400230680 /* XMLTextParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLTextParser.m; path = ExpoSup/XMLTextParser.m; sourceTree = "<group>"; };
 		A8C08C5A175361B400230680 /* XMLZoomParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLZoomParser.h; path = ExpoSup/XMLZoomParser.h; sourceTree = "<group>"; };
 		A8C08C5B175361B400230680 /* XMLZoomParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLZoomParser.m; path = ExpoSup/XMLZoomParser.m; sourceTree = "<group>"; };
+		A8E464D91C1ABFBC00C0B161 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8E464DA1C1ABFBC00C0B161 /* AVKit.framework in Frameworks */,
 				A89ACD2716D5393900B204DC /* AVFoundation.framework in Frameworks */,
 				A893DB5D16FB4BC100EF2E77 /* CoreMedia.framework in Frameworks */,
 				A893DB5F16FB4BD300EF2E77 /* CoreVideo.framework in Frameworks */,
@@ -224,6 +227,7 @@
 		A880A29016BD550C00A8BC18 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A8E464D91C1ABFBC00C0B161 /* AVKit.framework */,
 				A880A29116BD550C00A8BC18 /* UIKit.framework */,
 				A880A29316BD550C00A8BC18 /* Foundation.framework */,
 				A880A29516BD550C00A8BC18 /* CoreGraphics.framework */,
@@ -554,7 +558,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ulb.${PRODUCT_NAME}";
 				PRODUCT_NAME = ExpoSup;
 				PROVISIONING_PROFILE = "";
-				/* PROVISIONING_PROFILE[sdk=iphoneos*]" = "48c2004c-5818-4bb8-ada4-191321457ba4;*/
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
@@ -578,7 +581,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ulb.${PRODUCT_NAME}";
 				PRODUCT_NAME = ExpoSup;
 				PROVISIONING_PROFILE = "";
-				/* PROVISIONING_PROFILE[sdk=iphoneos*]" = "48c2004c-5818-4bb8-ada4-191321457ba4 ;*/
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};

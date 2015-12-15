@@ -62,9 +62,9 @@
         tempHeight += [self addComment];
     
     if(currentWidth == 1024)
-        [parser.audioFile addAudioToView: self.view atY: 768-60 width: currentWidth startDelayed: NO parent:self];
+        [parser.audioFile addAudioToView: self.view viewController: self atY: 768-60 width: currentWidth startDelayed: NO parent:self];
     else if(currentWidth == 768)
-        [parser.audioFile addAudioToView: self.view atY: 1024-60 width: currentWidth startDelayed: NO parent:self];
+        [parser.audioFile addAudioToView: self.view viewController: self atY: 1024-60 width: currentWidth startDelayed: NO parent:self];
 }
 
 - (int)addAnimation {

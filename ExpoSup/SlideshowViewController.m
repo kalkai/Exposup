@@ -293,7 +293,7 @@
     // On vérifie s'il y a un commentaire et une musique pour savoir comment placer les vues
     if(num < parser.audios.count)
         if([parser.audios objectAtIndex: num] != nil && ![[parser.audios objectAtIndex: num] isEqual:[[AudioViewController alloc] init]] )
-            audio = [[parser.audios objectAtIndex: num] addAudioToView: view atY: height width: width startDelayed: YES parent:self];
+            audio = [[parser.audios objectAtIndex: num] addAudioToView: view viewController: self atY: height width: width startDelayed: YES parent:self];
     
     if(![[parser.comments objectAtIndex: num] isEqualToString:@""])
         comment = YES;

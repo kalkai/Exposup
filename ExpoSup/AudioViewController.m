@@ -14,7 +14,7 @@
 
 @implementation AudioViewController
 
-@synthesize file,autostart,repetition, audioPlayer, pauseButton , playButton, stopButton, name, audioComment, volumeButton, popover, currentView, volumeViewSlider, popController;
+@synthesize file,autostart,repetition, audioPlayer, pauseButton , playButton, stopButton, name, audioComment, volumeButton, popover, currentView, volumeViewSlider, popController, currentViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,7 +37,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)addAudioAndPlayOnceToView:(UIView*)view parent:(SectionParentViewController*)parent {
+- (void)addAudioAndPlayOnceToView:(UIView*)view viewController:(UIViewController*)vc parent:(SectionParentViewController*)parent {
     NSLog(@"add audio, file = %@", file);
     if([Config instance].audioOn) {
         
@@ -53,6 +53,9 @@
                 [self presentViewController:alert animated:YES completion:nil];
             }
             else {
+                currentView = view;
+                currentViewController = vc;
+                
                 audioPlayer = [[AVAudioPlayer alloc] initWithData: data error: &error];
                 
                 if(audioPlayer == nil) {
@@ -73,7 +76,7 @@
 
 }
 
-- (Boolean)addAudioToView: (UIView *)view atY:(int) y width:(int)width startDelayed:(bool)delayed parent:(SectionParentViewController*)parent {
+- (Boolean)addAudioToView: (UIView *)view viewController:(UIViewController*)vc atY:(int) y width:(int)width startDelayed:(bool)delayed parent:(SectionParentViewController*)parent {
     NSLog(@"add audio, file = %@", file);
     if([Config instance].audioOn) {
         
@@ -101,7 +104,7 @@
                     NSLog(@"Audio file %@", file);
                     NSLog(autostart ? @"Autostart true" : @"Autostart false");
                     NSLog(repetition ? @"Repetition true" : @"Repetition false");
-                    [self createButtonsToView: view Yoffset: y width: width];
+                    [self createButtonsToView: view viewController: vc Yoffset: y width: width];
                     
                     if (autostart && !delayed)
                         [self playButtonClicked: self];
@@ -122,8 +125,10 @@
     }
 }
 
-- (int)createButtonsToView:(UIView *)view Yoffset:(int)y width:(int)width {
+- (int)createButtonsToView:(UIView *)view viewController:(UIViewController*)vc Yoffset:(int)y width:(int)width {
     currentView = view;
+    currentViewController = vc;
+    
     audioComment = [[UILabel alloc] init];
     audioComment.tag = 9999;
     if(name != nil && ![name isEqualToString: @"noaudio"]) {
@@ -215,8 +220,9 @@
 }
 
 
--(void) addVolumeButton:(UIView *)view Yoffset:(int)y Xoffset:(int)x {
+-(void) addVolumeButton:(UIView *)view viewController:(UIViewController*)vc Yoffset:(int)y Xoffset:(int)x {
     currentView = view;
+    currentViewController = vc;
     
     int widthButton = 50;
     int heightButton = 40;
@@ -257,7 +263,8 @@
         }
     }
     
-    volumeViewSlider.frame = CGRectMake(0, 0, 300, 50);
+    volumeViewSlider.frame = CGRectMake(10, 10, 250, 40);
+    popover.view.frame = volumeViewSlider.frame;
     [volumeViewSlider sizeToFit];
     [popover.view addSubview: volumeViewSlider];
     
@@ -273,8 +280,8 @@
     
     // After iOS 9
     popover.modalPresentationStyle = UIModalPresentationPopover;
-    popover.preferredContentSize = volumeViewSlider.frame.size;
-    [self presentViewController: popover animated:YES completion:nil];
+    popover.preferredContentSize = CGSizeMake(270, 50);
+    [currentViewController presentViewController: popover animated:YES completion:nil];
     
     // configure the Popover presentation controller
     popController = [popover popoverPresentationController];
