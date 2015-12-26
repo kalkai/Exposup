@@ -13,9 +13,20 @@
 #import "Labels.h"
 #import <Foundation/Foundation.h>
 
-@interface WebViewController : SectionParentViewController
+@interface WebViewController : SectionParentViewController<UIWebViewDelegate>
 
 @property (assign, nonatomic) NSString *fileName;
+@property (strong, nonatomic) NSURL *lastRequest;
 @property (strong, nonatomic) UIWebView *webview;
+@property (strong, nonatomic) UIActivityIndicatorView *activityView;
+
+- (void)loadFile:(NSString*)name;
+- (IBAction)popView:(id)sender;
+
+// webview delegate
+- (void)webViewDidStartLoad:(UIWebView *)webView;
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error;
+- (void)webViewDidFinishLoad:(UIWebView *)webView;
 
 @end
