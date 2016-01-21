@@ -10,7 +10,7 @@
 
 @implementation WebViewController
 
-@synthesize webview, fileName, activityView, lastRequest;
+@synthesize webview, fileOrLinkName, activityView, lastRequest,retryNumber, onWebsite;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,7 +29,7 @@
         webview.frame = CGRectMake(0, 0, 768, 1024);
     }
     [super viewWillAppear:YES];
-    [self loadFile: fileName];
+    [self loadFile: fileOrLinkName];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -46,6 +46,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    retryNumber = 0;
+    onWebsite = false;
+    
     webview = [[UIWebView alloc] init];
     [webview setBackgroundColor: [UIColor clearColor]];
     [webview setOpaque:NO];
@@ -61,26 +65,11 @@
 }
 
 - (void) loadFile: (NSString*)name {
+    lastRequest = [NSURL URLWithString: name];
     NSString *filePath = [[LanguageManagement instance] pathForFile: name contentFile: NO];
     NSURL *url = [NSURL URLWithString: filePath];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    lastRequest = request.URL;
     [webview loadRequest: request];
-    
-    
-    /*NSData *data = [NSData  dataWithContentsOfFile: filePath];
-    
-    if(data==nil) {
-        NSLog(@"\n\n\n\n DATA IS NIL \n\n\n\n");
-    }
-    else {
-        //Useful to set the base URL path
-        NSArray *paths = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-        NSURL *documentsURL = [paths lastObject];
-        
-        
-        [webview loadData: data MIMEType:@"text/html" textEncodingName:@"UTF-8" baseURL: documentsURL];
-    }*/
 }
 
 - (void)viewDidUnload
@@ -135,7 +124,7 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSLog(@"Webview should start load with request. \nRequest : %@\nNavigationType : %ld",request, (long)navigationType);
     
-    if(navigationType == UIWebViewNavigationTypeLinkClicked) {
+    if(!onWebsite && navigationType == UIWebViewNavigationTypeLinkClicked) {
         [webview stopLoading];
 
         NSString *URLConstruction = [[NSString alloc] init];
@@ -147,6 +136,11 @@
     else return true;
 }
 
+- (void)modifyFrameForWebsite {
+    CGRect newFrame = CGRectMake(0, 90, webview.frame.size.width, webview.frame.size.height-90);
+    webview.frame = newFrame;
+}
+
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"Webview loading error: %@", [error debugDescription]);
     if(error.code == 204) {
@@ -154,7 +148,32 @@
         [self webViewDidFinishLoad:webView];
     } else if (error.code == -1100) {
         // File not found
-        UIAlertController *alert = [Alerts getWebNotFoundAlert: lastRequest.lastPathComponent];
+        if(retryNumber < 2) {
+            retryNumber++;
+            [self modifyFrameForWebsite];
+            onWebsite = true;
+            
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:lastRequest];
+            [activityView stopAnimating];
+            [activityView removeFromSuperview];
+            [webview loadRequest: request];
+            
+            
+            
+            NSLog(@"Retry. Request = %@", lastRequest);
+        }
+    } else if (error.code == -1003) {
+        retryNumber=0;
+        NSLog(@"lastRequest =  %@", lastRequest.absoluteString);
+        UIAlertController *alert = [Alerts getWebNotFoundAlert: lastRequest.absoluteString];
+        [self presentViewController:alert animated:YES completion:nil];
+        [activityView stopAnimating];
+        [activityView removeFromSuperview];
+    } else if (error.code == 102) {
+        retryNumber=0;
+        NSLog(@"lastRequest =  %@", lastRequest.absoluteString);
+        UIAlertController *alert = [Alerts getWebNotFoundAlert: lastRequest.absoluteString];
         [self presentViewController:alert animated:YES completion:nil];
         [activityView stopAnimating];
         [activityView removeFromSuperview];

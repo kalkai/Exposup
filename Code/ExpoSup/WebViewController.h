@@ -15,10 +15,12 @@
 
 @interface WebViewController : SectionParentViewController<UIWebViewDelegate>
 
-@property (assign, nonatomic) NSString *fileName;
+@property (assign, nonatomic) NSString *fileOrLinkName;
 @property (strong, nonatomic) NSURL *lastRequest;
 @property (strong, nonatomic) UIWebView *webview;
 @property (strong, nonatomic) UIActivityIndicatorView *activityView;
+@property (assign, nonatomic) int retryNumber;
+@property (assign, nonatomic) Boolean onWebsite;
 
 - (void)loadFile:(NSString*)name;
 - (IBAction)popView:(id)sender;
