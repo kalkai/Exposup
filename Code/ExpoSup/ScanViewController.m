@@ -113,15 +113,51 @@
     [self setupScanner];
 }
 
-- (void) setupScanner;
+- (void) setupScanner
 {
-    self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    self.device =  nil;
+    AVCaptureDevice* tempDevice = nil;
+    
+    for (AVCaptureDevice *d in [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]) {
+        if ([d position] == AVCaptureDevicePositionBack) {
+            self.device = d;
+        }
+        tempDevice = d;
+    }
+    
+    if(self.device == nil && tempDevice == nil) {
+        UIAlertController* alert = [Alerts getCameraNotFoundAlert:0];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else if(self.device == nil) {
+        if([AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo] != nil) {
+            self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        }
+        else self.device = tempDevice;
+    }
     
     self.input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
     
     self.session = [[AVCaptureSession alloc] init];
-    
     self.output = [[AVCaptureMetadataOutput alloc] init];
+    
+    if(self.input == nil) {
+        UIAlertController* alert = [Alerts getCameraNotFoundAlert:1];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else if (self.output == nil){
+        UIAlertController* alert = [Alerts getCameraNotFoundAlert:2];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else if (self.session == nil){
+        UIAlertController* alert = [Alerts getCameraNotFoundAlert:3];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
     [self.session addOutput:self.output];
     [self.session addInput:self.input];
     
@@ -328,6 +364,10 @@
         ImageZoomViewController *zoomVC = [segue destinationViewController];
         zoomVC.fileName = argument;
     }
+    else if( [segue.identifier isEqualToString:@"fromScanToWeb"] ) {
+        WebViewController *webVC = [segue destinationViewController];
+        webVC.fileOrLinkName = argument;
+    }
    
 }
 
@@ -389,6 +429,9 @@
                  }
                  else if([type isEqualToString: @"animate"]) {
                     [self performSegueWithIdentifier: @"fromScanToAnimate" sender: self];
+                 }
+                 else if([type isEqualToString: @"web"]) {
+                     [self performSegueWithIdentifier: @"fromScanToWeb" sender: self];
                  }
              }
              else {
