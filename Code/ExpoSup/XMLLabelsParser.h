@@ -31,6 +31,9 @@
 @property (strong, nonatomic) NSString *confirmMod;
 
 @property (strong, nonatomic) NSString *scanInstruction;
+
+@property (strong, nonatomic) NSString *BeaconInfo;
+@property (strong, nonatomic) NSString *AreaLabel;
 @property (strong, nonatomic) NSString *toIDButton;
 
 @property (strong, nonatomic) NSString *IDInstruction;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="Obe-qt-oJi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="Obe-qt-oJi">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -150,6 +150,24 @@
             </objects>
             <point key="canvasLocation" x="-2637" y="-156"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="5fB-I3-86Q">
+            <objects>
+                <viewController id="t6m-2F-jaX" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eUR-TU-kMw"/>
+                        <viewControllerLayoutGuide type="bottom" id="G3h-0N-rod"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uqi-8T-X4N">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="11F-1z-QRD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1854" y="68"/>
+        </scene>
         <!--Selected Mod View Controller-->
         <scene sceneID="Wq3-EH-Kwh">
             <objects>
@@ -262,22 +280,48 @@
             </objects>
             <point key="canvasLocation" x="438" y="-1914"/>
         </scene>
-        <!--Scan View Controller-->
+        <!--Beacon View Controller-->
         <scene sceneID="rGH-kw-uMq">
             <objects>
-                <viewController id="yYV-1e-8uk" customClass="ScanViewController" sceneMemberID="viewController">
+                <viewController id="yYV-1e-8uk" customClass="BeaconViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Gyz-dF-Ssq"/>
-                        <viewControllerLayoutGuide type="bottom" id="E1R-MS-68f"/>
+                        <viewControllerLayoutGuide type="top" id="AyU-jd-T0z"/>
+                        <viewControllerLayoutGuide type="bottom" id="yNN-MO-2Jf"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9FQ-AX-5jB">
+                    <view key="view" contentMode="scaleToFill" id="CI0-hh-zko">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" placeholderIntrinsicWidth="352" placeholderIntrinsicHeight="431" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="39" sectionHeaderHeight="24" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f4j-MF-HxC">
+                                <rect key="frame" x="110" y="2" width="352" height="431"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="beaconCellId" textLabel="JWP-DE-iBX" style="IBUITableViewCellStyleDefault" id="aOn-c5-bJx">
+                                        <rect key="frame" x="0.0" y="24" width="352" height="39"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aOn-c5-bJx" id="PMY-iZ-evC">
+                                            <rect key="frame" x="0.0" y="0.0" width="352" height="38"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JWP-DE-iBX">
+                                                    <rect key="frame" x="15" y="0.0" width="322" height="38"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ew9-V7-LdH"/>
                     <connections>
-                        <segue destination="A4j-mn-uX5" kind="push" identifier="toSectionVC" id="P43-hf-Bn3"/>
+                        <outlet property="tableView" destination="f4j-MF-HxC" id="23G-jP-aL2"/>
+                        <segue destination="A4j-mn-uX5" kind="push" identifier="fromScanToSection" id="P43-hf-Bn3"/>
                         <segue destination="9vo-RT-dow" kind="push" identifier="toID" id="Jxn-Go-T59"/>
                         <segue destination="ZTN-cs-ig9" kind="push" identifier="fromScanToText" id="BL4-JM-DBn"/>
                         <segue destination="AR5-fN-x76" kind="push" identifier="fromScanToSlideshow" id="ftK-mM-x7m"/>
@@ -290,7 +334,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="53P-BU-blw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-546" y="-127"/>
+            <point key="canvasLocation" x="-416" y="-19"/>
         </scene>
         <!--Text View Controller-->
         <scene sceneID="PtN-UT-5nH">
@@ -504,14 +548,14 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="f5e-Sf-TL9"/>
-        <segue reference="e2N-Rj-4wa"/>
-        <segue reference="cfu-wm-07O"/>
-        <segue reference="Hic-bB-BiV"/>
-        <segue reference="HOL-nf-PgD"/>
-        <segue reference="cdr-jW-sBC"/>
-        <segue reference="V29-Mu-2aD"/>
-        <segue reference="z2y-ru-M7A"/>
-        <segue reference="PmZ-gO-0Fl"/>
+        <segue reference="rMF-Za-LdW"/>
+        <segue reference="5nn-if-pnK"/>
+        <segue reference="ftK-mM-x7m"/>
+        <segue reference="P43-hf-Bn3"/>
+        <segue reference="J5g-HR-FLs"/>
+        <segue reference="6E2-h1-dnZ"/>
+        <segue reference="N2u-tY-KDR"/>
+        <segue reference="nmO-Sc-cPv"/>
+        <segue reference="BL4-JM-DBn"/>
     </inferredMetricsTieBreakers>
 </document>

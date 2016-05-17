@@ -1,24 +1,23 @@
 //
-//  XMLIndexParser.m
-//  ExpoSup
+//  XMLBeaconParsers.m
+//  exposup
 //
-//  Created by Jean Richelle on 9/09/13.
+//  Created by Kevin on 13/05/16.
 //
 //
 
-#import "XMLIndexParser.h"
+#import "XMLBeaconParsers.h"
 
-@implementation XMLIndexParser
+@implementation XMLBeaconParsers
 
-
-@synthesize currentProperty, currentID, currentName, map, names, ids, error, errors;
+@synthesize currentProperty, currentID, currentName, mapIDtoName, names, ids, error, errors, zones, currentZone, mapZonetoID;
 
 
 
 - (Boolean)parseIndex{
     error = false;
     errors = [[NSString alloc] init];
-    NSData *data = [NSData  dataWithContentsOfFile: [[LanguageManagement instance] pathForFile: @"index.xml" contentFile: NO] ];
+    NSData *data = [NSData  dataWithContentsOfFile: [[LanguageManagement instance] pathForFile: @"indexWithZone.xml" contentFile: NO] ];
     if(data == nil) {
         NSLog(@"Error during creation of data from file. Path = %@", @"index.xml");
         [XMLParser setState: FILE_EMPTY];
@@ -49,19 +48,23 @@
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
-    map = [NSDictionary dictionary];
+    mapIDtoName = [NSDictionary dictionary];
+    mapZonetoID = [[NSMutableDictionary alloc] init];
     ids = [[NSMutableArray alloc] init];
     names = [[NSMutableArray alloc] init];
+    zones = [[NSMutableArray alloc] init];
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
     if([elementName isEqualToString: @"entry"]) {
         currentName = nil;
         currentID = nil;
+        currentZone = nil;
         currentName = [[NSString alloc] init];
         currentID = [[NSString alloc] init];
+        
     }
-    else if ([elementName isEqualToString: @"id"] || [elementName isEqualToString: @"name"]) {
+    else if ([elementName isEqualToString: @"id"] || [elementName isEqualToString: @"name"] || [elementName isEqualToString: @"zone"]) {
         currentProperty = nil;
         currentProperty = [[NSMutableString alloc] init];
     }
@@ -76,11 +79,14 @@
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
     
     if([elementName isEqualToString: @"index"]) {
-        map = [NSDictionary dictionaryWithObjects:names forKeys:ids];
+        mapIDtoName = [NSDictionary dictionaryWithObjects:names forKeys:ids];
+        //mapZonetoID = [NSDictionary dictionaryWithObjects:ids forKeys:zones];
     }
     else if([elementName isEqualToString:@"entry"]) {
         [names addObject: currentName];
         [ids addObject: currentID];
+        //[zones addObject: currentZone];
+        
     }
     else if([elementName isEqualToString:@"id"]) {
         currentID = [currentProperty stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -88,18 +94,25 @@
     else if([elementName isEqualToString:@"name"]) {
         currentName = [currentProperty stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
+    else if([elementName isEqualToString:@"zone"]) {
+        currentZone = [currentProperty stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if ([mapZonetoID objectForKey:currentZone] == nil){
+            [mapZonetoID setValue:[[NSMutableArray alloc] init] forKey:currentZone];
+            [zones addObject: currentZone];
+        }
+        [mapZonetoID[currentZone] addObject:currentID ];
+            
+    }
 }
 
-+(XMLIndexParser*)instance {
-    static XMLIndexParser *instance = nil;
++(XMLBeaconParsers*)instance {
+    static XMLBeaconParsers *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[XMLIndexParser alloc] init];
+        instance = [[XMLBeaconParsers alloc] init];
         [instance parseIndex];
     });
-    
     return instance;
-    
 }
 
 

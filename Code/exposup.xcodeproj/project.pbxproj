@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A10BCAC1CD50D390033C70A /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A10BCAB1CD50D390033C70A /* Storyboard.storyboard */; };
+		0A10BCB41CD6C6410033C70A /* BeaconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A10BCB31CD6C6410033C70A /* BeaconViewController.m */; };
+		0A10BCB71CD76B300033C70A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A10BCB61CD76B300033C70A /* ViewController.m */; };
+		0A10BCBA1CD7A3AD0033C70A /* Tableview.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A10BCB91CD7A3AD0033C70A /* Tableview.m */; };
+		0A25DB761CEA9C2900933DE4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A25DB751CEA9C2900933DE4 /* AppDelegate.m */; };
+		0A25DB791CEA9C9300933DE4 /* BeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A25DB781CEA9C9300933DE4 /* BeaconManager.m */; };
+		0A71F86C1CD3A1D2000A6BBB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A71F86B1CD3A1D2000A6BBB /* CoreLocation.framework */; };
+		0A71F8711CD3B4AC000A6BBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A71F86D1CD3B4AC000A6BBB /* LaunchScreen.storyboard */; };
+		0A71F8721CD3B4AC000A6BBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A71F86F1CD3B4AC000A6BBB /* Main.storyboard */; };
+		0A71F8741CD3B911000A6BBB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A71F8731CD3B911000A6BBB /* MapKit.framework */; };
+		0AF2D6F31CE61EFD00517C91 /* XMLBeaconParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF2D6F21CE61EFD00517C91 /* XMLBeaconParsers.m */; };
+		0AF2D6F91CE96A5100517C91 /* XMLBeaconConfigParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF2D6F81CE96A5100517C91 /* XMLBeaconConfigParser.m */; };
 		0F9768F1184F7326004EB9F0 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9768EE184F7326004EB9F0 /* pause.png */; };
 		0F9768F2184F7326004EB9F0 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9768EF184F7326004EB9F0 /* play.png */; };
 		0F9768F3184F7326004EB9F0 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9768F0184F7326004EB9F0 /* stop.png */; };
@@ -41,7 +53,6 @@
 		A8B59A971C200BAC008C9879 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8B59A961C200BAC008C9879 /* WebViewController.m */; };
 		A8B5F17D17ACFB3800DE51D6 /* AnimateImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8B5F17C17ACFB3800DE51D6 /* AnimateImageViewController.m */; };
 		A8C08C5C175361B400230680 /* Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C08C2C175361B300230680 /* Alerts.m */; };
-		A8C08C5D175361B400230680 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C08C2E175361B300230680 /* AppDelegate.m */; };
 		A8C08C5E175361B400230680 /* ColorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C08C30175361B300230680 /* ColorButton.m */; };
 		A8C08C5F175361B400230680 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C08C32175361B300230680 /* Config.m */; };
 		A8C08C60175361B400230680 /* IDChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C08C34175361B300230680 /* IDChoiceViewController.m */; };
@@ -68,6 +79,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A10BCAB1CD50D390033C70A /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		0A10BCB21CD6C6410033C70A /* BeaconViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconViewController.h; sourceTree = "<group>"; };
+		0A10BCB31CD6C6410033C70A /* BeaconViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconViewController.m; sourceTree = "<group>"; };
+		0A10BCB51CD76B300033C70A /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		0A10BCB61CD76B300033C70A /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0A10BCB81CD7A3AD0033C70A /* Tableview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tableview.h; sourceTree = "<group>"; };
+		0A10BCB91CD7A3AD0033C70A /* Tableview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tableview.m; sourceTree = "<group>"; };
+		0A25DB741CEA9C2900933DE4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0A25DB751CEA9C2900933DE4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0A25DB771CEA9C9300933DE4 /* BeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconManager.h; sourceTree = "<group>"; };
+		0A25DB781CEA9C9300933DE4 /* BeaconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconManager.m; sourceTree = "<group>"; };
+		0A71F8661CD3A10C000A6BBB /* BeaconManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BeaconManagerDelegate.h; path = ../../../../Downloads/IBeaconTraining/IBeaconTraining/BeaconManagerDelegate.h; sourceTree = "<group>"; };
+		0A71F86B1CD3A1D2000A6BBB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0A71F86E1CD3B4AC000A6BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "../../../IBeaconTraining 2/IBeaconTraining/Base.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		0A71F8701CD3B4AC000A6BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "../../../IBeaconTraining 2/IBeaconTraining/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		0A71F8731CD3B911000A6BBB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0A71F8751CD3B918000A6BBB /* ExpoSup.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = ExpoSup.entitlements; path = ExpoSup/ExpoSup.entitlements; sourceTree = "<group>"; };
+		0AF2D6F11CE61EFD00517C91 /* XMLBeaconParsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLBeaconParsers.h; sourceTree = "<group>"; };
+		0AF2D6F21CE61EFD00517C91 /* XMLBeaconParsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLBeaconParsers.m; sourceTree = "<group>"; };
+		0AF2D6F71CE96A5100517C91 /* XMLBeaconConfigParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLBeaconConfigParser.h; sourceTree = "<group>"; };
+		0AF2D6F81CE96A5100517C91 /* XMLBeaconConfigParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLBeaconConfigParser.m; sourceTree = "<group>"; };
 		0F9768EE184F7326004EB9F0 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		0F9768EF184F7326004EB9F0 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		0F9768F0184F7326004EB9F0 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
@@ -116,8 +148,6 @@
 		A8B5F17C17ACFB3800DE51D6 /* AnimateImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnimateImageViewController.m; path = ExpoSup/AnimateImageViewController.m; sourceTree = "<group>"; };
 		A8C08C2B175361B300230680 /* Alerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alerts.h; path = ExpoSup/Alerts.h; sourceTree = "<group>"; };
 		A8C08C2C175361B300230680 /* Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Alerts.m; path = ExpoSup/Alerts.m; sourceTree = "<group>"; };
-		A8C08C2D175361B300230680 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ExpoSup/AppDelegate.h; sourceTree = "<group>"; };
-		A8C08C2E175361B300230680 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ExpoSup/AppDelegate.m; sourceTree = "<group>"; };
 		A8C08C2F175361B300230680 /* ColorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorButton.h; path = ExpoSup/ColorButton.h; sourceTree = "<group>"; };
 		A8C08C30175361B300230680 /* ColorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorButton.m; path = ExpoSup/ColorButton.m; sourceTree = "<group>"; };
 		A8C08C31175361B300230680 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ExpoSup/Config.h; sourceTree = "<group>"; };
@@ -169,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A71F86C1CD3A1D2000A6BBB /* CoreLocation.framework in Frameworks */,
 				A8E464DA1C1ABFBC00C0B161 /* AVKit.framework in Frameworks */,
 				A89ACD2716D5393900B204DC /* AVFoundation.framework in Frameworks */,
 				A893DB5D16FB4BC100EF2E77 /* CoreMedia.framework in Frameworks */,
@@ -178,6 +209,7 @@
 				A88E50D516C29DBC00A76E8F /* MediaPlayer.framework in Frameworks */,
 				A880A29216BD550C00A8BC18 /* UIKit.framework in Frameworks */,
 				A880A29416BD550C00A8BC18 /* Foundation.framework in Frameworks */,
+				0A71F8741CD3B911000A6BBB /* MapKit.framework in Frameworks */,
 				A880A29616BD550C00A8BC18 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,6 +220,7 @@
 		A880A28216BD550C00A8BC18 = {
 			isa = PBXGroup;
 			children = (
+				0A71F8751CD3B918000A6BBB /* ExpoSup.entitlements */,
 				A8C08C77175363D300230680 /* Sections */,
 				A8B59A981C200BC8008C9879 /* Core */,
 				A8AFB69A1754914C004D3F92 /* InfoPlist.strings */,
@@ -216,6 +249,8 @@
 		A880A29016BD550C00A8BC18 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A71F8731CD3B911000A6BBB /* MapKit.framework */,
+				0A71F86B1CD3A1D2000A6BBB /* CoreLocation.framework */,
 				A8E464D91C1ABFBC00C0B161 /* AVKit.framework */,
 				A880A29116BD550C00A8BC18 /* UIKit.framework */,
 				A880A29316BD550C00A8BC18 /* Foundation.framework */,
@@ -233,10 +268,20 @@
 				A8B59A9B1C2011E0008C9879 /* Labels */,
 				A8B59A9A1C2011D8008C9879 /* Config */,
 				A8AFB6941754911B004D3F92 /* MainStoryboard.storyboard */,
-				A8C08C2D175361B300230680 /* AppDelegate.h */,
-				A8C08C2E175361B300230680 /* AppDelegate.m */,
+				0A71F86D1CD3B4AC000A6BBB /* LaunchScreen.storyboard */,
+				0A71F86F1CD3B4AC000A6BBB /* Main.storyboard */,
+				0A10BCAB1CD50D390033C70A /* Storyboard.storyboard */,
+				0A25DB771CEA9C9300933DE4 /* BeaconManager.h */,
+				0A25DB781CEA9C9300933DE4 /* BeaconManager.m */,
+				0A25DB741CEA9C2900933DE4 /* AppDelegate.h */,
+				0A25DB751CEA9C2900933DE4 /* AppDelegate.m */,
+				0A10BCB51CD76B300033C70A /* ViewController.h */,
+				0A10BCB61CD76B300033C70A /* ViewController.m */,
+				0A10BCB81CD7A3AD0033C70A /* Tableview.h */,
+				0A10BCB91CD7A3AD0033C70A /* Tableview.m */,
 				A8C08C38175361B300230680 /* main.m */,
 				A8C08C2B175361B300230680 /* Alerts.h */,
+				0A71F8661CD3A10C000A6BBB /* BeaconManagerDelegate.h */,
 				A8C08C2C175361B300230680 /* Alerts.m */,
 				0F9C872A18B4C53A00B00968 /* LanguageManagement.h */,
 				0F9C872B18B4C53A00B00968 /* LanguageManagement.m */,
@@ -275,6 +320,10 @@
 				0F9C873718B4C58600B00968 /* XMLLabelsParser.m */,
 				0F9C872818B4C53A00B00968 /* Labels.h */,
 				0F9C872918B4C53A00B00968 /* Labels.m */,
+				0AF2D6F11CE61EFD00517C91 /* XMLBeaconParsers.h */,
+				0AF2D6F21CE61EFD00517C91 /* XMLBeaconParsers.m */,
+				0AF2D6F71CE96A5100517C91 /* XMLBeaconConfigParser.h */,
+				0AF2D6F81CE96A5100517C91 /* XMLBeaconConfigParser.m */,
 			);
 			name = Labels;
 			sourceTree = "<group>";
@@ -381,6 +430,8 @@
 				A8C08C41175361B300230680 /* RotateViewController.m */,
 				A8C08C42175361B300230680 /* ScanViewController.h */,
 				A8C08C43175361B300230680 /* ScanViewController.m */,
+				0A10BCB21CD6C6410033C70A /* BeaconViewController.h */,
+				0A10BCB31CD6C6410033C70A /* BeaconViewController.m */,
 				A8C08C44175361B300230680 /* SectionParentViewController.h */,
 				A8C08C45175361B300230680 /* SectionParentViewController.m */,
 				A8C08C46175361B300230680 /* SectionViewController.h */,
@@ -443,7 +494,27 @@
 				LastUpgradeCheck = 0710;
 				TargetAttributes = {
 					A880A28C16BD550C00A8BC18 = {
-						DevelopmentTeam = T83AE8A2UD;
+						DevelopmentTeam = DL35RFVU9X;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.DataProtection = {
+								enabled = 0;
+							};
+							com.apple.HealthKit = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+							com.apple.WAC = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -453,6 +524,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = A880A28216BD550C00A8BC18;
 			productRefGroup = A880A28E16BD550C00A8BC18 /* Products */;
@@ -475,9 +547,12 @@
 				A8098D5B1742A9FC000D4BA0 /* icon.png in Resources */,
 				A8098D5F17437893000D4BA0 /* icon372.png in Resources */,
 				A8AFB6961754911B004D3F92 /* MainStoryboard.storyboard in Resources */,
+				0A71F8721CD3B4AC000A6BBB /* Main.storyboard in Resources */,
 				A8AFB69C1754914C004D3F92 /* InfoPlist.strings in Resources */,
 				0F98391917F35CAE000BA3B2 /* info.png in Resources */,
 				0F9768F1184F7326004EB9F0 /* pause.png in Resources */,
+				0A71F8711CD3B4AC000A6BBB /* LaunchScreen.storyboard in Resources */,
+				0A10BCAC1CD50D390033C70A /* Storyboard.storyboard in Resources */,
 				0F9768F2184F7326004EB9F0 /* play.png in Resources */,
 				0F9768F3184F7326004EB9F0 /* stop.png in Resources */,
 				0F99ACC8186DB4410060E213 /* moins.png in Resources */,
@@ -494,23 +569,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AF2D6F31CE61EFD00517C91 /* XMLBeaconParsers.m in Sources */,
 				0F9C873B18B4C6E100B00968 /* XMLAnimateImageParser.m in Sources */,
 				0F9C873C18B4C6E100B00968 /* XMLIndexParser.m in Sources */,
 				0F9C873D18B4C6E100B00968 /* XMLLabelsParser.m in Sources */,
+				0A25DB761CEA9C2900933DE4 /* AppDelegate.m in Sources */,
 				0F9C873E18B4C6E100B00968 /* Labels.m in Sources */,
 				A832E93E1C16293500482C0E /* XMLParser.m in Sources */,
 				0F9C873F18B4C6E100B00968 /* LanguageManagement.m in Sources */,
+				0A10BCB41CD6C6410033C70A /* BeaconViewController.m in Sources */,
 				A8C08C5C175361B400230680 /* Alerts.m in Sources */,
-				A8C08C5D175361B400230680 /* AppDelegate.m in Sources */,
 				A8C08C5E175361B400230680 /* ColorButton.m in Sources */,
 				A8C08C5F175361B400230680 /* Config.m in Sources */,
 				A8C08C60175361B400230680 /* IDChoiceViewController.m in Sources */,
+				0A10BCBA1CD7A3AD0033C70A /* Tableview.m in Sources */,
 				A8C08C61175361B400230680 /* ImageZoomViewController.m in Sources */,
 				A8C08C63175361B400230680 /* main.m in Sources */,
 				A8B59A971C200BAC008C9879 /* WebViewController.m in Sources */,
 				A8C08C64175361B400230680 /* MainViewController.m in Sources */,
 				A8C08C65175361B400230680 /* MovieViewController.m in Sources */,
 				A8C08C66175361B400230680 /* QuizViewController.m in Sources */,
+				0A10BCB71CD76B300033C70A /* ViewController.m in Sources */,
 				A8C08C68175361B400230680 /* RotateViewController.m in Sources */,
 				A8C08C69175361B400230680 /* ScanViewController.m in Sources */,
 				A8C08C6A175361B400230680 /* SectionParentViewController.m in Sources */,
@@ -519,6 +598,7 @@
 				A8C08C6D175361B400230680 /* SlideshowViewController.m in Sources */,
 				A8C08C6E175361B400230680 /* TextViewController.m in Sources */,
 				A8C08C6F175361B400230680 /* XMLConfigParser.m in Sources */,
+				0A25DB791CEA9C9300933DE4 /* BeaconManager.m in Sources */,
 				A8C08C70175361B400230680 /* XMLDictionaryParser.m in Sources */,
 				A8C08C71175361B400230680 /* XMLQuizParser.m in Sources */,
 				A8C08C72175361B400230680 /* XMLSectionParser.m in Sources */,
@@ -526,6 +606,7 @@
 				A8C08C74175361B400230680 /* XMLTextParser.m in Sources */,
 				A8C08C75175361B400230680 /* XMLZoomParser.m in Sources */,
 				A8B5F17D17ACFB3800DE51D6 /* AnimateImageViewController.m in Sources */,
+				0AF2D6F91CE96A5100517C91 /* XMLBeaconConfigParser.m in Sources */,
 				0F9C345617F6F33800C5BE75 /* AudioViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,6 +614,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		0A71F86D1CD3B4AC000A6BBB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0A71F86E1CD3B4AC000A6BBB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		0A71F86F1CD3B4AC000A6BBB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0A71F8701CD3B4AC000A6BBB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		A8AFB6941754911B004D3F92 /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -651,7 +748,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "ulb.${PRODUCT_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = ExpoSupo;
 				PRODUCT_NAME = ExpoSup;
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = armv7;
@@ -674,7 +771,7 @@
 					"\"$(SRCROOT)/ZBarSDK\"",
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "ulb.${PRODUCT_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = ExpoSupo;
 				PRODUCT_NAME = ExpoSup;
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = armv7;

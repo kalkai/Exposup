@@ -6,7 +6,7 @@
 //
 //
 #import "Config.h"
-#import "AppDelegate.h"
+
 #import "XMLConfigParser.h"
 #import "Labels.h"
 #import "RotateViewController.h"

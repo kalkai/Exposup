@@ -27,6 +27,8 @@
 -(NSString*)modifyMod;
 -(NSString*)confirmMod;
 -(NSString*)scanInstruction;
+-(NSString*)BeaconInfo;
+-(NSString*)AreaLabel;
 -(NSString*)toIDButton;
 -(NSString*)IDInstruction;
 -(NSString*)validateButton;

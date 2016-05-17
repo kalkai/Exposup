@@ -24,6 +24,9 @@
 -(NSString*)modifyMod { return labelsParser.modifyMod;}
 -(NSString*)confirmMod { return labelsParser.confirmMod;}
 -(NSString*)scanInstruction { return labelsParser.scanInstruction;}
+
+-(NSString*)BeaconInfo { return labelsParser.BeaconInfo;}
+-(NSString*)AreaLabel { return labelsParser.AreaLabel;}
 -(NSString*)toIDButton { return labelsParser.toIDButton;}
 -(NSString*)IDInstruction { return labelsParser.IDInstruction;}
 -(NSString*)validateButton { return labelsParser.validateButton;}

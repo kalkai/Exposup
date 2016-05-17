@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Config.h"
+#import "BeaconManager.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate> {
+
+@interface AppDelegate : BeaconManager<UIApplicationDelegate> {
 }
 
 @property (strong, nonatomic) UIWindow *window;
