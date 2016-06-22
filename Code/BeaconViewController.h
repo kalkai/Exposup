@@ -33,6 +33,7 @@
 @property (strong, nonatomic) UILabel *BeaconInfo;
 @property (strong, nonatomic) NSString *AreaLabel;
 @property (strong, nonatomic) UIButton *toID;
+@property (strong, nonatomic) UIButton *toScan;
 @property (strong, nonatomic) UIImageView *banner;
 @property (strong, nonatomic) UIViewController *popover;
 @property (strong, nonatomic) UIPopoverPresentationController *popController;

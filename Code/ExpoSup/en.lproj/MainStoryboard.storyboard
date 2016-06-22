@@ -251,6 +251,7 @@
         <!--Choice View Controller-->
         <scene sceneID="hVa-ec-yaD">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rfg-Ew-auc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="9vo-RT-dow" customClass="IDChoiceViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NY0-dp-LAP"/>
@@ -276,7 +277,6 @@
                         <segue destination="z5y-G1-h9U" kind="push" identifier="fromIDToWeb" id="PmZ-gO-0Fl"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rfg-Ew-auc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="438" y="-1914"/>
         </scene>
@@ -330,6 +330,7 @@
                         <segue destination="dSG-4O-gOa" kind="push" identifier="fromScanToQuiz" id="J5g-HR-FLs"/>
                         <segue destination="Llb-0U-cHc" kind="push" identifier="fromScanToAnimate" id="6E2-h1-dnZ"/>
                         <segue destination="z5y-G1-h9U" kind="push" identifier="fromScanToWeb" id="N2u-tY-KDR"/>
+                        <segue destination="vne-Mm-PcX" kind="push" identifier="toScan" id="hq6-H8-yHp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="53P-BU-blw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -546,16 +547,47 @@
             </objects>
             <point key="canvasLocation" x="6415" y="-1725"/>
         </scene>
+        <!--Scan View Controller-->
+        <scene sceneID="eMe-oO-RGK">
+            <objects>
+                <viewController id="vne-Mm-PcX" customClass="ScanViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="djr-NZ-1mb"/>
+                        <viewControllerLayoutGuide type="bottom" id="nix-Fi-xcu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ANB-xv-d1f">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ngf-9i-IlX"/>
+                    <connections>
+                        <segue destination="9vo-RT-dow" kind="push" identifier="toID" id="Scc-Ry-cwm"/>
+                        <segue destination="A4j-mn-uX5" kind="push" identifier="fromScanToSection" id="uQl-pf-D1T"/>
+                        <segue destination="ZTN-cs-ig9" kind="push" identifier="fromScanToText" id="9ba-Fl-BNp"/>
+                        <segue destination="AR5-fN-x76" kind="push" identifier="fromScanToSlideshow" id="Dir-An-Ig0"/>
+                        <segue destination="JbO-JC-7Ov" kind="push" identifier="fromScanToMovie" id="x9D-rU-MfI"/>
+                        <segue destination="OB8-E7-QDq" kind="push" identifier="fromScanToZoom" id="wmQ-kK-bU1"/>
+                        <segue destination="dSG-4O-gOa" kind="push" identifier="fromScanToQuiz" id="PLx-RC-Nlo"/>
+                        <segue destination="Llb-0U-cHc" kind="push" identifier="fromScanToAnimate" id="1Ts-6L-vjC"/>
+                        <segue destination="z5y-G1-h9U" kind="push" identifier="fromScanToWeb" id="M8d-Yb-1Gi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pwA-75-oOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-408" y="1405"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="rMF-Za-LdW"/>
-        <segue reference="5nn-if-pnK"/>
-        <segue reference="ftK-mM-x7m"/>
-        <segue reference="P43-hf-Bn3"/>
-        <segue reference="J5g-HR-FLs"/>
-        <segue reference="6E2-h1-dnZ"/>
-        <segue reference="N2u-tY-KDR"/>
-        <segue reference="nmO-Sc-cPv"/>
-        <segue reference="BL4-JM-DBn"/>
+        <segue reference="f5e-Sf-TL9"/>
+        <segue reference="wmQ-kK-bU1"/>
+        <segue reference="Scc-Ry-cwm"/>
+        <segue reference="x9D-rU-MfI"/>
+        <segue reference="1Ts-6L-vjC"/>
+        <segue reference="M8d-Yb-1Gi"/>
+        <segue reference="PLx-RC-Nlo"/>
+        <segue reference="Dir-An-Ig0"/>
+        <segue reference="uQl-pf-D1T"/>
+        <segue reference="9ba-Fl-BNp"/>
     </inferredMetricsTieBreakers>
 </document>

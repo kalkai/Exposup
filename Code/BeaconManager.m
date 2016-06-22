@@ -13,7 +13,9 @@
 @property(strong, nonatomic) CLBeaconRegion  *beaconRegion;
 @property(strong, nonatomic)NSMutableDictionary *beaconsDiscovered;
 @property(strong, nonatomic)XMLBeaconConfigParser *index;
-
+@property(strong,nonatomic) NSMutableArray *beaconsQueue ;
+@property int *cpt;
+@property(strong,nonatomic)CLBeacon *nearest;
 
 
 @end
@@ -30,7 +32,7 @@
     _ZoneToBeacons = [[NSMutableDictionary alloc] init];
     _SortedZoneToBeacons = [[NSMutableDictionary alloc] init];
     
-    
+    _beaconsQueue = [[NSMutableArray alloc] init];
     _ImidiateBeacons = [[NSMutableArray alloc] init];
     _NearBeacons = [[NSMutableArray alloc] init];
     _FarBeacons = [[NSMutableArray alloc] init];
@@ -44,6 +46,8 @@
     _locationManager.delegate = self;
     _index = [XMLBeaconConfigParser instance];
     _zones =  [XMLBeaconParsers instance].zones;
+    _cpt = 0;
+    _nearest = NULL;
     return self;
 }
 
@@ -66,7 +70,7 @@
 };
 
 -(void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region{
-    
+    _nearest = NULL;
     [_currentBeacons  removeAllObjects];
     [_ZoneToBeacons removeAllObjects];
     [_SortedZoneToBeacons removeAllObjects];
@@ -74,12 +78,32 @@
     [_NearBeacons removeAllObjects];
     [_FarBeacons removeAllObjects];
     [_UnknownBeacons removeAllObjects];
+//    CLBeacon *nearest = NULL;
     for(CLBeacon* aBeacon in beacons){
-        double acc = aBeacon.accuracy;
-        NSLog(@"%f",acc);
-        NSString *BeaconMajorkey = [ _index.mapMajortoZone objectForKey:[NSString stringWithFormat:@"%d",aBeacon.major.intValue]];
+        if([_beaconsQueue count]< [beacons count]*5){
+            [_beaconsQueue addObject:aBeacon];
+        }
+        else
+        {
+            [_beaconsQueue removeObjectAtIndex:0];
+            [_beaconsQueue addObject:aBeacon];
+             
+        }
+    }
+    
+        for(CLBeacon* oneBeacon in _beaconsQueue){
+        if(_nearest == NULL || _nearest.rssi == 0){
+            _nearest = oneBeacon;
+        }
+        else if(_nearest.rssi < oneBeacon.rssi && oneBeacon.rssi == 0){
+            _nearest = oneBeacon;
+        }
+//        double acc = oneBeacon.accuracy;
+//        double dist = oneBeacon.proximity;//
+//                NSLog(@"%f",dist);
+        NSString *BeaconMajorkey = [ _index.mapMajortoZone objectForKey:[NSString stringWithFormat:@"%d",_nearest.major.intValue]];
         
-        NSString *BeaconMinorkey =  [ _index.mapMajortoZone objectForKey:[NSString stringWithFormat:@"%d",aBeacon.minor.intValue]];
+        NSString *BeaconMinorkey =  [ _index.mapMajortoZone objectForKey:[NSString stringWithFormat:@"%d",oneBeacon.minor.intValue]];
         
         //        if (aBeacon.proximity == CLProximityImmediate){
         //            [_ImidiateBeacons addObject:BeaconMinorkey];
@@ -99,13 +123,18 @@
 //        }
 //        [_beaconsDiscovered setValue:aBeacon forKey:BeaconMinorkey];
         //        if(aBeacon.proximity == CLProximityNear || aBeacon.proximity == CLProximityImmediate){
+        [_currentBeacons removeAllObjects];
         [_currentBeacons addObject:BeaconMajorkey];
+        
         //NSLog(@"VAAAAALEUR");
         //[_ZoneToBeacons[BeaconMajorkey] addObject:BeaconMinorkey];
         //NSLog(@"%@", _ZoneToBeacons);
         
         //        }
+    
     }
+    
+    
     
     for (NSMutableArray *zone in _zones ){
         if ([_currentBeacons containsObject:zone] == FALSE){
@@ -143,10 +172,14 @@
     
 //    NSLog(@"%@", _ImidiateBeacons);
     //NSLog(@"%@", _SortedZoneToBeacons);
-//    NSLog(@"%@", _currentBeacons);
+    NSLog(@"%@", beacons);
     //NSLog(@"%@", _SectionKeyArray);
+
+   
     [_delegate updateCurrentBeacons];
+    
 }
+
 
 
 

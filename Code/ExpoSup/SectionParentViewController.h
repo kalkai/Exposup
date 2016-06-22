@@ -22,6 +22,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *returnButton;
 @property (strong, nonatomic) IBOutlet UIButton *scanButton;
+@property (strong, nonatomic) IBOutlet UIButton *scanBeaconButton;
 @property (assign, nonatomic) Boolean showReturn;
 @property (assign, nonatomic) Boolean isPageWithAudio;
 
@@ -33,6 +34,7 @@
 - (BOOL)prefersStatusBarHidden;
 - (IBAction)popView:(id)sender;
 - (IBAction)popToScanView:(id)sender;
+- (IBAction)popToScanBeaconView:(id)sender;
 - (void)createBackButtons;
 
 

@@ -12,7 +12,7 @@
 @implementation BeaconViewController
 
 
-@synthesize result, file, expoTitle, scannerContainer, toID, banner, popover, infoButton, BeaconInfo, languagesButton, argument, popController,tableView,beaconManager, AreaLabel, index, SectionKeyArray;
+@synthesize result, file, expoTitle, scannerContainer, toID,toScan, banner, popover, infoButton, BeaconInfo, languagesButton, argument, popController,tableView,beaconManager, AreaLabel, index, SectionKeyArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,6 +78,15 @@
     [self.view addSubview: toID];
     
     
+    //bouton Scan
+    toScan = [UIButton buttonWithType: UIButtonTypeCustom];
+    [ColorButton configButton: toScan];
+    [toScan setTitle: [[Labels instance] toScanButton] forState: UIControlStateNormal];
+    [toScan addTarget:self action:@selector(toScan:) forControlEvents: UIControlEventTouchUpInside];
+    [toScan sizeToFit];
+    toScan.frame = CGRectMake(0, 0, toScan.frame.size.width + 20, 35);
+    [self.view addSubview: toScan];
+    
     
     //banner
     if([[Config instance] banner] != nil) {
@@ -137,9 +146,9 @@
 //    }
 
     SectionKeyArray = beaconManager.currentBeacons;//[NSMutableArray arrayWithArray:[index.mapZonetoID allKeys]];
-    NSLog(@"VAAAAALEUR222");
-    NSLog(@"%@",SectionKeyArray);
-    NSLog(@"%@",index.mapZonetoID);
+//    NSLog(@"VAAAAALEUR222");
+//    NSLog(@"%@",SectionKeyArray);
+//    NSLog(@"%@",index.mapZonetoID);
     
 }
 -(void)updateCurrentBeacons{
@@ -235,14 +244,14 @@
         
         if([appDelegate.mod  isEqualToString: @"Guide"] || [appDelegate.mod isEqualToString:@"Child"]) {
             file = [res stringByAppendingString: appDelegate.mod];
-            NSLog(@"Fichier guide ou enfant n'existe pas, chargement adulte");
+//            NSLog(@"Fichier guide ou enfant n'existe pas, chargement adulte");
             if(![self isFileFound: file])
                 file = fileToLoad; // si le guide ou enfant n'est pas trouvé, on met le fichier par defaut, l'adulte
         }
         else file = fileToLoad;
         
         if(![self isFileFound: file]) {
-            NSLog(@"Fichier non trouvé : %@.", file);
+//            NSLog(@"Fichier non trouvé : %@.", file);
             //Alerts *alert = [[Alerts alloc] init];
             //[alert showIDNotFoundAlert:self];
             UIAlertController* alert = [Alerts getIDNotFoundAlert];
@@ -267,7 +276,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     result = cell.detailTextLabel.text;
     [beaconManager.touchedIds addObject:result];
-    NSLog(@"%@", beaconManager.touchedIds);
+//    NSLog(@"%@", beaconManager.touchedIds);
     
 //    
 //    
@@ -418,6 +427,10 @@
     [self performSegueWithIdentifier: @"toID" sender:self];
 }
 
+- (IBAction)toScan:(id)sender {
+    [self performSegueWithIdentifier: @"toScan" sender:self];
+}
+
 - (IBAction)parseFileAndProceed:(id)sender {
     NSString *res = result;
     NSString *fileToLoad = @"default";
@@ -448,14 +461,14 @@
         
         if([appDelegate.mod  isEqualToString: @"Guide"] || [appDelegate.mod isEqualToString:@"Child"]) {
             file = [res stringByAppendingString: appDelegate.mod];
-            NSLog(@"Fichier guide ou enfant n'existe pas, chargement adulte");
+//            NSLog(@"Fichier guide ou enfant n'existe pas, chargement adulte");
             if(![self isFileFound: file])
                 file = fileToLoad; // si le guide ou enfant n'est pas trouvé, on met le fichier par defaut, l'adulte
         }
         else file = fileToLoad;
         
         if(![self isFileFound: file]) {
-            NSLog(@"Fichier non trouvé : %@.", file);
+//            NSLog(@"Fichier non trouvé : %@.", file);
             //Alerts *alert = [[Alerts alloc] init];
             //[alert showIDNotFoundAlert:self];
             UIAlertController* alert = [Alerts getIDNotFoundAlert];
@@ -470,7 +483,7 @@
                 // si on a une seule sous-section, on passe directement dessus
                 NSString *type = [sectionParser.types objectAtIndex: 0];
                 if(sectionParser.names.count == 1 && ![type isEqualToString:@"audio"] && ![type isEqualToString:@"movie"]) {
-                    NSLog(@"Only one subsection");
+ //                   NSLog(@"Only one subsection");
                     //[self setNumberOfPagesToPop: [NSNumber numberWithInt: 2]]; // utile pour faire un retour "direct" à la page de scan
                     
                     argument = [sectionParser.files objectAtIndex: 0];
@@ -607,6 +620,7 @@
     tableView.frame = CGRectMake(768/2-600/2, 250, 600, 500);
     //    self.preview.frame = CGRectMake(0, 0, scannerContainer.frame.size.width, scannerContainer.frame.size.height);
     toID.frame = CGRectMake(768/2 - toID.frame.size.width/2, 845, toID.frame.size.width, toID.frame.size.height);
+    toScan.frame = CGRectMake(768/2 - toID.frame.size.width/2, 845-toID.frame.size.height-10, toID.frame.size.width, toID.frame.size.height);
     
     expoTitle.frame = CGRectMake(768 / 2 - expoTitle.frame.size.width/2, 100, expoTitle.frame.size.width, expoTitle.frame.size.height);
     
@@ -623,6 +637,7 @@
     tableView.frame = CGRectMake(1024/2-550/2, 140, 550, 400);
     //    self.preview.frame = CGRectMake(0, 0, scannerContainer.frame.size.width, scannerContainer.frame.size.height);
     toID.frame = CGRectMake(1024/2 - toID.frame.size.width/2, 595, toID.frame.size.width, toID.frame.size.height);
+    toID.frame = CGRectMake(1024/2 - toID.frame.size.width/2, 595-toID.frame.size.height-10, toID.frame.size.width, toID.frame.size.height);
     
     expoTitle.frame = CGRectMake(1024 / 2 - expoTitle.frame.size.width/2, 30, expoTitle.frame.size.width, expoTitle.frame.size.height);
     

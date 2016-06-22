@@ -28,6 +28,7 @@
 -(NSString*)BeaconInfo { return labelsParser.BeaconInfo;}
 -(NSString*)AreaLabel { return labelsParser.AreaLabel;}
 -(NSString*)toIDButton { return labelsParser.toIDButton;}
+-(NSString*)toScanButton { return labelsParser.toScanButton;}
 -(NSString*)IDInstruction { return labelsParser.IDInstruction;}
 -(NSString*)validateButton { return labelsParser.validateButton;}
 -(NSString*)userManual { return labelsParser.userManual; }

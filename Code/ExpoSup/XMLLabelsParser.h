@@ -35,6 +35,7 @@
 @property (strong, nonatomic) NSString *BeaconInfo;
 @property (strong, nonatomic) NSString *AreaLabel;
 @property (strong, nonatomic) NSString *toIDButton;
+@property (strong, nonatomic) NSString *toScanButton;
 
 @property (strong, nonatomic) NSString *IDInstruction;
 @property (strong, nonatomic) NSString *validateButton;

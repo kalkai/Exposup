@@ -30,6 +30,7 @@
 -(NSString*)BeaconInfo;
 -(NSString*)AreaLabel;
 -(NSString*)toIDButton;
+-(NSString*)toScanButton;
 -(NSString*)IDInstruction;
 -(NSString*)validateButton;
 -(NSString*)userManual;

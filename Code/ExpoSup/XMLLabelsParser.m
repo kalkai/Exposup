@@ -12,7 +12,7 @@
 @implementation XMLLabelsParser
 
 
-@synthesize currentProperty, expoTitle, confirmMod, chosenModLabel, chooseModLabel, childButton, IDInstruction, modifyMod, adultButton, guideButton, backButtonLabel, soundButtonLabel, validateButton, toIDButton, scanInstruction, userManual, welcomeTitle, expandSynopsis, contractSynopsis, animateButton, BeaconInfo , AreaLabel;
+@synthesize currentProperty, expoTitle, confirmMod, chosenModLabel, chooseModLabel, childButton, IDInstruction, modifyMod, adultButton, guideButton, backButtonLabel, soundButtonLabel, validateButton, toIDButton,toScanButton, scanInstruction, userManual, welcomeTitle, expandSynopsis, contractSynopsis, animateButton, BeaconInfo , AreaLabel;
 
 
 - (Boolean)parseXMLLabels {
@@ -71,6 +71,7 @@
     BeaconInfo = [[NSString alloc] init];
     AreaLabel = [[NSString alloc] init];
     toIDButton = [[NSString alloc] init];
+    toScanButton = [[NSString alloc] init];
     
     IDInstruction = [[NSString alloc] init];
     validateButton = [[NSString alloc] init];
@@ -151,6 +152,9 @@
     
     else if ([elementName isEqualToString:@"toIDButton"]) {
         toIDButton = [currentProperty stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    }
+    else if ([elementName isEqualToString:@"toScanButton"]) {
+        toScanButton = [currentProperty stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
     
     //-----------

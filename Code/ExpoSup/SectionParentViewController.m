@@ -15,7 +15,7 @@
 
 @implementation SectionParentViewController
 
-@synthesize scanButton,returnButton, showReturn, swipeArea, gesture, volumeLabel, animationView, volumeViewSlider, isPageWithAudio, numberOfPagesToPop, navController;
+@synthesize scanButton,scanBeaconButton, returnButton, showReturn, swipeArea, gesture, volumeLabel, animationView, volumeViewSlider, isPageWithAudio, numberOfPagesToPop, navController;
 
 
 
@@ -72,10 +72,19 @@
     scanButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];
     scanButton.frame = CGRectMake(5, 5, 85, 85);
     
+//    [scanBeaconButton removeFromSuperview];
+//    scanBeaconButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+//    scanBeaconButton.frame = CGRectMake(100, 5, 85, 85);
+    
     [scanButton setBackgroundImage: [UIImage imageWithContentsOfFile: [[Config instance]backButtonToScan]] forState:UIControlStateNormal];
     [scanButton addTarget:self action:@selector(popToScanView:) forControlEvents:UIControlEventTouchUpInside];
     scanButton.tag = 999;
     [self.view addSubview:scanButton];
+    
+//    [scanBeaconButton setBackgroundImage: [UIImage imageWithContentsOfFile: [[Config instance]backButtonToScan]] forState:UIControlStateNormal];
+//    [scanBeaconButton addTarget:self action:@selector(popToScanView:) forControlEvents:UIControlEventTouchUpInside];
+//    scanBeaconButton.tag = 999;
+//    [self.view addSubview:scanBeaconButton];
     
     if(showReturn) {
         [returnButton addTarget:self action:@selector(popView:) forControlEvents:UIControlEventTouchUpInside];
@@ -84,6 +93,12 @@
         [self.view addSubview: returnButton];
     }
     
+    
+    
+    
+
+    
+ 
     
 }
 
@@ -94,6 +109,15 @@
     
     [button setBackgroundImage: [UIImage imageWithContentsOfFile: [[Config instance]backButtonToScan]] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(popToScanView:) forControlEvents:UIControlEventTouchUpInside];
+    return button;
+}
+
+- (UIView*)createBackToScanBeaconButton {
+    UIButton *button = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+    button.frame = CGRectMake(100, 5, 85, 85);
+    
+    [button setBackgroundImage: [UIImage imageWithContentsOfFile: [[Config instance]backButtonToScan]] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(popToScanBeaconView:) forControlEvents:UIControlEventTouchUpInside];
     return button;
 }
 
@@ -117,6 +141,17 @@
 }
 
 - (IBAction)popToScanView:(id)sender {
+    int indexOfScanPage = 2;
+    if(![[Config instance] showChildMode] && ![[Config instance] showGuideMode]) {
+        indexOfScanPage = 1;
+    }
+    
+    [[[self.navigationController viewControllers] objectAtIndex: indexOfScanPage] viewDidLoad];
+    [[[self.navigationController viewControllers] objectAtIndex: indexOfScanPage] viewWillAppear:YES];
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex: indexOfScanPage] animated:YES];
+}
+
+- (IBAction)popToScanBeaconView:(id)sender {
     int indexOfScanPage = 2;
     if(![[Config instance] showChildMode] && ![[Config instance] showGuideMode]) {
         indexOfScanPage = 1;
